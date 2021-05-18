@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<th:block th:fragment="header">
+		<div class="heder-area">
+			<nav class="navbar navbar-expand-lg navbar-dark p-4">
+				<div class="container-fluid">
+					<a class="navbar-brand" th:href="@{/}">教材共有アプリ</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+						aria-label="Toggle navigation" aria-hidden="true" sec:authorize="isAuthenticated()">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					
+					<div class="collapse navbar-collapse" id="navbarToggler" sec:authorize="isAuthenticated()">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" th:href="@{/}">HOME</a>
+							</li>
+							<li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+								<a class="nav-link" th:href="@{/home}">
+									User Mater
+								</a>
+							</li>
+						</ul>
+							<div class="col-12 clearfix">
+    <div class="float-right">						
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a href="@{/show}" class="btn btn-menu">MyPage</a>
+      </li>
+      <li class="nav-item">
+        <a href="@{/show}" class="btn btn-menu">教材アップロード</a>
+      </li>
+      <li class="nav-item">
+        <a href="@{/show}" class="btn btn-menu">ログアウト</a>
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</th:block>
+</body>
+
+</html>
