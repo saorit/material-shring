@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.SiteUser;
-import com.example.demo.repository.SiteUserRepository;
 import com.example.demo.util.Role;
+import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
 public class SecurityController {
+	
+	/**
+	 * UserEntityクラスを操作するServiceクラス.
+	 */
+	@Autowired
+	private UserService userService;
 
-    private final SiteUserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
@@ -60,11 +66,13 @@ public class SecurityController {
     public String register(@ModelAttribute("user") SiteUser user) {
         return "userconfirm";
     }
-
+    
     @PostMapping("/userconfirm")
     public String process(@ModelAttribute("user") SiteUser user) {
+    	
 
-        userRepository.save(user);
+    	// ユーザー情報を保存
+    			userService.save(user);
 
         return "redirect:/login?register";
     }
