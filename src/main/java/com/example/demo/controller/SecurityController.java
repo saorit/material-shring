@@ -72,7 +72,7 @@ public class SecurityController {
     	
 
     	// ユーザー情報を保存
-    			userService.save(user);
+        userService.save(user);
 
         return "redirect:/login?register";
     }
