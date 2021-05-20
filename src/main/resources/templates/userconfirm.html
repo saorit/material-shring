@@ -30,13 +30,8 @@
                  
                     <form th:action="@{/userconfirm}" th:object="${user}" method="post" novalidate>
           　　　　　　<div class="form-group">
-            　　　　　　<label for="name" th:text="ユーザ名："></label>
-            　　　　　　<input type="text" class="form-control" th:field="*{username}" disabled>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label for="password" th:text="パスワード："></label>
-                      <input type="password" class="form-control" th:field="*{password}" disabled>
+                      <p th:text="'ユーザ名：' + *{username}">ユーザ名の表示</p>
+                      <p th:text="'パスワード：' + '非表示'">パスワードは非表示</p>
                       </div><br><br>
                    
                     <button class="btn btn-info btn-user btn-block">
