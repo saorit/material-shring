@@ -31,8 +31,9 @@
                     <form th:action="@{/userconfirm}" th:object="${user}" method="post" novalidate>
           　　　　　　<div class="form-group">
                       <p>ユーザー名：</p>
-                      <input type="text" name="username" value="username" th:field="*{username}">
-                      <p>パスワード：</p>
+                      <input type="text" class="form-control" name="username" value="username" th:field="*{username}">
+                      <br>
+                      <p>パスワード：非表示</p>
                       <input type="hidden" name="password" value="password" th:field="*{password}">
                       </div><br><br>
                    
