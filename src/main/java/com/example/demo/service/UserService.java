@@ -31,5 +31,13 @@ public interface UserService {
 	 * @return 保存したUser(Entity)クラス
 	 */
 	public SiteUser save(SiteUser user);
+	
+	/**
+	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.
+	 *
+	 * @param username ユーザー名
+	 * @return 件数
+	 */
+	public long countByUsername(String username);
 
 }

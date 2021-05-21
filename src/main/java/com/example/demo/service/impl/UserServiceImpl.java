@@ -60,5 +60,15 @@ public class UserServiceImpl implements UserService {
 		// データベースにUser(Entityクラス)を保存
 		return repository.save(user);
 	}
+	
+	/**
+	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.
+	 *
+	 * @param username ユーザー名
+	 * @return 件数
+	 */
+	public long countByUsername(String username) {
+		return repository.countByUsername(username);
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +26,14 @@ public class SiteUser {
 
     @Size(min = 4, max = 255)
     private String password;
+    
+	
+	/** ロール. */
+	@Column(name = "role", length = 120, nullable = false)
+	private String role;
+
 
     private boolean admin;
-    private String role;
     private boolean active = true;
 }
 
