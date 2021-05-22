@@ -24,10 +24,11 @@ public class UserServiceImpl implements UserService {
 	private SiteUserRepository repository;
 
 	/**
-	 * PasswordEncoderクラス.
-	 */
+	 * PasswordEncoderクラス.一旦非表示
+	 
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	*/
 
 	/**
 	 * User(Entity)クラスのデータを全件取得する.
@@ -62,13 +63,13 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	/**
-	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.
+	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.一旦非表示
 	 *
 	 * @param username ユーザー名
 	 * @return 件数
-	 */
+	 
 	public long countByUsername(String username) {
 		return repository.countByUsername(username);
-	}
+	}*/
 
 }
