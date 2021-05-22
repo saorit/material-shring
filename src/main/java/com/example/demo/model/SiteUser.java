@@ -32,9 +32,20 @@ public class SiteUser {
     /** 表示名. */
     @Size(min = 2, max = 20, message="名前は2文字から20文字内で入力してください")
 	private String displayname;
+    
+    /** 自己紹介. */
+    @Column(name = "profile", length = 200, nullable = true)
+	private String profile;
+    
+    /** プロフィール画像. */
+    @Column(name = "photos", length = 64, nullable = true)
+	private String photos;
+    
+    /** ロール. */
+	@Column(name = "role", length = 120, nullable = true)
+	private String role;
 
     private boolean admin;
-    private String role;
     private boolean active = true;
 }
 

@@ -39,15 +39,10 @@
                       <p>名前：</p>
                       <input type="text" class="form-control" name="displayname" value="displayname" th:field="*{displayname}">
                       <br>
-                      <div class="form-check mb-2">
-                      <input type="checkbox" class="form-check-input"
-                        th:field="*{admin}">
-                      <label th:for="${#ids.prev('admin')}">
-                        管理者(Admin)として登録する
-                      </label>
-                    </div>
+                      <p>自己紹介：</p>
+                      <textarea class="profile_text" rows="10" cols="60" th:field="*{profile}"></textarea>
+                      <br>
                       
-                   
                     <button class="btn btn-info btn-user btn-block">
                       この内容で登録
                     </button>
