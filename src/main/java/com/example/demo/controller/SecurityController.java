@@ -52,12 +52,7 @@ public class SecurityController {
             return "register";
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.isAdmin()) {
-            user.setRole(Role.ADMIN.name());
-        } else {
-            user.setRole(Role.USER.name());
-        }
+        
         
         return "userconfirm";
     }
@@ -69,6 +64,13 @@ public class SecurityController {
     
     @PostMapping("/userconfirm")
     public String process(@ModelAttribute("user") SiteUser user) {
+    	
+    	user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.isAdmin()) {
+            user.setRole(Role.ADMIN.name());
+        } else {
+            user.setRole(Role.USER.name());
+        }
     	
 
     	// ユーザー情報を保存

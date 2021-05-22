@@ -56,14 +56,17 @@
                     <div class="form-group">
                       <label for="name">
                         <span class="badge badge-danger">必須</span>
-                        ユーザ名
+                        名前
                       </label>
                       <input type="text" class="form-control"
-                        th:errorclass="is-invalid" th:field="*{displayName}">
+                        th:errorclass="is-invalid" th:field="*{displayname}">
                       <div class="invalid-feedback"
-                        th:errors="*{displayName}">
+                        th:errors="*{displayname}">
                       </div>
                     </div>
+                    
+                    
+                   
 
                     <button class="btn btn-success btn-user btn-block">
                       登録確認

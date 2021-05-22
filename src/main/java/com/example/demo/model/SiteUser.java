@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.example.demo.validator.UniqueLogin;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "users")
 public class SiteUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,15 +30,11 @@ public class SiteUser {
     private String password;
     
     /** 表示名. */
-    @Size(min = 2, max = 20, message="ユーザー名は2文字から20文字内で入力してください")
-	private String displayName;
-    	
-	/** ロール. */
-	@Column(name = "role", length = 120, nullable = false)
-	private String role;
+    @Size(min = 2, max = 20, message="名前は2文字から20文字内で入力してください")
+	private String displayname;
 
-    
     private boolean admin;
+    private String role;
     private boolean active = true;
 }
 
