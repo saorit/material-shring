@@ -71,5 +71,8 @@
   background: #FFFFCC;
   color: #FFF;
 }
-
-
+/* ホーム画面の新着教材一覧 */
+* {
+	margin: 0;
+	padding: 0;
+}
