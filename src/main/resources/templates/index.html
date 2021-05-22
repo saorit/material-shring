@@ -7,7 +7,7 @@
 </head>
 <body class="bg-gradient">
   <!-- Page Wrapper -->
-  <div id="wrapper">
+  
 
     <!-- Main -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -15,16 +15,16 @@
         <div class="container">
 
           <!-- teaching-material list -->
-          <div class="card shadow my-4">
+          <div class="card my-4">
             <div class="card-header py-3">
-              <h3 class="m-0 font-weight-bold text-primary">
+              <h3 class="m-0 font-weight-bolder">
                 新着教材一覧
               </h3>
             </div>
             <div class="card-body">
               <div class="teaching-material">
               
-    <div class="album py-5 bg-light">
+    <div class="album py-5">
     <div class="container">
 
       <div class="row">
@@ -183,23 +183,34 @@
               </div>
             </div>
           </div>
+          <!-- 以下２つのタブで範囲を指定 -->
+          </div>
+          </div>
           <!-- End of teaching-material list -->
           <!-- Official account -->
-          <h3 class="m-0 font-weight-bold text-primary">
+          <div class="container">
+          <div class="card-deck mb-3 text-center">
+          
+          <div class="card my-4">
+            <div class="card-header py-3">
+              <h3 class="m-0 font-weight-bolder">
                 公式アカウント
-              </h3><br>
-          
-          <div class="card-deck">
-          
+              </h3>
+            </div>
+            <div class="card-body px-4">
+              <div class="official account">
+              
+    　　　　　　
+                <div class="card-deck">
          <div class="card" style="width: 18rem;">
-           <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+           <svg class="rounded-pill" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
            <div class="card-body">
              <h5 class="card-title">Card title</h5>
              <a href="#" class="card-link">Card link</a>
              <p class="card-text">紹介文</p>
-             <a href="#" class="btn btn-primary">公式アカウント詳細</a>
+             <a href="#" class="btn btn-primary">詳細</a>
            </div>
-         </div>
+         </div><br>
          
          <div class="card" style="width: 18rem;">
            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
@@ -207,9 +218,9 @@
              <h5 class="card-title">Card title</h5>
              <a href="#" class="card-link">Card link</a>
              <p class="card-text">紹介文</p>
-             <a href="#" class="btn btn-primary">公式アカウント詳細</a>
+             <a href="#" class="btn btn-primary">詳細</a>
            </div>
-         </div>
+         </div><br>
          
          <div class="card" style="width: 18rem;">
            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
@@ -217,17 +228,28 @@
              <h5 class="card-title">Card title</h5>
              <a href="#" class="card-link">Card link</a>
              <p class="card-text">紹介文</p>
-             <a href="#" class="btn btn-primary">公式アカウント詳細</a>
+             <a href="#" class="btn btn-primary">詳細</a>
            </div>
+         </div><br>
+         
+         </div>
+         
          </div>
 
          </div>
-        </div>
-      </div>
-    </div>
+    　　　　　　</div>
+              </div>
+              </div>
+              
+              </div>
+              
+            
+       
+      
     <!-- End of Official account -->
     <!-- End of Main -->
-  </div>
+    </div>
+ 
 
 </body>
 <th:block th:insert="fragments/base :: scripts"></th:block>
