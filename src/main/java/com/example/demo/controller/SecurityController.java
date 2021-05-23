@@ -53,8 +53,7 @@ public class SecurityController {
     	if (result.hasErrors()) {
             return "register";
         }
-
-        
+    	
         
         return "userconfirm";
     }
@@ -73,7 +72,6 @@ public class SecurityController {
         } else {
             user.setRole(Role.USER.name());
         }
-    	
 
     	// ユーザー情報を保存
         userService.save(user);

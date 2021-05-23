@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -58,23 +57,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public SiteUser save(SiteUser user) {
 
-		// パスワード
-		String password = user.getPassword();
-
-		// パスワードが空か判定
-		if (StringUtils.isBlank(password)) {
-			// 空の場合
-
-			// DBからパスワードを取得し、User(Entity)クラスのパスワードに設定
-			SiteUser dbData = this.findOne(user.getUsername());
-			user.setPassword(dbData.getPassword());
-
-		} else {
-			// 空以外の場合
-
-			// パスワードを暗号化し、User(Entity)クラスのパスワードに設定
-			user.setPassword(passwordEncoder.encode(password));
-		}
 
 		// データベースにUser(Entityクラス)を保存
 		return repository.save(user);
