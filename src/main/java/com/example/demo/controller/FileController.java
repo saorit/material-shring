@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.form.FileUploadForm;
@@ -32,7 +31,7 @@ import com.example.demo.service.UserService;
  * リクエストURLが「クラスの@RequestMappingで指定したパス + メソッドで指定したパス」になります。
  */
 @Controller
-@RequestMapping("/file")
+
 public class FileController {
 
 	/**
@@ -55,17 +54,17 @@ public class FileController {
 	/**
 	 * 新規登録画面のTemplateHTMLのパス.
 	 */
-	private final String NEW_TEMPLATE_PATH = "file/sharing/new";
+	private final String NEW_TEMPLATE_PATH = "file/new";
 
 	/**
 	 * 編集画面のTemplateHTMLのパス.
 	 */
-	private final String EDIT_TEMPLATE_PATH = "file/sharing/edit";
+	private final String EDIT_TEMPLATE_PATH = "file/edit";
 
 	/**
 	 * 詳細画面のTemplateHTMLのパス.
 	 */
-	private final String SHOW_TEMPLATE_PATH = "file/sharing/show";
+	private final String SHOW_TEMPLATE_PATH = "file/show";
 
 	/**
 	 * ファイル新規登録画面表示.
@@ -73,7 +72,7 @@ public class FileController {
 	 * @param fileUploadForm アップロードファイルのFormクラス
 	 * @return ファイル新規登録画面のテンプレートパス
 	 */
-	@GetMapping("sharing/new")
+	@GetMapping("/file/new")
 	public String newFile(@ModelAttribute FileUploadForm fileUploadForm) {
 		return NEW_TEMPLATE_PATH;
 	}
@@ -85,7 +84,7 @@ public class FileController {
 	 * @param fileUploadForm アップロードファイルのFormクラス
 	 * @return ファイル編集画面のテンプレートパス
 	 */
-	@GetMapping("sharing/edit/{id}")
+	@GetMapping("/file/edit/{id}")
 	public String editFile(@PathVariable @ModelAttribute int id, @ModelAttribute FileUploadForm fileUploadForm) {
 
 		return EDIT_TEMPLATE_PATH;
@@ -98,7 +97,7 @@ public class FileController {
 	 * @param model Modelクラス
 	 * @return ファイル詳細画面のテンプレートパス
 	 */
-	@GetMapping("sharing/show/{id}")
+	@GetMapping("/file/show/{id}")
 	public String show(@PathVariable int id, Model model) {
 		// ファイル情報を取得
 		File file = fileService.findOne(id);
@@ -113,7 +112,7 @@ public class FileController {
 	 * @param id  ファイルID
 	 * @param res HTTPレスポンス
 	 */
-	@GetMapping("sharing/show/image/{id}")
+	@GetMapping("/file/show/image/{id}")
 	@ResponseBody
 	public void showImage(@PathVariable int id, HttpServletResponse res) {
 		// ファイル情報を取得
@@ -137,7 +136,7 @@ public class FileController {
 	 * @param userDetails   ユーザーの詳細情報
 	 * @return 遷移先パス(エラーの場合、新規登録画面のテンプレートパス。成功の場合、HOME画面)
 	 */
-	@PostMapping("sharing/upload")
+	@PostMapping("/file/upload")
 	public String create(@Validated @ModelAttribute FileUploadForm fileForm, final BindingResult bindingResult,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
@@ -189,7 +188,7 @@ public class FileController {
 	 * @param userDetails    ログインユーザーの詳細情報
 	 * @return 遷移先(エラーの場合、編集画面。成功の場合、HOME画面)
 	 */
-	@PostMapping("sharing/update/{id}")
+	@PostMapping("/file/update/{id}")
 	public String update(@PathVariable int id, @Validated FileUploadForm fileForm, final BindingResult bindingResult,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
@@ -239,7 +238,7 @@ public class FileController {
 	 * @param id ファイルID
 	 * @return 遷移先(HOME画面のURL)
 	 */
-	@PostMapping("sharing/delete/{id}")
+	@PostMapping("/file/delete/{id}")
 	public String destroy(@PathVariable int id) {
 		fileService.delete(id);
 		return REDIRECT_HOME_URL;
@@ -252,7 +251,7 @@ public class FileController {
 	 * @return 遷移先(null)
 	 * @throws UnsupportedEncodingException
 	 */
-	@GetMapping("sharing/download/{id}")
+	@GetMapping("/file/download/{id}")
 	@ResponseBody
 	public String download(@PathVariable int id, HttpServletResponse res) throws UnsupportedEncodingException {
 		// ファイル情報を取得
@@ -303,4 +302,3 @@ public class FileController {
 		return false;
 	}
 }
-

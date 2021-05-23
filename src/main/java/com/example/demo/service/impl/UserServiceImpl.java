@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,10 @@ public class UserServiceImpl implements UserService {
 	private SiteUserRepository repository;
 
 	/**
-	 * PasswordEncoderクラス.一旦非表示
-	 
+	 * PasswordEncoderクラス.
+	 */
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	*/
 
 	/**
 	 * User(Entity)クラスのデータを全件取得する.
@@ -58,18 +58,35 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public SiteUser save(SiteUser user) {
 
+		// パスワード
+		String password = user.getPassword();
+
+		// パスワードが空か判定
+		if (StringUtils.isBlank(password)) {
+			// 空の場合
+
+			// DBからパスワードを取得し、User(Entity)クラスのパスワードに設定
+			SiteUser dbData = this.findOne(user.getUsername());
+			user.setPassword(dbData.getPassword());
+
+		} else {
+			// 空以外の場合
+
+			// パスワードを暗号化し、User(Entity)クラスのパスワードに設定
+			user.setPassword(passwordEncoder.encode(password));
+		}
+
 		// データベースにUser(Entityクラス)を保存
 		return repository.save(user);
 	}
-	
+
 	/**
-	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.一旦非表示
+	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.
 	 *
 	 * @param username ユーザー名
 	 * @return 件数
-	 
+	 */
 	public long countByUsername(String username) {
 		return repository.countByUsername(username);
-	}*/
-
+	}
 }

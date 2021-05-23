@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>New File</title>
+	<th:block th:insert="fragments/header :: header"></th:block>
+    <th:block th:insert="fragments/base :: header"></th:block>
+</head>
+
+<body class="bg-gradient">
+	<div class="container body-container">
+		<h1>New File</h1>
+		<form th:action="@{/file/upload}" th:method="post" enctype="multipart/form-data"
+			th:object="${fileUploadForm}">
+			<div class="mb-3">
+				<input type="file" th:field="*{multipartFile}" class="form-control" />
+				<br />
+				<span th:if="${#fields.hasErrors('multipartFile')}"
+					th:errors="*{multipartFile}">
+				</span>
+			</div>
+			<br />
+			<span class="d-flex justify-content-between">
+				<button type="submit" class="btn btn-outline-dark">アップロード</button>
+				<a class="btn btn-outline-dark" th:href="@{/}">HOME画面へ</a>
+			</span>
+		</form>
+	</div>
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+    <th:block th:insert="fragments/footer :: footer"></th:block>
+</body>
+</html>
