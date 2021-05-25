@@ -40,25 +40,25 @@ public class File {
 	private byte[] data;
 
 	/** イメージフラグ. */
-	@Column(name = "is_image_extension", nullable = false)
+	@Column(name = "is_image_extension", nullable = true)
 	private boolean isImageExtension;
 
 	/** 登録日時. */
-	@Column(name = "create_date", nullable = false)
+	@Column(name = "create_date", nullable = true)
 	private Timestamp createDate;
 
 	/** 登録ユーザー名. */
 	@ManyToOne
-	@JoinColumn(name = "create_username", nullable = false)
+	@JoinColumn(name = "create_username", nullable = true)
 	private SiteUser createUser;
 
 	/** 更新日時. */
-	@Column(name = "update_date", nullable = false)
+	@Column(name = "update_date", nullable = true)
 	private Timestamp updateDate;
 
 	/** 更新ユーザー名. */
 	@ManyToOne
-	@JoinColumn(name = "update_username", nullable = false)
+	@JoinColumn(name = "update_username", nullable = true)
 	private SiteUser updateUser;
 
 }

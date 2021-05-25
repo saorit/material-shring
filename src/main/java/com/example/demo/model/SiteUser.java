@@ -34,15 +34,15 @@ public class SiteUser {
 	private String displayname;
     
     /** 自己紹介. */
-    @Column(name = "profile", length = 200, nullable = false)
+    @Column(name = "profile", length = 200, nullable = true)
 	private String profile;
     
     /** プロフィール画像. */
-    @Column(name = "photos", length = 64, nullable = false)
+    @Column(name = "photos", length = 64, nullable = true)
 	private String photos;
     
     /** ロール. */
-	@Column(name = "role", length = 120, nullable = false)
+	@Column(name = "role", length = 120, nullable = true)
 	private String role;
 
     private boolean admin;
