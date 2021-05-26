@@ -158,6 +158,10 @@ public class FileController {
 			// ファイル名を取得
 			String fileName = fileForm.getMultipartFile().getOriginalFilename();
 			file.setName(fileName);
+			
+			// 教材の内容を取得
+			String description = fileForm.getDescription();
+			file.setDescription(description);
 
 			// 画像ファイル拡張子フラグを取得
 			boolean isImageExtension = this.isImageExtension(fileName);

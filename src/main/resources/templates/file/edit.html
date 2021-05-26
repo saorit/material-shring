@@ -7,9 +7,9 @@
 	<th:block th:insert="fragments/base :: header"></th:block>
 </head>
 
-<body>
-	<div class="container body-container">
-		<h1>教材の編集<span th:text="${id}"></span></h1>
+<body class="bg-gradient">
+	<div class="container body-container"><br />
+		<h1>教材の編集<span th:text="${id}"></span></h1><br/>
 		<form th:action="@{/file/update/{id}(id=${id})}" th:method="post" th:object="${fileUploadForm}"
 			enctype="multipart/form-data">
 			<div class="mb-3">
@@ -18,6 +18,16 @@
 					th:errors="*{multipartFile}">
 				</span>
 				<br />
+				
+				<div class="form-group">
+                      <label for="description">
+                        <span class="badge badge-primary">任意</span>
+                        教材の内容（使い方や関連書籍など）
+                      </label>
+                      <textarea class="profile_text" rows="10" cols="60" th:field="*{description}" placeholder="ここに記入してください"></textarea>
+                    </div>
+			<br />
+			
 				<span class="d-flex justify-content-between">
 					<button type="submit" class="btn btn-outline-dark">アップロード</button>
 					<a class="btn btn-outline-dark" th:href="@{/}">HOME画面へ</a>

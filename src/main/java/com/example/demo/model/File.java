@@ -34,6 +34,10 @@ public class File {
 	/** ファイル名. */
 	@Column(name = "name", length = 60, nullable = false)
 	private String name;
+	
+	/** 教材の内容 */
+    @Column(name = "description", length = 300, nullable = false)
+	private String description;
 
 	/** ファイルデータ. */
 	@Column(name = "data", nullable = false, columnDefinition = "mediumblob")

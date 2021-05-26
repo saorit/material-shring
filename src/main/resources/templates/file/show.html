@@ -12,12 +12,16 @@
 		<h1>教材ダウンロード</h1>
 		<table class="table file-container" th:object="${file}">
 			<tr>
-				<th>ファイル ID</th>
+				<th>教材 ID</th>
 				<td th:text="*{id}"></td>
 			</tr>
 			<tr>
-				<th>ファイル名</th>
+				<th>教材名</th>
 				<td th:text="*{name}"></td>
+			</tr>
+			<tr>
+				<th>教材の内容</th>
+				<td th:text="*{description}"></td>
 			</tr>
 			<tr>
 				<th>ファイル</th>
