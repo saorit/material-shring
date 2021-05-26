@@ -49,7 +49,7 @@ public class FileController {
 	/**
 	 * Redirect用HOME画面パス.
 	 */
-	private final String REDIRECT_HOME_URL = "redirect:/";
+	private final String REDIRECT_HOME_URL = "redirect:/index";
 
 	/**
 	 * 新規登録画面のTemplateHTMLのパス.
