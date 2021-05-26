@@ -22,7 +22,7 @@ public class SiteUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    
-    @Size(min = 2, max = 20, message="ユーザー名は2文字から20文字内で入力してください")
+    @Size(min = 2, max = 35, message="ユーザー名は2文字から10文字内で入力してください")
     @UniqueLogin
     private String username;
 
@@ -30,7 +30,7 @@ public class SiteUser {
     private String password;
     
     /** 表示名. */
-    @Size(min = 2, max = 20, message="名前は2文字から20文字内で入力してください")
+    @Size(min = 2, max = 35, message="名前は2文字から10文字内で入力してください")
 	private String displayname;
     
     /** 自己紹介. */
