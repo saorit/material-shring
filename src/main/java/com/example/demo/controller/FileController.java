@@ -49,22 +49,22 @@ public class FileController {
 	/**
 	 * Redirect用HOME画面パス.
 	 */
-	private final String REDIRECT_HOME_URL = "/redirect:/index";
+	private final String REDIRECT_HOME_URL = "redirect:/";
 
 	/**
 	 * 新規登録画面のTemplateHTMLのパス.
 	 */
-	private final String NEW_TEMPLATE_PATH = "/file/new";
+	private final String NEW_TEMPLATE_PATH = "file/new";
 
 	/**
 	 * 編集画面のTemplateHTMLのパス.
 	 */
-	private final String EDIT_TEMPLATE_PATH = "/file/edit";
+	private final String EDIT_TEMPLATE_PATH = "file/edit";
 
 	/**
 	 * 詳細画面のTemplateHTMLのパス.
 	 */
-	private final String SHOW_TEMPLATE_PATH = "/file/show";
+	private final String SHOW_TEMPLATE_PATH = "file/show";
 
 	/**
 	 * ファイル新規登録画面表示.
@@ -165,7 +165,7 @@ public class FileController {
 			file.setUpdateDate(currentTime); // 更新日時を設定
 
 			// ユーザー名に紐づくユーザー情報を取得
-			SiteUser loginUser = userService.findOne(userDetails.getUsername());
+			SiteUser loginUser = userService.findOne(userDetails.getId());
 			file.setCreateUser(loginUser); // 登録ユーザーを設定
 			file.setUpdateUser(loginUser); // 更新ユーザーを設定
 
@@ -219,7 +219,7 @@ public class FileController {
 			file.setUpdateDate(currentTime);
 
 			// ユーザー名に紐づくユーザー情報を取得
-			SiteUser loginUser = userService.findOne(userDetails.getUsername());
+			SiteUser loginUser = userService.findOne(userDetails.getId());
 			// 更新ユーザーを設定
 			file.setUpdateUser(loginUser);
 

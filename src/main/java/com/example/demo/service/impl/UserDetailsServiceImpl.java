@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.SiteUser;
+import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.repository.SiteUserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+	@Autowired
     private final SiteUserRepository userRepository;
 
     @Override
@@ -33,10 +36,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return createUserDetails(user);
     }
 
-    public User createUserDetails(SiteUser user) {
+    public UserDetailsImpl createUserDetails(SiteUser user) {
         Set<GrantedAuthority> grantedAuthories = new HashSet<>();
         grantedAuthories.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
-        return new User(user.getUsername(), user.getPassword(), grantedAuthories);
+        return new UserDetailsImpl(user, grantedAuthories);
     }
 }

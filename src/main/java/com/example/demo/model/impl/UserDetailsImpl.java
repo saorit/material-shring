@@ -34,6 +34,15 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	/**
+	 * ユーザーIDを取得する.
+	 *
+	 * @return ユーザーID
+	 */
+	public Long getId() {
+		return user.getId();
+	}
+
+	/**
 	 * ユーザーの表示名を取得する.
 	 *
 	 * @return ユーザーの表示名

@@ -23,4 +23,7 @@ public interface SiteUserRepository extends JpaRepository<SiteUser, String> {
 	 */
 	@Query("select count(e) from SiteUser e WHERE e.username = :username")
 	long countByUsername(@Param("username") String username);
+
+	@Query("select e from SiteUser e WHERE e.id = :id")
+	SiteUser getById(@Param("id") Long id);
 }

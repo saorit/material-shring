@@ -19,10 +19,10 @@ public interface UserService {
 	/**
 	 * ユーザー名に紐付くUser(Entity)クラスのデータを1件取得する.
 	 *
-	 * @param username ユーザー名
+	 * @param long1 ユーザー名
 	 * @return 該当した1件のデータ
 	 */
-	public SiteUser findOne(String username);
+	public SiteUser findOne(Long long1);
 
 	/**
 	 * User(Entity)クラスのデータを保存する.

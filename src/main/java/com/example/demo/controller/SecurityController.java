@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.SiteUser;
 import com.example.demo.util.Role;
@@ -36,12 +37,11 @@ public class SecurityController {
         return "login";
     }
 
-    @GetMapping("/")
-    public String showList(Authentication loginUser, Model model) {
-        model.addAttribute("username", loginUser.getName());
-        model.addAttribute("role", loginUser.getAuthorities());
+    @RequestMapping("/")
+    public String top() {
         return "index";
     }
+
     @GetMapping("/register")
     private String readForm(@ModelAttribute("user") SiteUser user) {
         return "register";
@@ -79,4 +79,3 @@ public class SecurityController {
         return "redirect:/login?register";
     }
 }
-
