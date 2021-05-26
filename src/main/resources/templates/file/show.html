@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Show File</title>
+	<th:block th:insert="fragments/header :: header"></th:block>
+	<th:block th:insert="fragments/base :: header"></th:block>
+</head>
+
+<body class="bg-gradient">
+	<div class="container body-container">
+		<h1>Show File</h1>
+		<table class="table file-container" th:object="${file}">
+			<tr>
+				<th>ファイル ID</th>
+				<td th:text="*{id}"></td>
+			</tr>
+			<tr>
+				<th>ファイル名</th>
+				<td th:text="*{name}"></td>
+			</tr>
+			<tr>
+				<th>ファイル</th>
+				<td>
+					<img th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
+						class="img-responsive file-show" loading="lazy">
+					<img th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}"
+						th:alt="*{name}" class="img-responsive file-thumbnail" loading="lazy">
+					<br />
+					<span class="d-flex justify-content-end">
+						<a class="btn btn-outline-dark btn-xs" th:href="@{/file/download/{id}(id=*{id})}">ダウンロード</a>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th>登録ユーザー</th>
+				<td th:text="*{createUser.displayname}"></td>
+			</tr>
+			<tr>
+				<th>登録日時</th>
+				<td th:text="*{createDate}"></td>
+			</tr>
+			<tr>
+				<th>更新ユーザー</th>
+				<td th:text="*{updateUser.displayname}"></td>
+			</tr>
+			<tr>
+				<th>更新日時</th>
+				<td th:text="*{updateDate}"></td>
+			</tr>
+			<tfoot>
+				<tr>
+					<td colspan="2">
+						<span class="d-flex justify-content-end">
+							<a class="btn btn-outline-dark" th:href="@{/}">HOME画面へ</a>
+						</span>
+					<td>
+				</tr>
+				<tfoot>
+		</table>
+	</div>
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+    <th:block th:insert="fragments/footer :: footer"></th:block>
+</body>
+
+</html>
