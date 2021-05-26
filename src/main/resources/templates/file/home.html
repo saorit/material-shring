@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>HOME</title>
+	<th:block th:insert="fragments/header :: header"></th:block>
+	<th:block th:insert="fragments/base :: header"></th:block>
+</head>
+
+<body class="bg-gradient">
+	<div class="container body-container">
+		<h1>File List</h1>
+		<!-- https://kiyoblog.org/css-flex/ -->
+		<ul class="file-ltems">
+			<li class="file-ltem" th:each="file:${files}" th:object="${file}">
+				<img th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
+					class="img-thumbnail img-responsive file-thumbnail" loading="lazy">
+				<img th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
+					class="img-thumbnail img-responsive file-thumbnail" loading="lazy">
+				<br />
+				<br />
+				<div class="d-flex justify-content-between">
+					<a class="btn btn-outline-dark" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
+					<a th:if="${loginUsername} == *{createUser.username}" class="btn btn-outline-dark"
+						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
+					<form th:if="${loginUsername} == *{createUser.username}"
+						th:action="@{/file/delete/{id}(id=*{id})}" th:method="post">
+						<input type="submit" class="btn btn-outline-dark" value="削除" />
+					</form>
+				</div>
+			</li>
+		</ul>
+		<div th:fragment='paginationbar' class="d-flex justify-content-between">
+			<div sec:authorize="isAuthenticated()">
+				<a class="btn btn-outline-dark" th:href="@{/file/new}">新規登録</a>
+			</div>
+			
+		</div>
+	</div>
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+    <th:block th:insert="fragments/footer :: footer"></th:block>
+</body>
+</html>

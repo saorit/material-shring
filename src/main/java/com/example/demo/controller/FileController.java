@@ -49,7 +49,7 @@ public class FileController {
 	/**
 	 * Redirect用HOME画面パス.
 	 */
-	private final String REDIRECT_HOME_URL = "redirect:/index";
+	private final String REDIRECT_HOME_URL = "redirect:/file/home";
 
 	/**
 	 * 新規登録画面のTemplateHTMLのパス.
@@ -65,6 +65,11 @@ public class FileController {
 	 * 詳細画面のTemplateHTMLのパス.
 	 */
 	private final String SHOW_TEMPLATE_PATH = "file/show";
+	
+	@GetMapping("/file/home")
+	public String newHome(@ModelAttribute FileUploadForm fileUploadForm) {
+		return "file/home";
+	}
 
 	/**
 	 * ファイル新規登録画面表示.
