@@ -54,31 +54,33 @@
     </div>
   </div>
   </div>
-        
-        
-                    <div class="container">
+  
+              <div class="container">
               <div class="row">
                 <div class="col-md-6 offset-md-3 py-2">
                 <nav aria-label="ページ送り">
-                  <div class="text-center">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item"><a class="page-link" href="?page={{ previous_page_number }}">&laquo;</a></li>
-                      <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-                      <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">2 <span class="sr-only">(現位置)</span></a>
-                        </li>
-                      <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
-                      <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
-                      <li class="page-item"><a class="page-link" href="?page=5">5</a></li>
-                      <li class="page-item"><a class="page-link" href="?page={{ next_page_number }}">&raquo;</a></li>
-                    </ul>
-                  </div>
-                </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+                 <div class="text-center">
+                 <ul th:if="0 != ${page.totalPages}" class="pagination justify-content-center">
+				     <li class="page-item">
+					    <a class="page-link" th:if="${!page.isFirstPage()}" th:href="@{${url}(page=0)}">最初のページ</a>
+				     </li>
+				     <li class="page-item" th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:class="(${i}==${page.number})? 'active file-page' : 'file-page'" >
+					     <span class="page-link" th:if='${i}==${page.number - 1}' th:text='${i + 1}'>1</span>
+					     <a class="page-link" th:if='${i}!=${page.number - 1}' th:href="@{${url}(page=${i})}">
+						   <span th:text='${i + 1}'>1</span>
+					     </a>
+				     </li>
+				     <li class="file-page">
+					     <a class="page-link" th:if="${!page.isLastPage()}" th:href="@{${url}(page=(${page.totalPages} - 1))}">最後のページ</a>
+				     </li>
+			      </ul>
+			      </div>
+			    </nav>
+			    </div>
+			  </div>
+			  </div>
+			
+			
           <!-- End of teaching-material list -->
           <!-- Official account -->
           <div class="container">
