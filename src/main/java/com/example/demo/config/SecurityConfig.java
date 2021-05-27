@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/login", "/register", "/userconfirm").permitAll().
 				anyRequest().authenticated()
 				.and().sessionManagement().sessionFixation().none().and().formLogin().loginPage("/login")
-				.loginProcessingUrl("/login") // ログインフォームのアクションに指定したURL[action="@{/login}"]を設定
+				.loginProcessingUrl("/index") // ログインフォームのアクションに指定したURL[action="@{/login}"]を設定
 				.usernameParameter("username") // ログインフォームのユーザー欄のname属性を設定
 				.passwordParameter("password") // ログインフォームのパスワード欄のname属性を設定
 				.successForwardUrl("/") // ログイン成功時に遷移するURL

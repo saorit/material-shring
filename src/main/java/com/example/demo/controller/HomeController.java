@@ -51,7 +51,7 @@ public class HomeController {
 	 * @return 遷移先
 	 */
 	@GetMapping("/file/home")
-	public String index(Model model,
+	public String home(Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -76,6 +76,42 @@ public class HomeController {
 		}
 
 		return HOME_TEMPLATE_PATH;
+	}
+	
+	/**
+	 * HOME画面表示.
+	 * 
+	 * @param model       Modelクラス
+	 * @param pageable    ページネーション情報（デフォルト[1ページ目、6件表示、更新日時の新しい順でソート])
+	 * @param userDetails ログインユーザーの詳細情報
+	 * @return 遷移先
+	 */
+	@GetMapping("/index")
+	public String index(Model model,
+			@PageableDefault(page = 0, size = 6, sort = {
+					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
+			@AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+		// 1ページに表示するファイル情報を取得
+		Page<File> filesPage = fileService.findAll(pageable);
+
+		// ファイル一覧のページ情報を設定
+		PageWrapper<File> page = new PageWrapper<File>(filesPage, HOME_URL);
+
+		model.addAttribute("files", filesPage);
+		model.addAttribute("page", page);
+		model.addAttribute("url", HOME_URL);
+
+		// ログインユーザーの詳細情報を判定
+		if (userDetails == null) {
+			// ログインユーザーの詳細情報がNULLの場合
+			model.addAttribute("loginUsername", "");
+		} else {
+			// ログインユーザーの詳細情報がNULL以外の場合
+			model.addAttribute("loginUsername", userDetails.getUsername());
+		}
+
+		return "index";
 	}
 
 }
