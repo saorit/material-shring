@@ -35,6 +35,21 @@
 				<a class="btn btn-outline-dark" th:href="@{/file/new}">新規登録</a>
 			</div>
 			
+			<ul th:if="0 != ${page.totalPages}">
+				<li class="file-page">
+					<a th:if="${!page.isFirstPage()}" th:href="@{${url}(page=0)}">最初のページ</a>
+				</li>
+				<li th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:class="(${i}==${page.number})? 'active file-page' : 'file-page'" >
+					<span th:if='${i}==${page.number - 1}' th:text='${i + 1}'>1</span>
+					<a th:if='${i}!=${page.number - 1}' th:href="@{${url}(page=${i})}">
+						<span th:text='${i + 1}'>1</span>
+					</a>
+				</li>
+				<li class="file-page">
+					<a th:if="${!page.isLastPage()}" th:href="@{${url}(page=(${page.totalPages} - 1))}">最後のページ</a>
+				</li>
+			</ul>
+			
 		</div>
 	</div>
 	<th:block th:insert="fragments/base :: scripts"></th:block>

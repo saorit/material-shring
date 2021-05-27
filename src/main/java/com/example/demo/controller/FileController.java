@@ -66,10 +66,7 @@ public class FileController {
 	 */
 	private final String SHOW_TEMPLATE_PATH = "file/show";
 	
-	@GetMapping("/file/home")
-	public String newHome(@ModelAttribute FileUploadForm fileUploadForm) {
-		return "file/home";
-	}
+
 
 	/**
 	 * ファイル新規登録画面表示.
