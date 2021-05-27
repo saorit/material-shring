@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Editing User</title>
+	<meta charset="UTF-8">
+  <th:block th:insert="fragments/header :: header"></th:block>
+  <th:block th:insert="fragments/base :: header"></th:block>
+</head>
+
+<body>
+	<div class="container body-container">
+		<h1>Editing User</h1>
+		<form th:action="@{/user_master/update}" th:method="post" th:object="${user}">
+			<table class="table user-container">
+				<tbody>
+					<tr>
+						<th>名前</th>
+						<td>
+							<input type="text" class="form-control" th:field="*{username}" />
+							<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th>表示名</th>
+						<td>
+							<input type="text" class="form-control" th:field="*{displayname}" />
+							<span th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th>パスワード</th>
+						<td>
+							<input type="password" class="form-control" th:field="*{password}" />
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+						</td>
+					</tr>
+					
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<span class="d-flex justify-content-between">
+								<button type="submit" class="btn btn-outline-dark">保存</button>
+								<a class="btn btn-outline-dark" th:href="@{/file/home}">MyPageへ</a>
+							</span>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</form>
+	</div>
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+    <th:block th:insert="fragments/footer :: footer"></th:block>
+</body>
+</html>
