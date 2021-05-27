@@ -159,6 +159,10 @@ public class FileController {
 			String fileName = fileForm.getMultipartFile().getOriginalFilename();
 			file.setName(fileName);
 			
+			// 教材の名前を取得
+			String itemname = fileForm.getItemname();
+			file.setItemname(itemname);
+			
 			// 教材の内容を取得
 			String description = fileForm.getDescription();
 			file.setDescription(description);
