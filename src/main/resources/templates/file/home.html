@@ -1,58 +1,147 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<title>HOME</title>
-	<th:block th:insert="fragments/header :: header"></th:block>
-	<th:block th:insert="fragments/base :: header"></th:block>
+  <meta charset="UTF-8">
+  <th:block th:insert="fragments/header :: header"></th:block>
+  <th:block th:insert="fragments/base :: header"></th:block>
 </head>
-
 <body class="bg-gradient">
-	<div class="container body-container">
-		<h1>File List</h1>
-		<!-- https://kiyoblog.org/css-flex/ -->
-		<ul class="file-ltems">
-			<li class="file-ltem" th:each="file:${files}" th:object="${file}">
-				<img th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
-					class="img-thumbnail img-responsive file-thumbnail" loading="lazy">
-				<img th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
-					class="img-thumbnail img-responsive file-thumbnail" loading="lazy">
-				<br />
-				<br />
-				<div class="d-flex justify-content-between">
-					<a class="btn btn-outline-dark" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
-					<a th:if="${loginUsername} == *{createUser.username}" class="btn btn-outline-dark"
-						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
-					<form th:if="${loginUsername} == *{createUser.username}"
-						th:action="@{/file/delete/{id}(id=*{id})}" th:method="post">
-						<input type="submit" class="btn btn-outline-dark" value="削除" />
-					</form>
-				</div>
-			</li>
-		</ul>
-		<div th:fragment='paginationbar' class="d-flex justify-content-between">
-			<div sec:authorize="isAuthenticated()">
-				<a class="btn btn-outline-dark" th:href="@{/file/new}">新規登録</a>
-			</div>
-			
-			<ul th:if="0 != ${page.totalPages}">
-				<li class="file-page">
-					<a th:if="${!page.isFirstPage()}" th:href="@{${url}(page=0)}">最初のページ</a>
-				</li>
-				<li th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:class="(${i}==${page.number})? 'active file-page' : 'file-page'" >
-					<span th:if='${i}==${page.number - 1}' th:text='${i + 1}'>1</span>
-					<a th:if='${i}!=${page.number - 1}' th:href="@{${url}(page=${i})}">
-						<span th:text='${i + 1}'>1</span>
-					</a>
-				</li>
-				<li class="file-page">
-					<a th:if="${!page.isLastPage()}" th:href="@{${url}(page=(${page.totalPages} - 1))}">最後のページ</a>
-				</li>
-			</ul>
-			
-		</div>
-	</div>
-	<th:block th:insert="fragments/base :: scripts"></th:block>
-    <th:block th:insert="fragments/footer :: footer"></th:block>
+  <!-- Page Wrapper -->
+  
+
+    <!-- Main -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <div class="container">
+
+          <!-- teaching-material list -->
+          <div class="card my-4">
+            <div class="card-header py-3">
+              <h3 class="m-0 font-weight-bolder">
+                新着教材一覧
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="teaching-material">
+              
+    <div class="album py-5">
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-md-4" th:each="file:${files}" th:object="${file}">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
+					 loading="lazy">
+            <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
+					 loading="lazy">
+            <div class="card-body">
+              <p class="card-text">教材の内容</p>
+              <p th:text="*{description}"></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/file/show/{id}(id=*{id})}">教材名</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">アカウント名(表示名)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+    </div>
+  </div>
+  </div>
+        
+        
+                    <div class="container">
+              <div class="row">
+                <div class="col-md-6 offset-md-3 py-2">
+                <nav aria-label="ページ送り">
+                  <div class="text-center">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item"><a class="page-link" href="?page={{ previous_page_number }}">&laquo;</a></li>
+                      <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2 <span class="sr-only">(現位置)</span></a>
+                        </li>
+                      <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+                      <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
+                      <li class="page-item"><a class="page-link" href="?page=5">5</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{ next_page_number }}">&raquo;</a></li>
+                    </ul>
+                  </div>
+                </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- End of teaching-material list -->
+          <!-- Official account -->
+          <div class="container">
+          <div class="card-deck mb-3 text-center">
+          
+          <div class="card my-4">
+            <div class="card-header py-3">
+              <h3 class="m-0 font-weight-bolder">
+                公式アカウント
+              </h3>
+            </div>
+            <div class="card-body px-4">
+              <div class="official account">
+              
+    　　　　　　
+                <div class="card-deck">
+         <div class="card" style="width: 18rem;">
+           <svg class="rounded-pill" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+           <div class="card-body">
+             <h5 class="card-title">Card title</h5>
+             <a href="#" class="card-link">Card link</a>
+             <p class="card-text">紹介文</p>
+             <a href="#" class="btn btn-primary">詳細</a>
+           </div>
+         </div><br>
+         
+         <div class="card" style="width: 18rem;">
+           <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+           <div class="card-body">
+             <h5 class="card-title">Card title</h5>
+             <a href="#" class="card-link">Card link</a>
+             <p class="card-text">紹介文</p>
+             <a href="#" class="btn btn-primary">詳細</a>
+           </div>
+         </div><br>
+         
+         <div class="card" style="width: 18rem;">
+           <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+           <div class="card-body">
+             <h5 class="card-title">Card title</h5>
+             <a href="#" class="card-link">Card link</a>
+             <p class="card-text">紹介文</p>
+             <a href="#" class="btn btn-primary">詳細</a>
+           </div>
+         </div><br>
+         
+         </div>
+         
+         </div>
+
+         </div>
+    　　　　　　</div>
+              </div>
+              </div>
+              
+              </div>
+      
+    <!-- End of Official account -->
+    <!-- End of Main -->
+    </div>
+ 
+
 </body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
+<th:block th:insert="fragments/footer :: footer"></th:block>
 </html>
