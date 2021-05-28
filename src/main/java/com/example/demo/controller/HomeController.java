@@ -9,18 +9,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.data.domain.Sort;
 import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
+import com.example.demo.repository.SiteUserRepository;
 import com.example.demo.service.FileService;
+import com.example.demo.service.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * HOME画面のControllerクラス.
  */
 @Controller
 public class HomeController {
+	
+	
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * File(Entityクラス)を操作するServiceクラス.
@@ -53,12 +61,15 @@ public class HomeController {
 	 * @param userDetails ログインユーザーの詳細情報
 	 * @return 遷移先
 	 */
-	@GetMapping("/file/home")
+	
+	@GetMapping("/file/home/{id}")
 	public String home(Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails,
-			@ModelAttribute("user") SiteUser user) {
+			@PathVariable Integer id) {
+		
+		model.addAttribute("user",  userService.findOne(id));
 
 		// 1ページに表示するファイル情報を取得
 		Page<File> filesPage = fileService.findAll(pageable);
@@ -86,7 +97,10 @@ public class HomeController {
 	public String upload(Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
-			@AuthenticationPrincipal UserDetailsImpl userDetails) {
+			@AuthenticationPrincipal UserDetailsImpl userDetails,
+			@PathVariable Long id
+			) {
+	
 
 		// 1ページに表示するファイル情報を取得
 		Page<File> filesPage = fileService.findAll(pageable);

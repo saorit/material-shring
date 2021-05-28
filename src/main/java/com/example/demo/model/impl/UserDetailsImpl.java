@@ -38,7 +38,7 @@ public class UserDetailsImpl implements UserDetails {
 	 *
 	 * @return ユーザーID
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return user.getId();
 	}
 

@@ -9,10 +9,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.example.demo.validator.UniqueLogin;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Getter
 @Setter
 @Entity
@@ -20,7 +22,7 @@ import lombok.Setter;
 public class SiteUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
    
     @Size(min = 2, max = 35, message="ユーザー名は2文字から10文字内で入力してください")
     @UniqueLogin

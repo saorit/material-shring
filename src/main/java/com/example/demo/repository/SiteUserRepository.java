@@ -11,9 +11,10 @@ import com.example.demo.model.SiteUser;
  * User(Entity)クラスのリポジトリクラス.
  */
 @Repository
-public interface SiteUserRepository extends JpaRepository<SiteUser, String> {
-    SiteUser findByUsername(String username);
+public interface SiteUserRepository extends JpaRepository<SiteUser, Integer> {
+	SiteUser findByUsername(String username);
     boolean existsByUsername(String username);
+ 
     
     /**
 	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得.

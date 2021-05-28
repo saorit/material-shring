@@ -44,9 +44,9 @@ public class UserServiceImpl implements UserService {
 	 * @param username ユーザー名
 	 * @return 該当した1件のデータ
 	 */
-	public SiteUser findOne(Long id) {
-		return repository.getById(id);
-	}
+	public SiteUser findOne(Integer id) {
+	  return repository.getOne(id);
+	    }
 
 	/**
 	 * User(Entityクラス)のデータを保存する.

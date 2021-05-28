@@ -22,7 +22,7 @@ public interface UserService {
 	 * @param long1 ユーザー名
 	 * @return 該当した1件のデータ
 	 */
-	public SiteUser findOne(Long long1);
+	public SiteUser findOne(Integer id);
 
 	/**
 	 * User(Entity)クラスのデータを保存する.
