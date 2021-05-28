@@ -16,6 +16,52 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <div class="container">
+        <br />
+            <!-- upload btn -->
+            <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-4">
+                <h4>教材アップロード</h4>
+                    <a th:href="@{/file/new}" class="btn btn-info btn-user btn-block">
+                      アップロード画面へ
+                    </a>
+            </div>
+            </div>
+            <!-- end of upload btn -->
+            <!-- profile -->
+             <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="p-5">
+
+                  <!-- userConfirm -->
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">
+                      ユーザ登録内容確認
+                    </h1>
+                  </div>
+                 
+                    <h1>Show User</h1>
+		<table class="table user-container" th:object="${user}">
+			
+				<tr>
+					<th>名前</th>
+					<td th:text="*{username}"></td>
+				</tr>
+				<tr>
+					<th>表示名</th>
+					<td th:text="*{displayname}"></td>
+				</tr>
+				
+			
+		</table>
+                    
+                    
+            </div>
+          </div>
+        </div>
+            
+            
 
           <!-- teaching-material list -->
           <div class="card my-4">
