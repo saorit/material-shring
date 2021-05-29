@@ -32,18 +32,17 @@
 						</ul>
 						
 						<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-						<div th:each="file:${files}" th:object="${file}">
                             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
-                              <a th:if="${loginUsername} == *{createUser.username}"class="nav-link"
+                              <a th:field="${user}" class="nav-link"
 						         th:href="@{/file/home/{id}(id=*{id})}">MyPage</a>
                             </li>
                             <li class="nav-item">
-                              <a th:if="${loginUsername} == *{createUser.username}" class="nav-link" 
+                              <a class="nav-link" 
                                  th:href="@{/file/new}">教材アップロード</a>
                             </li>
                             <li class="nav-item">
-                              <a th:if="${loginUsername} == *{createUser.username}" class="nav-link" 
+                              <a class="nav-link" 
                                  th:href="@{/logout}">ログアウト</a>
                             </li>
                             

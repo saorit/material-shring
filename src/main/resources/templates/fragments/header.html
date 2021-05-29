@@ -32,20 +32,19 @@
 						</ul>
 							<div class="col-12 clearfix">
     <div class="float-right">
-    <div class="col-md-4" th:each="file:${files}" th:object="${file}">						
+    <div class="col-md-4">						
 	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-      <a th:if="${loginUsername} == *{createUser.username}"class="btn btn-menu"
-						th:href="@{/file/home/{id}(id=*{id})}">MyPage</a>
-        
+      <a class="btn btn-menu" th:field="${user}"
+		 th:href="@{/file/home/{id}(id=*{id})}" th:method="post">MyPage</a>
       </li>
       <li class="nav-item">
-        <a th:if="${loginUsername} == *{createUser.username}"class="btn btn-menu"
+        <a class="btn btn-menu"
          th:href="@{/file/new}">教材アップロード</a>
       </li>
       <li class="nav-item">
-        <a th:if="${loginUsername} == *{createUser.username}"class="btn btn-menu"
+        <a class="btn btn-menu"
            th:href="@{/logout}">ログアウト</a>
       </li>
     </ul>
