@@ -186,7 +186,7 @@ public class FileController {
 		// ファイル情報を保存
 		fileService.save(file);
 
-		return REDIRECT_HOME_URL;
+		return "redirect:/index?upload";
 	}
 
 	/**
@@ -239,7 +239,7 @@ public class FileController {
 			// TODO 例外処理を実装する
 
 		}
-		return REDIRECT_HOME_URL;
+		return "redirect:/index?fileupdate";
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class FileController {
 	@PostMapping("/file/delete/{id}")
 	public String destroy(@PathVariable int id) {
 		fileService.delete(id);
-		return REDIRECT_HOME_URL;
+		return "redirect:/index?delete";
 	}
 
 	/**

@@ -9,9 +9,9 @@
   <!-- Page Wrapper -->
       
           <div class="alert alert-success" th:if="${param.upload}">
-          <div class="d-flex align-items-center justify-content-center">プロフィールを更新しました!</div>
+          <div class="d-flex align-items-center justify-content-center">教材を追加しました！</div>
           </div>
-
+          
     <!-- Main -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
@@ -35,25 +35,28 @@
                 <div class="p-5">
 
                   <!-- userConfirm -->
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">
-                      ユーザ登録内容確認
-                    </h1>
-                  </div>
-                 
-                    <h1>Show User</h1>
+                    <h1>Myプロフィール</h1>
                     
 		<table class="table user-container" th:object="${user}">
 			
 				<tr>
-					<th>名前</th>
+					<th>ユーザー名</th>
 					<td th:text="*{username}"></td>
 				</tr>
 				<tr>
-					<th>表示名</th>
+					<th>名前</th>
 					<td th:text="*{displayname}"></td>
 				</tr>
-				
+				<tr>
+					<th>自己紹介</th>
+					<td th:text="*{profile}"></td>
+				</tr>
+				<tr>
+				    <td>
+				    <a th:href="@{/user_master/edit/{username}(username=*{username})}">プロフィールを編集する</a>
+					</td>
+					</div>
+				</tr>
 			
 		</table>
                     

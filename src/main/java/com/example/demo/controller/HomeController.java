@@ -93,24 +93,23 @@ public class HomeController {
 		return HOME_TEMPLATE_PATH;
 	}
 	
-	@PostMapping("/file/home")
-	public String upload(Model model,
+	@GetMapping("/file/home")
+	public String fileHome(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
-			@AuthenticationPrincipal UserDetailsImpl userDetails,
-			@PathVariable Long id
-			) {
-	
+			@AuthenticationPrincipal UserDetailsImpl userDetails) {
+		
+		
 
 		// 1ページに表示するファイル情報を取得
 		Page<File> filesPage = fileService.findAll(pageable);
 
 		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, HOME_URL);
+		PageWrapper<File> page = new PageWrapper<File>(filesPage, "file/home/{user.id}");
 
 		model.addAttribute("files", filesPage);
 		model.addAttribute("page", page);
-		model.addAttribute("url", HOME_URL);
+		model.addAttribute("url", "file/home/{user.id}");
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
@@ -121,8 +120,9 @@ public class HomeController {
 			model.addAttribute("loginUsername", userDetails.getUsername());
 		}
 
-		return HOME_TEMPLATE_PATH;
+		return "file/home";
 	}
+	
 	
 	/**
 	 * HOME画面表示.

@@ -60,7 +60,7 @@ public class UserMasterController {
 		// ユーザー情報を保存
         userService.save(user);
 
-		return "redirect:/file/home?upload";
+		return "redirect:/index?upldate";
 	}
 
 }

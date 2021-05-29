@@ -8,6 +8,19 @@
 <body class="bg-gradient">
   <!-- Page Wrapper -->
   
+          <div class="alert alert-success" th:if="${param.upload}">
+          <div class="d-flex align-items-center justify-content-center">教材を追加しました！</div>
+          </div>
+          
+          <div class="alert alert-danger" th:if="${param.delete}">
+          <div class="d-flex align-items-center justify-content-center">教材を削除しました</div>
+          </div>
+          
+          <div class="alert alert-danger" th:if="${param.fileupdate}">
+          <div class="d-flex align-items-center justify-content-center">教材内容を更新しました</div>
+          </div>
+          
+  
 
     <!-- Main -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -40,9 +53,11 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/file/show/{id}(id=*{id})}">教材名</a>
-                  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-outline-dark"
-						th:href="@{/file/home/{id}(id=*{id})}">編集</a>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">アカウント名(表示名)</button>
+                  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-secondary"
+						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
+				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-secondary"
+						th:href="@{/file/delete/{id}(id=*{id})}" th:method="post">削除</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">製作者</button>
                 </div>
               </div>
             </div>
