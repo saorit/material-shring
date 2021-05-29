@@ -58,11 +58,11 @@ public class SecurityController {
     }
 
     @RequestMapping("/")
-    public String top(Model model,
+    public String top(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
-
+    	
     	        // 1ページに表示するファイル情報を取得
     			Page<File> filesPage = fileService.findAll(pageable);
 
@@ -81,6 +81,12 @@ public class SecurityController {
     				// ログインユーザーの詳細情報がNULL以外の場合
     				model.addAttribute("loginUsername", userDetails.getUsername());
     			}
+    			
+    			model.addAttribute("username", userDetails.getUsername());
+    			model.addAttribute("id", userDetails.getId());
+    			model.addAttribute("displayname", userDetails.getDisplayname());
+    	        model.addAttribute("role", userDetails.getAuthorities());
+    			
 
 		return "index";
 	}

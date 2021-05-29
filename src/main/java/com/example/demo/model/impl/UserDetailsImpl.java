@@ -47,7 +47,7 @@ public class UserDetailsImpl implements UserDetails {
 	 *
 	 * @return ユーザーの表示名
 	 */
-	public String getDisplayName() {
+	public String getDisplayname() {
 		return user.getDisplayname();
 	}
 
