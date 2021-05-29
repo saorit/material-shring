@@ -47,6 +47,16 @@ public class UserServiceImpl implements UserService {
 	public SiteUser findOne(Integer id) {
 	  return repository.getOne(id);
 	    }
+	
+	/**
+	 * ユーザー名に紐付くUser(Entity)クラスのデータを1件取得する.
+	 *
+	 * @param username ユーザー名
+	 * @return 該当した1件のデータ
+	 */
+	public SiteUser findOneUsername(String username){
+		return repository.getOneUsername(username);
+	}
 
 	/**
 	 * User(Entityクラス)のデータを保存する.

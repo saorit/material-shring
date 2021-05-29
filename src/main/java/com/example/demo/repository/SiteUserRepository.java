@@ -14,6 +14,15 @@ import com.example.demo.model.SiteUser;
 public interface SiteUserRepository extends JpaRepository<SiteUser, Integer> {
 	SiteUser findByUsername(String username);
     boolean existsByUsername(String username);
+    
+    /**
+	 * IDに紐付くFile(Entity)クラスを取得.
+	 *
+	 * @param username userID
+	 * @return 取得したデータが格納されたUser(Entity)クラス
+	 */
+	@Query("SELECT f FROM SiteUser f WHERE f.username = :username")
+	SiteUser getOneUsername(@Param("username") String username);
  
     
     /**

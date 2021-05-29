@@ -24,7 +24,7 @@ public class FileUploadForm implements Serializable {
 	@FileRequired
 	private MultipartFile multipartFile;
 	
-	@Size(min = 2, max = 65, message="教材名は2文字から20文字内で入力してください")
+	@Size(min = 1, max = 65, message="教材名は1文字以上20文字内で入力してください")
     private String itemname;
 	
     @Size(min = 0, max = 300)

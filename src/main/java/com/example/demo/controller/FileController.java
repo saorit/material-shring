@@ -140,7 +140,9 @@ public class FileController {
 	 */
 	@PostMapping("/file/upload")
 	public String create(@Validated @ModelAttribute FileUploadForm fileForm, final BindingResult bindingResult,
-			@AuthenticationPrincipal UserDetailsImpl userDetails) {
+			@AuthenticationPrincipal UserDetailsImpl userDetails){
+		
+		
 
 		// 入力チェック
 		if (bindingResult.hasErrors()) {
@@ -175,7 +177,7 @@ public class FileController {
 			file.setUpdateDate(currentTime); // 更新日時を設定
 
 			// ユーザー名に紐づくユーザー情報を取得
-			SiteUser loginUser = userService.findOne(userDetails.getId());
+			SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
 			file.setCreateUser(loginUser); // 登録ユーザーを設定
 			file.setUpdateUser(loginUser); // 更新ユーザーを設定
 
