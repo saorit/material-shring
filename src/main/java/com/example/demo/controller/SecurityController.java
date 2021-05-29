@@ -21,6 +21,7 @@ import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.util.Role;
+import com.example.demo.controller.PageWrapper;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
 
@@ -48,7 +49,7 @@ public class SecurityController {
 	/**
 	 * HOME画面URL.
 	 */
-	private final String HOME_URL = "/file/home";
+	private final String HOME_URL = "index";
 
 	
     @GetMapping("/login")
@@ -62,24 +63,24 @@ public class SecurityController {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-		// 1ページに表示するファイル情報を取得
-		Page<File> filesPage = fileService.findAll(pageable);
+    	        // 1ページに表示するファイル情報を取得
+    			Page<File> filesPage = fileService.findAll(pageable);
 
-		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, HOME_URL);
+    			// ファイル一覧のページ情報を設定
+    			PageWrapper<File> page = new PageWrapper<File>(filesPage, HOME_URL);
 
-		model.addAttribute("files", filesPage);
-		model.addAttribute("page", page);
-		model.addAttribute("url", HOME_URL);
+    			model.addAttribute("files", filesPage);
+    			model.addAttribute("page", page);
+    			model.addAttribute("url", HOME_URL);
 
-		// ログインユーザーの詳細情報を判定
-		if (userDetails == null) {
-			// ログインユーザーの詳細情報がNULLの場合
-			model.addAttribute("loginUsername", "");
-		} else {
-			// ログインユーザーの詳細情報がNULL以外の場合
-			model.addAttribute("loginUsername", userDetails.getUsername());
-		}
+    			// ログインユーザーの詳細情報を判定
+    			if (userDetails == null) {
+    				// ログインユーザーの詳細情報がNULLの場合
+    				model.addAttribute("loginUsername", "");
+    			} else {
+    				// ログインユーザーの詳細情報がNULL以外の場合
+    				model.addAttribute("loginUsername", userDetails.getUsername());
+    			}
 
 		return "index";
 	}

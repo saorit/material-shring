@@ -44,7 +44,7 @@ public class HomeController {
 	/**
 	 * HOME画面URL.
 	 */
-	private final String HOME_URL = "/file/home";
+	private final String HOME_URL = "/file/home/{id}";
 
 	/**
 	 * Redirect用HOME画面パス.
@@ -75,11 +75,11 @@ public class HomeController {
 		Page<File> filesPage = fileService.findAll(pageable);
 
 		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, HOME_URL);
+		PageWrapper<File> page = new PageWrapper<File>(filesPage, "file/home/{id}");
 
 		model.addAttribute("files", filesPage);
 		model.addAttribute("page", page);
-		model.addAttribute("url", HOME_URL);
+		model.addAttribute("url", "file/home/{id}");
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
@@ -142,11 +142,11 @@ public class HomeController {
 		Page<File> filesPage = fileService.findAll(pageable);
 
 		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, HOME_URL);
+		PageWrapper<File> page = new PageWrapper<File>(filesPage, "index");
 
 		model.addAttribute("files", filesPage);
 		model.addAttribute("page", page);
-		model.addAttribute("url", HOME_URL);
+		model.addAttribute("url", "index");
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
