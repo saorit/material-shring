@@ -248,7 +248,7 @@ public class FileController {
 	 * @param id ファイルID
 	 * @return 遷移先(HOME画面のURL)
 	 */
-	@PostMapping("/file/delete/{id}")
+	@GetMapping("/file/delete/{id}")
 	public String destroy(@PathVariable int id) {
 		fileService.delete(id);
 		return "redirect:/index?delete";
