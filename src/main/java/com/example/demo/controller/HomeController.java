@@ -75,11 +75,11 @@ public class HomeController {
 		Page<File> filesPage = fileService.findAll(pageable);
 
 		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, "file/home/{id}");
+		PageWrapper<File> page = new PageWrapper<File>(filesPage, "file/home/{user.id}");
 
 		model.addAttribute("files", filesPage);
 		model.addAttribute("page", page);
-		model.addAttribute("url", "file/home/{id}");
+		model.addAttribute("url", "file/home/{user.id}");
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
