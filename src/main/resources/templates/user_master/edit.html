@@ -8,48 +8,71 @@
   <th:block th:insert="fragments/base :: header"></th:block>
 </head>
 
-<body>
-	<div class="container body-container">
-		<h1>Editing User</h1>
-		<form th:action="@{/user_master/update}" th:method="post" th:object="${user}">
-			<table class="table user-container">
-				<tbody>
-					<tr>
+<body class="bg-gradient">
+
+     <!-- Card -->
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="p-5">
+                
+                <!-- Edit Profile -->
+	            <div class="container body-container">
+		        <h1>プロフィール編集</h1>
+		          <form th:action="@{/user_master/update}" th:method="post" th:object="${user}">
+			        <table class="table user-container">
+				    <tbody>
+					  <tr>
 						<th>名前</th>
 						<td>
 							<input type="text" class="form-control" th:field="*{username}" />
 							<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 						</td>
-					</tr>
-					<tr>
+					  </tr>
+					  <tr>
 						<th>表示名</th>
 						<td>
 							<input type="text" class="form-control" th:field="*{displayname}" />
 							<span th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
 						</td>
-					</tr>
-					<tr>
+					  </tr>
+					  <tr>
+						<th>自己紹介</th>
+						<td>
+						    <textarea class="profile_text" rows="10" cols="60" th:field="*{profile}"></textarea>
+							<span th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}"></span>
+						</td>
+					  </tr>
+					  <tr>
 						<th>パスワード</th>
 						<td>
 							<input type="password" class="form-control" th:field="*{password}" />
 							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 						</td>
-					</tr>
+					  </tr>
 					
-				</tbody>
-				<tfoot>
-					<tr>
+				  </tbody>
+				  <tfoot>
+					  <tr>
 						<td colspan="2">
 							<span class="d-flex justify-content-between">
 								<button type="submit" class="btn btn-outline-dark">保存</button>
 								<a class="btn btn-outline-dark" th:href="@{/file/home}">MyPageへ</a>
 							</span>
 						</td>
-					</tr>
-				</tfoot>
-			</table>
-		</form>
+				      </tr>
+				  </tfoot>
+			      </table>
+	              </form>
+	              </div>
+	              <!-- End of Edit Profile -->
 	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<!-- End of Card -->
 	<th:block th:insert="fragments/base :: scripts"></th:block>
     <th:block th:insert="fragments/footer :: footer"></th:block>
 </body>
