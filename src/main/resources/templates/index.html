@@ -57,7 +57,8 @@
 						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
 				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-secondary"
 						th:href="@{/file/delete/{id}(id=*{id})}" th:method="post">削除</a>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">製作者</button>
+                  <a th:field="${user}" class="btn btn-sm btn-outline-secondary"
+                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
                 </div>
               </div>
             </div>

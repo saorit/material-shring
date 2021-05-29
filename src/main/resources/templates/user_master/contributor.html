@@ -7,26 +7,13 @@
 </head>
 <body class="bg-gradient">
   <!-- Page Wrapper -->
-      
-          <div class="alert alert-success" th:if="${param.upload}">
-          <div class="d-flex align-items-center justify-content-center">教材を追加しました！</div>
-          </div>
           
     <!-- Main -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <div class="container">
         <br />
-            <!-- upload btn -->
-            <div class="row justify-content-center">
-            <div class="col-xl-5 col-lg-6 col-md-4">
-                <h4>教材アップロード</h4>
-                    <a th:href="@{/file/new}" class="btn btn-info btn-user btn-block">
-                      アップロード画面へ
-                    </a>
-            </div>
-            </div>
-            <!-- end of upload btn -->
+            
             <!-- profile -->
              <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-4">
@@ -35,12 +22,14 @@
                 <div class="p-5">
 
                   <!-- userConfirm -->
+                  
                   <table class="table contributor-top" th:object="${user}">
-                  <tr><th th:text="*{displayname}+のプロフィール"></th></tr>
+                  <tr><th th:text="*{displayname}+さんのプロフィール"></th></tr>
                   </table>
-                    
-		<table class="table user-container" th:object="${user}">
 			
+                    
+                    
+		        <table class="table user-container" th:object="${user}">
 				<tr>
 					<th>ユーザー名</th>
 					<td th:text="*{username}"></td>
@@ -53,14 +42,7 @@
 					<th>自己紹介</th>
 					<td th:text="*{profile}"></td>
 				</tr>
-				<tr>
-				    <td>
-				    <a th:href="@{/user_master/edit/{username}(username=*{username})}">プロフィールを編集する</a>
-					</td>
-					<td></td>
-				</tr>
-		</table>
-		
+		        </table>
                     
                     
             </div>

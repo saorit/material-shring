@@ -81,3 +81,23 @@
     border-color: #d1d3e2;
 }
 
+/* 投稿者画面のユーザタイトル */
+.contributor-top {
+	font-size: 20px;
+	padding: 20px;/*上下左右20pxずつ*/
+	color: #FF9800;/*文字色*/
+    background: #fff5e5;/*背景色*/
+    text-align: center;
+    border: solid 2px #ffe4b5;/*表全体を線で囲う*/
+}
+
+.user-container th {
+	color: skyblue;
+	background: #f8f8ff;/*背景色*/
+	text-align: center;
+}
+.user-container {
+	border: solid 2px #f5f5f5;
+	table-layout: fixed;
+	width: 100%;
+	}
