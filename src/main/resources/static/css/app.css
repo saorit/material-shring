@@ -101,3 +101,8 @@
 	table-layout: fixed;
 	width: 100%;
 	}
+
+.index-itemname td {
+	font-size: 18px;
+	color: #FF9800;/*文字色*/
+	}
