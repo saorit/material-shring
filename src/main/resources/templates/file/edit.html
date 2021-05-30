@@ -9,7 +9,46 @@
 
 <body class="bg-gradient">
 	<div class="container body-container"><br />
-		<h1>教材の編集<span th:text="${id}"></span></h1><br/>
+	
+	 <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="p-5">
+		
+		
+		         <table class="table file-top" th:object="${file}">
+                   <tr><th th:text="教材「 + *{itemname} + 」の編集"></th></tr>
+                 </table>
+	             <table class="table file-container" th:object="${file}">
+				 <tr>
+					<th>現在のアップロードファイル</th>
+					<td th:text="*{name}"></td>
+				 </tr>
+				 <tr>
+					<th>現在の教材名</th>
+					<td th:text="*{itemname}"></td>
+				 </tr>
+				 <tr>
+					<th>現在の教材内容</th>
+					<td th:textarea="*{description}"></td>
+				 </tr>
+		         </table>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	
+	 <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="p-5">
+	   
+		<h1>教材の編集</h1><br/>
+		
+		
 		<form th:action="@{/file/update/{id}(id=${id})}" th:method="post" th:object="${fileUploadForm}"
 			enctype="multipart/form-data">
 			<div class="mb-3">
@@ -22,10 +61,10 @@
 				<div class="form-group">
                       <label for="name">
                         <span class="badge badge-danger">必須</span>
-                        教材名
+                        教材名の編集
                       </label>
-                      <input type="text" class="form-control"
-                        th:errorclass="is-invalid" th:field="*{itemname}">
+                      <input type="text" class="form-control" 
+                        th:errorclass="is-invalid" name="itemname" value="itemname" th:field="*{itemname}">
                       <div class="invalid-feedback"
                         th:errors="*{itemname}">
                       </div>
@@ -34,19 +73,25 @@
 				<div class="form-group">
                       <label for="description">
                         <span class="badge badge-primary">任意</span>
-                        教材の内容（使い方や関連書籍など）
+                        教材内容の編集（使い方や関連書籍など）
                       </label>
                       <textarea class="profile_text" rows="10" cols="60" th:field="*{description}" placeholder="ここに記入してください"></textarea>
                     </div>
 			<br />
 			
 				<span class="d-flex justify-content-between">
-					<button type="submit" class="btn btn-outline-dark">アップロード</button>
-					<a class="btn btn-outline-dark" th:href="@{/}">HOME画面へ</a>
+					<button type="submit" class="btn btn-outline-danger">アップロード</button>
+					<a class="btn btn-outline-primary" th:href="@{/}">HOME画面へ</a>
 				</span>
 			</div>
 		</form>
 	</div>
+	 </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 	<th:block th:insert="fragments/base :: scripts"></th:block>
     <th:block th:insert="fragments/footer :: footer"></th:block>
 </body>

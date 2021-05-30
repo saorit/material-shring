@@ -90,7 +90,7 @@
     text-align: center;
     border: solid 2px #ffe4b5;/*表全体を線で囲う*/
 }
-
+/* ユーザーのプロフィールテーブル */
 .user-container th {
 	color: skyblue;
 	background: #f8f8ff;/*背景色*/
@@ -98,6 +98,33 @@
 }
 .user-container {
 	border: solid 2px #f5f5f5;
+	table-layout: fixed;
+	width: 100%;
+	}
+
+.index-itemname td {
+	font-size: 18px;
+	color: #FF9800;/*文字色*/
+	}
+	
+/* 教材テーブル上教材タイトル */
+.file-top {
+	font-size: 20px;
+	padding: 20px;/*上下左右20pxずつ*/
+	color: #3cb371;/*文字色*/
+    background: #f0fff0;/*背景色*/
+    text-align: center;
+    border: solid 2px #8fbc8f;/*表全体を線で囲う*/
+}
+	
+/* 教材のテーブル */
+.file-container th {
+	color: #db7093;
+	background: #fffafa;/*背景色*/
+	text-align: center;
+}
+.file-container {
+	border: solid 2px #ffb6c1;
 	table-layout: fixed;
 	width: 100%;
 	}

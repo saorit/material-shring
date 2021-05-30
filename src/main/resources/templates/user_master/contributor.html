@@ -67,6 +67,11 @@
     <div class="album py-5">
     <div class="container">
     
+      <div class="card-body">
+              <div class="teaching-material">
+    <div class="album py-5">
+    <div class="container">
+    
       <div class="row">
         <div class="col-md-4" th:each="file:${files}" th:object="${file}">
           <div class="card mb-4 shadow-sm">
@@ -75,18 +80,34 @@
             <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
 					 loading="lazy">
             <div class="card-body">
-              <p class="card-text">教材の内容</p>
-              <p th:text="*{description}"></p>
+              
+              <table class="table index-itemname" th:object="${file}">
+			  <tr>
+				<td th:text="*{itemname}"></td>
+			  </tr>
+			  </table>
+              
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/file/show/{id}(id=*{id})}">教材名</a>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">アカウント名(表示名)</button>
+                  <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
+                  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
+						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
+				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
+						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
+                  <a th:field="${user}" class="btn btn-sm btn-outline-success"
+                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <a th:field="${user}" class="btn btn-sm btn-outline-secondary"
+                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
         </div>
+    </div>
+  </div>
+  </div>
+  </div>
     </div>
   </div>
   <div class="container">

@@ -87,9 +87,22 @@ public class FileController {
 	 * @return ファイル編集画面のテンプレートパス
 	 */
 	@GetMapping("/file/edit/{id}")
-	public String editFile(@PathVariable @ModelAttribute int id, @ModelAttribute FileUploadForm fileUploadForm) {
-
+	public String editFile(@PathVariable int id, Model model,
+			@ModelAttribute FileUploadForm fileUploadForm) {
+		// ファイル情報を取得
+		File file = fileService.findOne(id);
+		model.addAttribute("file", file);
 		return EDIT_TEMPLATE_PATH;
+	}
+	
+	@GetMapping("/file/release/{id}")
+	public String releaseFile(@PathVariable int id, Model model,
+			@ModelAttribute FileUploadForm fileUploadForm) {
+		// ファイル情報を取得
+				File file = fileService.findOne(id);
+				model.addAttribute("file", file);
+
+		return "file/release";
 	}
 
 	/**
