@@ -46,6 +46,10 @@ public class SiteUser {
     /** ロール. */
 	@Column(name = "role", length = 120, nullable = true)
 	private String role;
+	
+	/** 有効フラグ. */
+	@Column(name = "is_enabled", nullable = true)
+	private boolean isEnabled;
 
     private boolean admin;
     private boolean active = true;

@@ -26,8 +26,7 @@
                     </h1>
                   </div>
 
-                  <form th:action="@{/register}" th:object="${user}"
-                    method="post" novalidate>
+                  <form th:action="@{/register}" th:object="${userCreateForm}" method="post">
                     <div class="form-group">
                       <label for="name">
                         <span class="badge badge-danger">必須</span>
@@ -73,11 +72,26 @@
                       <textarea class="profile_text" rows="10" cols="60" th:field="*{profile}" placeholder="ここに記入してください"></textarea>
                     </div>
                     
+                    <div class="form-group">
+                      <label for="name">
+                        <span class="badge badge-danger">必須</span>
+                        ロール
+                      </label>
+                          <select class="form-control" th:field="*{role}">
+								<option th:each="item : *{getRoleItems()}" th:value="${item.key}"
+									th:text="${item.value}" th:selected="${item.key} == *{role}">
+									pulldown
+								</option>
+							</select>
+                      </div><br />
+                    
+                    
                     <button class="btn btn-success btn-user btn-block">
                       登録確認
                     </button>
                   </form>
                   <!-- End of Registration -->
+                  </div>
 
                 </div>
               </div>
@@ -88,7 +102,7 @@
 
       </div>
     </div>
-  </div>
+  
   <!-- End of Main -->
 
   <th:block th:insert="fragments/base :: scripts"></th:block>

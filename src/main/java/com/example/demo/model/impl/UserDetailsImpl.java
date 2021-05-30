@@ -60,6 +60,16 @@ public class UserDetailsImpl implements UserDetails {
 	public String getPassword() {
 		return user.getPassword();
 	}
+	
+	/**
+	 * ユーザー情報が有効か確認する.
+	 *
+	 * @return ユーザー情報の有効フラグ
+	 */
+	@Override
+	public boolean isEnabled() {
+		return user.isEnabled();
+	}
 
 
 	/**
@@ -81,26 +91,34 @@ public class UserDetailsImpl implements UserDetails {
 	public String getUsername() {
 		return user.getUsername();
 	}
-	
-	/* 一応オーバーライド	    */
-	    @Override
-	    public boolean isAccountNonExpired() {
-	        return true;
-	    }
-	    @Override
-	    public boolean isAccountNonLocked() {
-	        return true;
-	    }
-	    @Override
-	    public boolean isCredentialsNonExpired() {
-	        return true;
-	    }
-	    @Override
-	    public boolean isEnabled() {
-	        return true;
-	    }
-	    
+	/**
+	 * ユーザーアカウントが有効期限内か確認するフラグを取得する. ユーザー情報が有効な場合は、有効期限内とする.
+	 *
+	 * @return アカウント有効期限内フラグ
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return user.isEnabled();
+	}
 
+	/**
+	 * ユーザーアカウントがロックされているか確認するフラグを取得する. ユーザー情報が無効な場合は、ロックされたとする.
+	 *
+	 * @return アカウントロックフラグ
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return user.isEnabled();
+	}
 
+	@Override
+	/**
+	 * パスワードの有効期限内か確認するフラグを取得する. ユーザー情報が無効な場合は、パスワードの有効期限外とする.
+	 *
+	 * @return パスワードの有効期限内フラグ
+	 */
+	public boolean isCredentialsNonExpired() {
+		return user.isEnabled();
+	}
 
 }

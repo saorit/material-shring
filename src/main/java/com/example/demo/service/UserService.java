@@ -45,7 +45,8 @@ public interface UserService {
 	 *
 	 * @param username ユーザー名
 	 * @return 件数
+	 * */
 	 
-	public long countByUsername(String username);*/
+	public long countByUsername(String username);
 
 }
