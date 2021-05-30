@@ -28,17 +28,19 @@ public class UserCreateForm extends UserBaseForm {
 	private static final String ALPHANUMERIC_MESSAGE = "半角英字、数字、ピリオドを使用できます";
 
 	@NotBlank
-	@Size(max = 35)
+	@Size(min = 2, max = 35, message="2文字から10文字内で入力してください")
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	@CustomCheck(uniqueUsername = "username", message = "既に登録されています")
 	private String username;
 	
-	@NotBlank
-	@Size(max = 200)
+	@Size(min = 1, max = 35, message="10文字内で入力してください")
+	private String displayname;
+	
+	@Size(max = 200, message = "200文字以内にしてください")
 	private String profile;
 
 	@NotBlank
-	@Size(max = 255)
+	@Size(min = 4, max = 255, message="パスワードは4文字以上で入力してください")
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	private String password;
 
