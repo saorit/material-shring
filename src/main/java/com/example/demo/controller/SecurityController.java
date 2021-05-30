@@ -109,14 +109,18 @@ public class SecurityController {
     }
 
     @PostMapping("/register")
-    private String confirm(@Validated @ModelAttribute("user") SiteUser user,
+    private String confirm(@Validated @ModelAttribute UserCreateForm userCreateForm,
             BindingResult result) {
     	if (result.hasErrors()) {
             return "register";
         }
+    	SiteUser user = userCreateForm.toEntity();
+
+		// ユーザー情報を保存
+		userService.save(user);
     	
         
-        return "userconfirm";
+        return "redirect:/login?register";
     }
 
     @GetMapping("/userconfirm")
