@@ -10,7 +10,7 @@
 <body class="bg-gradient">
 	<div class="container body-container"><br />
 		<h1>公開範囲の設定</h1><br/>
-		<form th:action="@{/file/release/{id}(id=${id})}" th:method="post" th:object="${fileUploadForm}"
+		<form th:action="@{/file/update/{id}(id=${id})}" th:method="post" th:object="${fileUploadForm}"
 			enctype="multipart/form-data">
 			<div class="mb-3">
 				<input type="file" name="multipartFile" th:field="*{multipartFile}" class="form-control" /><br />

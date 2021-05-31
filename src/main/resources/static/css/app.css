@@ -95,7 +95,6 @@
 	color: skyblue;
 	background: #f8f8ff;/*背景色*/
 	text-align: center;
-	vertical-align: middle;
 }
 .user-container {
 	border: solid 2px #f5f5f5;
@@ -120,12 +119,15 @@
 	
 /* 教材のテーブル */
 .file-container th {
-	color: #db7093;
-	background: #fffafa;/*背景色*/
+	color: #ff8c00;
+	background: #fffaf0;/*背景色*/
 	text-align: center;
 }
+.file-container td {
+	background: #ffffff;/*背景色*/
+}
 .file-container {
-	border: solid 2px #ffb6c1;
+	border: solid 2px #ffefd5;
 	table-layout: fixed;
 	width: 100%;
 	}

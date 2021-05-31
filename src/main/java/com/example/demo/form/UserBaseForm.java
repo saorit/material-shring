@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.example.demo.util.RoleItems;
-import com.example.demo.util.EnabledItems;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +24,6 @@ public class UserBaseForm implements Serializable {
 	@NotBlank
 	@Size(max = 30)
 	private String displayname;
-	
-	@Size(max = 200)
-	private String profile;
 
 	private String role;
 
@@ -40,15 +36,6 @@ public class UserBaseForm implements Serializable {
 	 */
 	public Map<String, String> getRoleItems() {
 		return RoleItems.ROLEITEMS;
-	}
-	
-	/**
-	 * 有効/無効の選択肢の定数を取得するメソッド.
-	 * 
-	 * @return 選択肢の定数
-	 */
-	public Map<Boolean, String> getEnabledItems() {
-		return EnabledItems.ENABLEDITEMS;
 	}
 
 }

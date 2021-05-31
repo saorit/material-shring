@@ -21,7 +21,6 @@ import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.util.Role;
-import com.example.demo.form.sub.UserCreateForm;
 import com.example.demo.controller.PageWrapper;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
@@ -91,36 +90,21 @@ public class SecurityController {
 
 		return "index";
 	}
-    
-    /**
-	 * ログインに成功した時の処理.
-	 *
-	 * @return 遷移先
-	 */
-    @PostMapping("success")
-	public String success() {
-		return "redirect:/success";
-	}
-	
 
     @GetMapping("/register")
-    private String readForm(@ModelAttribute UserCreateForm userCreateForm) {
+    private String readForm(@ModelAttribute("user") SiteUser user) {
         return "register";
     }
 
     @PostMapping("/register")
-    private String confirm(@Validated @ModelAttribute UserCreateForm userCreateForm,
+    private String confirm(@Validated @ModelAttribute("user") SiteUser user,
             BindingResult result) {
     	if (result.hasErrors()) {
             return "register";
         }
-    	SiteUser user = userCreateForm.toEntity();
-
-		// ユーザー情報を保存
-		userService.save(user);
     	
         
-        return "redirect:/login?register";
+        return "userconfirm";
     }
 
     @GetMapping("/userconfirm")
