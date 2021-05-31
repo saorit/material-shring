@@ -33,8 +33,6 @@ public class UserCreateForm extends UserBaseForm {
 	@CustomCheck(uniqueUsername = "username", message = "既に登録されています")
 	private String username;
 	
-	@Size(min = 1, max = 35, message="10文字内で入力してください")
-	private String displayname;
 	
 	@Size(max = 200, message = "200文字以内にしてください")
 	private String profile;

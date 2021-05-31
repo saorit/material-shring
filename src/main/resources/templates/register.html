@@ -27,15 +27,15 @@
 					<tr>
 						<th>ユーザー名 <span class="badge badge-danger">必須</span></th>
 						<td>
-							<input type="text" class="form-control is-invalid" th:field="*{username}" />
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+							<input type="text" class="form-control" th:field="*{username}" />
+							<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 						</td>
 					</tr>
 					<tr>
 						<th>名前（表示する名前）<span class="badge badge-danger">必須</span></th>
 						<td>
-							<input type="text" class="form-control is-invalid" th:field="*{displayname}" />
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
+							<input type="text" class="form-control" th:field="*{displayname}" />
+							<span th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
 						</td>
 					</tr>
 					<tr>
@@ -48,8 +48,8 @@
 					<tr>
 						<th>パスワード <span class="badge badge-danger">必須</span></th>
 						<td>
-							<input type="password" class="form-control is-invalid" th:field="*{password}" />
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							<input type="password" class="form-control" th:field="*{password}" />
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 						</td>
 					</tr>
 					<tr>
