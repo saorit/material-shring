@@ -2,11 +2,14 @@ package com.example.demo.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -77,4 +80,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		return user;
 	}
+	
+	public UserDetailsImpl createUserDetails(SiteUser user) {
+        Set<GrantedAuthority> grantedAuthories = new HashSet<>();
+        grantedAuthories.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+
+        return new UserDetailsImpl(user, grantedAuthories);
+    }
 }
