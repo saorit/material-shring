@@ -70,6 +70,8 @@ public class HomeController {
 			@PathVariable Integer id) {
 		
 		model.addAttribute("user",  userService.findOne(id));
+        
+		model.addAttribute("user",  userService.findOne(id));
 
 		// 1ページに表示するファイル情報を取得
 		Page<File> filesPage = fileService.findAll(pageable);

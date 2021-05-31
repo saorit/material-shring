@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.File;
+import com.example.demo.model.SiteUser;
 import com.example.demo.repository.FileRepository;
 import com.example.demo.service.FileService;
 
@@ -29,6 +30,15 @@ public class FileServiceImpl implements FileService {
 	 */
 	public Page<File> findAll(Pageable pageable) {
 		return repository.findAll(pageable);
+	}
+	
+	/**
+	 * userIDに紐付くFile(Entity)クラスのデータを取得する.
+	 *
+	 * @return 該当したfileのデータ
+	 */
+	public File findUserFile(File createUser) {
+		return repository.getFindUserFile(createUser);
 	}
 
 	/**

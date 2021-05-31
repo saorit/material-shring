@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.File;
+import com.example.demo.model.SiteUser;
+
+import antlr.collections.List;
 
 /**
  * File(Entity)クラスのリポジトリクラス.
@@ -18,6 +21,15 @@ import com.example.demo.model.File;
 public interface FileRepository extends JpaRepository<File, String> {
 
 	Page<File> findAll(Pageable pageable);
+	
+	/**
+	 * userIDに紐付くFile(Entity)クラスを取得.
+	 *
+	 * @param id ファイルID
+	 * @return 取得したデータが格納されたFile(Entity)クラス
+	 */
+	@Query("SELECT f FROM File f WHERE f.createUser = :createUser")
+    File getFindUserFile(@Param("createUser") File createUser);
 
 	/**
 	 * IDに紐付くFile(Entity)クラスを取得.

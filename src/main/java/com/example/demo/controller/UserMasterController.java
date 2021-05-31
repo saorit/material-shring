@@ -78,7 +78,26 @@ public class UserMasterController {
 		return "redirect:/index?upldate";
 	}
 	
+	/**
+	 * 公開範囲設定画面表示.
+	 *
+	 * @param username ユーザー名
+	 * @param model    Modelクラス
+	 * @return 公開範囲設定画面のテンプレートパス
+	 */
+	@GetMapping("/user_master/publish/{username}")
+	public String publish(@ModelAttribute("user") SiteUser user) {
+		
+		return "user_master/publish";
+	}
 	
+	/**
+	 * 投稿者の詳細画面表示.
+	 *
+	 * @param id ユーザー
+	 * @param model    Modelクラス
+	 * @return 投稿者の詳細画面のテンプレートパス
+	 */
 	@GetMapping("/file/contributor/{id}")
 	public String contributor(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
