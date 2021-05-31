@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,7 @@ import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.util.Role;
+import com.example.demo.form.sub.UserCreateForm;
 import com.example.demo.controller.PageWrapper;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
@@ -92,19 +95,24 @@ public class SecurityController {
 	}
 
     @GetMapping("/register")
-    private String readForm(@ModelAttribute("user") SiteUser user) {
+    private String readForm(@ModelAttribute UserCreateForm userCreateForm) {
         return "register";
     }
 
     @PostMapping("/register")
-    private String confirm(@Validated @ModelAttribute("user") SiteUser user,
-            BindingResult result) {
-    	if (result.hasErrors()) {
-            return "register";
-        }
-    	
+    private String confirm(@Valid @ModelAttribute UserCreateForm userCreateForm, final BindingResult bindingResult)  {
+    	       // 入力チェック
+    			if (bindingResult.hasErrors()) {
+    				// 入力チェックエラー時の処理
+    				return "register";
+    			}
+
+    			SiteUser user = userCreateForm.toEntity();
+
+    			// ユーザー情報を保存
+    			userService.save(user);
         
-        return "userconfirm";
+        return "redirect:/login?register";
     }
 
     @GetMapping("/userconfirm")

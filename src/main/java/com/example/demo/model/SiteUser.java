@@ -49,8 +49,12 @@ public class SiteUser {
 	private String photos;
     
     /** ロール. */
-	@Column(name = "role", length = 120, nullable = true)
+	@Column(name = "role", length = 120, nullable = false)
 	private String role;
+	
+	/** 有効フラグ. */
+	@Column(name = "is_enabled", nullable = false)
+	private boolean isEnabled;
 
     private boolean admin;
     private boolean active = true;

@@ -20,7 +20,7 @@ import com.example.demo.service.impl.UserDetailsServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	UserDetailsServiceImpl service;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -52,6 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// userDetailsServiceを使用して、DBからユーザを参照できるようにします
-		auth.userDetailsService(userDetailsService);
+		auth.userDetailsService(service);
 	}
 }

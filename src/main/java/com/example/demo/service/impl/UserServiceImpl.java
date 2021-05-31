@@ -66,8 +66,6 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Transactional
 	public SiteUser save(SiteUser user) {
-
-
 		// データベースにUser(Entityクラス)を保存
 		return repository.save(user);
 	}

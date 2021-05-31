@@ -28,22 +28,20 @@
                 <input type="button" id="rowAdd" value="行追加" />
                 <input type="button" id="rowRemove" value="行削除" />
                 <br /><br />
- 
+                
+                 <form th:action="@{/user_master/publish}" th:method="post" th:object="${user}">
                  <table>
                  <tr>
-                     <td><input type="text" name="data_value1" /></td>
-                     <td><input type="text" name="data_value2" /></td>
+                     <td><input type="text" name="data_value2" placeholder="公開するグループ" /></td>
                  </tr>
                  <tr>
-                     <td><input type="text" name="data_value1" /></td>
-                     <td><input type="number" name="data_value2" /></td>
+                     <td><input type="number" name="data_value2" placeholder="公開するユーザー" /></td>
                  </tr>
                  <tr>
-                     <td><input type="text" name="data_value1" /></td>
-                     <td><input type="number" name="data_value2" /></td>
+                     <td><input type="number" name="data_value2" placeholder="公開するユーザー" /></td>
                  </tr>
                  </table>
-                
+                 </form>
 	</div>
 	</div>
 	</div>
