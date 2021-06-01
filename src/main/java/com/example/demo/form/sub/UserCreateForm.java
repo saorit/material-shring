@@ -74,4 +74,5 @@ public class UserCreateForm extends UserBaseForm {
 
 		return user;
 	}
+
 }

@@ -84,10 +84,8 @@ public class SecurityController {
     				// ログインユーザーの詳細情報がNULL以外の場合
     				model.addAttribute("loginUsername", userDetails.getUsername());
     			}
-    			
-    			
 
-		return "index";
+		return "";
 	}
 
     @GetMapping("/register")
@@ -102,6 +100,8 @@ public class SecurityController {
     				// 入力チェックエラー時の処理
     				return "register";
     			}
+    			userCreateForm.setPassword(passwordEncoder.encode(userCreateForm.getPassword()));
+    	        
 
     			SiteUser user = userCreateForm.toEntity();
 
