@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.data.domain.Sort;
 
 import com.example.demo.form.sub.UserCreateForm;
@@ -136,33 +137,32 @@ public class HomeController {
 	 * @param userDetails ログインユーザーの詳細情報
 	 * @return 遷移先
 	 */
-	@GetMapping("/index")
-	public String index(@ModelAttribute("user") Model model,
+	@RequestMapping("/index")
+	public String index(Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
-					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
-			@AuthenticationPrincipal UserDetailsImpl userDetails) {
+			"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
+	        @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-		// 1ページに表示するファイル情報を取得
-		Page<File> filesPage = fileService.findAll(pageable);
+            // 1ページに表示するファイル情報を取得
+            Page<File> filesPage = fileService.findAll(pageable);
 
-		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, "index");
+            // ファイル一覧のページ情報を設定
+            PageWrapper<File> page = new PageWrapper<File>(filesPage, "index");
 
-		model.addAttribute("files", filesPage);
-		model.addAttribute("page", page);
-		model.addAttribute("url", "index");
+            model.addAttribute("files", filesPage);
+            model.addAttribute("page", page);
+            model.addAttribute("url", "index");
 
-		// ログインユーザーの詳細情報を判定
-		if (userDetails == null) {
-			// ログインユーザーの詳細情報がNULLの場合
-			model.addAttribute("loginUsername", "");
-		} else {
-			// ログインユーザーの詳細情報がNULL以外の場合
-			model.addAttribute("loginUsername", userDetails.getUsername());
-		}
+            // ログインユーザーの詳細情報を判定
+            if (userDetails == null) {
+	        // ログインユーザーの詳細情報がNULLの場合
+         	model.addAttribute("loginUsername", "");
+            } else {
+	        // ログインユーザーの詳細情報がNULL以外の場合
+	       model.addAttribute("loginUsername", userDetails.getUsername());
+           }
 
-
-		return "index";
+           return "index";
 	}
 
 }

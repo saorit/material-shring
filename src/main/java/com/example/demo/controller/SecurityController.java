@@ -85,7 +85,7 @@ public class SecurityController {
     				model.addAttribute("loginUsername", userDetails.getUsername());
     			}
 
-		return "";
+		return "index";
 	}
 
     @GetMapping("/register")
