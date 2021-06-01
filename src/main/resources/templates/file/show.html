@@ -43,9 +43,9 @@
 				<th>ファイル</th>
 				<td>
 					<img th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
-						class="img-responsive file-show" loading="lazy">
+						 class="image-vw" loading="lazy">
 					<img th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}"
-						th:alt="*{name}" class="img-responsive file-thumbnail" loading="lazy">
+						th:alt="*{name}" class="image-vw" loading="lazy">
 					<br />
 				</td>
 			</tr>

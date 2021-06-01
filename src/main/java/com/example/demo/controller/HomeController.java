@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.data.domain.Sort;
+
+import com.example.demo.form.sub.UserCreateForm;
 import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
@@ -135,7 +137,7 @@ public class HomeController {
 	 * @return 遷移先
 	 */
 	@GetMapping("/index")
-	public String index(@ModelAttribute("user") SiteUser user,Model model,
+	public String index(@ModelAttribute("user") Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -158,11 +160,7 @@ public class HomeController {
 			// ログインユーザーの詳細情報がNULL以外の場合
 			model.addAttribute("loginUsername", userDetails.getUsername());
 		}
-		
-		model.addAttribute("username", userDetails.getUsername());
-		model.addAttribute("id", userDetails.getId());
-		model.addAttribute("displayname", userDetails.getDisplayname());
-        model.addAttribute("role", userDetails.getAuthorities());
+
 
 		return "index";
 	}

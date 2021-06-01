@@ -49,7 +49,7 @@
 					 loading="lazy">
             <div class="card-body">
               
-              <table class="table index-itemname" th:object="${file}">
+              <table class="table index-itemname">
 			  <tr>
 				<td th:text="*{itemname}"></td>
 			  </tr>
@@ -62,7 +62,7 @@
 						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
 				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
 						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
-                  <a th:field="${user}" class="btn btn-sm btn-outline-success"
+                  <a th:field="${userDetails}" class="btn btn-sm btn-outline-success"
                         th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
                 </div>
               </div>

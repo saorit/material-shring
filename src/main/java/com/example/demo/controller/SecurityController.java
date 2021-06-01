@@ -61,7 +61,7 @@ public class SecurityController {
     }
 
     @RequestMapping("/")
-    public String top(@ModelAttribute("user") SiteUser user,Model model,
+    public String top(Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -85,10 +85,6 @@ public class SecurityController {
     				model.addAttribute("loginUsername", userDetails.getUsername());
     			}
     			
-    			model.addAttribute("username", userDetails.getUsername());
-    			model.addAttribute("id", userDetails.getId());
-    			model.addAttribute("displayname", userDetails.getDisplayname());
-    	        model.addAttribute("role", userDetails.getAuthorities());
     			
 
 		return "index";
