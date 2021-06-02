@@ -62,14 +62,17 @@
 						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
 				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
 						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
-                  <a th:field="${userDetails}" class="btn btn-sm btn-outline-success"
-                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
+                  <a class="btn btn-sm btn-outline-success"
+                        th:href="@{/file/contributor/{createUser}(createUser=*{createUser})}" >投稿者</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <a th:field="${user}" class="btn btn-sm btn-outline-secondary"
+                        th:href="@{/file/contributor/{username}(username=*{username})}" >投稿者</a>
+                        
+                        <a th:field="${user}" class="btn btn-sm btn-outline-secondary"
                         th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
         </div>
     </div>

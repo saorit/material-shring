@@ -11,6 +11,8 @@ import com.example.demo.model.SiteUser;
 import com.example.demo.repository.FileRepository;
 import com.example.demo.service.FileService;
 
+import java.util.List;
+
 /**
  * File Entityクラスを操作するServiceクラス.
  */
@@ -37,9 +39,11 @@ public class FileServiceImpl implements FileService {
 	 *
 	 * @return 該当したfileのデータ
 	 */
-	public File findUserFile(File createUser) {
-		return repository.getFindUserFile(createUser);
+	public List<File> findMyFile(Integer userId) {
+		return repository.getMyFile(userId);
 	}
+	
+
 
 	/**
 	 * IDに紐付くFile(Entity)クラスのデータを1件取得する.

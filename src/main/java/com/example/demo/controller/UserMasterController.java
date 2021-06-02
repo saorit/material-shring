@@ -98,14 +98,14 @@ public class UserMasterController {
 	 * @param model    Modelクラス
 	 * @return 投稿者の詳細画面のテンプレートパス
 	 */
-	@GetMapping("/file/contributor/{id}")
+	@GetMapping("/file/contributor/{username}")
 	public String contributor(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails,
-			@PathVariable Integer id) {
+			@PathVariable String username) {
 		
-		model.addAttribute("user",  userService.findOne(id));
+		model.addAttribute("user",  userService.findOneUsername(username));
 		
 
 		// 1ページに表示するファイル情報を取得

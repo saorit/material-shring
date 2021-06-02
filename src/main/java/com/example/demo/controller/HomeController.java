@@ -23,6 +23,8 @@ import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 /**
  * HOME画面のControllerクラス.
  */
@@ -65,26 +67,18 @@ public class HomeController {
 	 * @return 遷移先
 	 */
 	
-	@GetMapping("/file/home/{id}")
+	@GetMapping("/file/home/{userId}")
 	public String home(Model model,
-			@PageableDefault(page = 0, size = 6, sort = {
-					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
+			
 			@AuthenticationPrincipal UserDetailsImpl userDetails,
-			@PathVariable Integer id) {
+			@PathVariable Integer userId) {
 		
-		model.addAttribute("user",  userService.findOne(id));
+		model.addAttribute("user",  userService.findOne(userId));
         
-		model.addAttribute("user",  userService.findOne(id));
-
 		// 1ページに表示するファイル情報を取得
-		Page<File> filesPage = fileService.findAll(pageable);
-
-		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, "file/home/{user.id}");
-
+		List<File> filesPage = fileService.findMyFile(userId);
+		
 		model.addAttribute("files", filesPage);
-		model.addAttribute("page", page);
-		model.addAttribute("url", "file/home/{user.id}");
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
@@ -95,7 +89,7 @@ public class HomeController {
 			model.addAttribute("loginUsername", userDetails.getUsername());
 		}
 
-		return HOME_TEMPLATE_PATH;
+		return "file/home";
 	}
 	
 	@GetMapping("/file/home")
@@ -138,7 +132,7 @@ public class HomeController {
 	 * @return 遷移先
 	 */
 	@RequestMapping("/index")
-	public String index(Model model,
+	public String index(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 			"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 	        @AuthenticationPrincipal UserDetailsImpl userDetails) {

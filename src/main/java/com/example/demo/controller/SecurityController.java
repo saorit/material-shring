@@ -61,7 +61,7 @@ public class SecurityController {
     }
 
     @RequestMapping("/")
-    public String top(Model model,
+    public String top(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {

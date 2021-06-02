@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 
+import java.util.List;
+
 /**
  * File Entityクラスを操作するServiceクラスのインターフェース.
  */
@@ -24,7 +26,8 @@ public interface FileService {
 	 * @param id userID
 	 * @return 該当したfileのデータ
 	 */
-	public File findUserFile(File createUser);
+	public List<File> findMyFile(Integer userId);
+	
 
 	/**
 	 * ファイルIDに紐付くFile(Entity)クラスのデータを1件取得する.

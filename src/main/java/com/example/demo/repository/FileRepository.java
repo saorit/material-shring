@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 
-import antlr.collections.List;
+import java.util.List;
+
 
 /**
  * File(Entity)クラスのリポジトリクラス.
@@ -28,8 +29,9 @@ public interface FileRepository extends JpaRepository<File, String> {
 	 * @param id ファイルID
 	 * @return 取得したデータが格納されたFile(Entity)クラス
 	 */
-	@Query("SELECT f FROM File f WHERE f.createUser = :createUser")
-    File getFindUserFile(@Param("createUser") File createUser);
+	@Query("SELECT f FROM File f WHERE f.createUser = :userId")
+	List<File> getMyFile(@Param("userId") Integer userId);
+	
 
 	/**
 	 * IDに紐付くFile(Entity)クラスを取得.
