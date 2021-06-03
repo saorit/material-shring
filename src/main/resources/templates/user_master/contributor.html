@@ -57,9 +57,9 @@
           <!-- teaching-material list -->
           <div class="card my-4">
             <div class="card-header py-3">
-              <h3 class="m-0 font-weight-bolder">
-                新着教材一覧
-              </h3>
+              <h3>
+                <a th:text="*{user.displayname}+さんが投稿した教材"></a>
+                </h3>
             </div>
             <div class="card-body">
               <div class="teaching-material">
@@ -101,8 +101,7 @@
             </div>
           </div>
         </div>
-        <a th:field="${user}" class="btn btn-sm btn-outline-secondary"
-                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
+
         </div>
     </div>
   </div>
@@ -110,30 +109,7 @@
   </div>
     </div>
   </div>
-  <div class="container">
-              <div class="row">
-                <div class="col-md-6 offset-md-3 py-2">
-                <nav aria-label="ページ送り">
-                 <div class="text-center">
-                 <ul th:if="0 != ${page.totalPages}" class="pagination justify-content-center">
-				     <li class="page-item">
-					    <a class="page-link" th:if="${!page.isFirstPage()}" th:href="@{${url}(page=0)}">最初のページ</a>
-				     </li>
-				     <li class="page-item" th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:class="(${i}==${page.number})? 'active file-page' : 'file-page'" >
-					     <span class="page-link" th:if='${i}==${page.number - 1}' th:text='${i + 1}'>1</span>
-					     <a class="page-link" th:if='${i}!=${page.number - 1}' th:href="@{${url}(page=${i})}">
-						   <span th:text='${i + 1}'>1</span>
-					     </a>
-				     </li>
-				     <li class="file-page">
-					     <a class="page-link" th:if="${!page.isLastPage()}" th:href="@{${url}(page=(${page.totalPages} - 1))}">最後のページ</a>
-				     </li>
-			      </ul>
-			      </div>
-			    </nav>
-			    </div>
-			  </div>
-			  </div>
+ 
   </div>
   </div>
     </div>

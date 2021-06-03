@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,28 +101,30 @@ public class UserMasterController {
 	 * @param model    Modelクラス
 	 * @return 投稿者の詳細画面のテンプレートパス
 	 */
-	@GetMapping("/file/contributor/{userId}")
-	public String contributor(@ModelAttribute("user") SiteUser user,Model model,
-			@PageableDefault(page = 0, size = 6, sort = {
-					"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
+	@GetMapping("/user_master/contributor/{userId}")
+	public String contributor(Model model,
 			@AuthenticationPrincipal UserDetailsImpl userDetails,
 			@PathVariable Integer userId) {
+		
 		model.addAttribute("user",  userService.findOne(userId));
-		// 1ページに表示するファイル情報を取得
-		Page<File> filesPage = fileService.findAll(pageable);
-		// ファイル一覧のページ情報を設定
-		PageWrapper<File> page = new PageWrapper<File>(filesPage, "file/home/{user.id}");
-		model.addAttribute("files", filesPage);
-		model.addAttribute("page", page);
-		model.addAttribute("url", "file/home/{user.id}");
+
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
 			// ログインユーザーの詳細情報がNULLの場合
 			model.addAttribute("loginUsername", "");
+			model.addAttribute("files", new ArrayList<File>());
 		} else {
 			// ログインユーザーの詳細情報がNULL以外の場合
+			// 1ページに表示するファイル情報を取得
+			SiteUser siteUser = userService.findOne(userId);
+			model.addAttribute("user", siteUser);
+			
+			List<File> filesPage = fileService.findMyFile(siteUser);
+			
+			model.addAttribute("files", filesPage);
 			model.addAttribute("loginUsername", userDetails.getUsername());
 		}
+		
 		return "user_master/contributor";
 	}
 

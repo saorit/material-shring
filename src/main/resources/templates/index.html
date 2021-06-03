@@ -63,7 +63,7 @@
 				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
 						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
                   <a class="btn btn-sm btn-outline-success"
-                        th:href="@{/file/contributor/{userId}(userId=*{createUser.id})}" >投稿者</a>
+                        th:href="@{/user_master/contributor/{userId}(userId=*{createUser.id})}" >投稿者</a>
                 </div>
               </div>
             </div>

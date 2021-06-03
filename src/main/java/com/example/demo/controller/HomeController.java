@@ -70,10 +70,7 @@ public class HomeController {
 	
 	@GetMapping("/file/mypage")
 	public String home(@ModelAttribute("user") SiteUser user,Model model,
-			
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
-		
-		
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
