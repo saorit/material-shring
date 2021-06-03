@@ -23,6 +23,7 @@ import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,29 +68,31 @@ public class HomeController {
 	 * @return 遷移先
 	 */
 	
-	@GetMapping("/file/home/{userId}")
-	public String home(Model model,
+	@GetMapping("/file/mypage")
+	public String home(@ModelAttribute("user") SiteUser user,Model model,
 			
-			@AuthenticationPrincipal UserDetailsImpl userDetails,
-			@PathVariable Integer userId) {
+			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		
-		model.addAttribute("user",  userService.findOne(userId));
-        
-		// 1ページに表示するファイル情報を取得
-		List<File> filesPage = fileService.findMyFile(userId);
 		
-		model.addAttribute("files", filesPage);
 
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
 			// ログインユーザーの詳細情報がNULLの場合
 			model.addAttribute("loginUsername", "");
+			model.addAttribute("files", new ArrayList<File>());
 		} else {
 			// ログインユーザーの詳細情報がNULL以外の場合
+			// 1ページに表示するファイル情報を取得
+			SiteUser siteUser = userService.findOne(userDetails.getId());
+			model.addAttribute("user", siteUser);
+			
+			List<File> filesPage = fileService.findMyFile(siteUser);
+			
+			model.addAttribute("files", filesPage);
 			model.addAttribute("loginUsername", userDetails.getUsername());
 		}
 
-		return "file/home";
+		return "file/mypage";
 	}
 	
 	@GetMapping("/file/home")

@@ -26,7 +26,7 @@ public interface FileService {
 	 * @param id userID
 	 * @return 該当したfileのデータ
 	 */
-	public List<File> findMyFile(Integer userId);
+	public List<File> findMyFile(SiteUser siteUser);
 	
 
 	/**

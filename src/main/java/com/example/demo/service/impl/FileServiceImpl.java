@@ -39,8 +39,8 @@ public class FileServiceImpl implements FileService {
 	 *
 	 * @return 該当したfileのデータ
 	 */
-	public List<File> findMyFile(Integer userId) {
-		return repository.getMyFile(userId);
+	public List<File> findMyFile(SiteUser siteUser) {
+		return repository.getMyFile(siteUser);
 	}
 	
 

@@ -35,6 +35,7 @@
                 <div class="p-5">
 
                   <!-- userConfirm -->
+                  
                   <table class="table contributor-top" th:object="${user}">
                   <tr><th th:text="*{displayname}+のプロフィール"></th></tr>
                   </table>
@@ -113,8 +114,6 @@
             </div>
           </div>
         </div>
-        <a th:field="${user}" class="btn btn-sm btn-outline-secondary"
-                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
         </div>
     </div>
   </div>

@@ -29,8 +29,8 @@ public interface FileRepository extends JpaRepository<File, String> {
 	 * @param id ファイルID
 	 * @return 取得したデータが格納されたFile(Entity)クラス
 	 */
-	@Query("SELECT f FROM File f WHERE f.createUser = :userId")
-	List<File> getMyFile(@Param("userId") Integer userId);
+	@Query("SELECT f FROM File f WHERE f.createUser = :siteUser")
+	List<File> getMyFile(@Param("siteUser") SiteUser siteUser);
 	
 
 	/**
