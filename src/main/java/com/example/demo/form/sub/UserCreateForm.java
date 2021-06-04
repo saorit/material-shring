@@ -39,9 +39,6 @@ public class UserCreateForm extends UserBaseForm {
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	@CustomCheck(uniqueUsername = "username", message = "既に登録されています")
 	private String username;
-	
-	@Size(max = 255)
-	private String profile;
 
 	@NotBlank
 	@Size(max = 255)
