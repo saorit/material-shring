@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.repository.SiteUserRepository;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
+import com.example.demo.form.sub.UserCreateForm;
 import com.example.demo.form.sub.UserUpdateForm;
 
 @Controller
@@ -46,6 +48,8 @@ public class UserMasterController {
 	@Autowired
 	private UserService userService;
 	
+	 private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	/**
 	 * ユーザー編集画面表示.
 	 *
@@ -53,8 +57,8 @@ public class UserMasterController {
 	 * @param model    Modelクラス
 	 * @return ユーザー編集画面のテンプレートパス
 	 */
-	@GetMapping("/user_master/edit/{username}")
-	public String edit(@ModelAttribute("user") SiteUser user) {
+	@GetMapping("/user_master/edit")
+	public String edit(@ModelAttribute UserCreateForm userCreateForm) {
 		
 		return "user_master/edit";
 	}
@@ -68,15 +72,20 @@ public class UserMasterController {
 	 * @return 遷移先パス(エラーの場合、編集画面のテンプレートパス。成功の場合、一覧画面のテンプレートパス)
 	 */
 	@PostMapping("/user_master/update")
-	public String update(@Validated @ModelAttribute("user") SiteUser user,
-            BindingResult result) {
+	public String update(@Valid @ModelAttribute UserCreateForm userCreateForm, final BindingResult bindingResult)  {
+	       // 入力チェック
+			if (bindingResult.hasErrors()) {
+				// 入力チェックエラー時の処理
+				return "register";
+			}
+			userCreateForm.setPassword(passwordEncoder.encode(userCreateForm.getPassword()));
+	        
 
-		// 入力チェック
-		if (result.hasErrors()) {
-            return "user_master/edit";
-        }
-		// ユーザー情報を保存
-        userService.save(user);
+			SiteUser user = userCreateForm.toEntity();
+
+			// ユーザー情報を保存
+			userService.save(user);
+ 
 
 		return "redirect:/index?upldate";
 	}
