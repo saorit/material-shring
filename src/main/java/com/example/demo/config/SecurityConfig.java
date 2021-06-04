@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				// 認証不要でアクセス可能
-				.antMatchers("/login", "/register", "/userconfirm", "/**").permitAll().
+				.antMatchers("/login", "/register", "/userconfirm").permitAll().
 				anyRequest().authenticated()
 				.and().sessionManagement().sessionFixation().none().and().formLogin().loginPage("/login")
 				.loginProcessingUrl("/index") // ログインフォームのアクションに指定したURL[action="@{/login}"]を設定

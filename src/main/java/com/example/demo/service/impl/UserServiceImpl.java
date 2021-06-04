@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.form.sub.UserUpdateRequest;
 import com.example.demo.model.SiteUser;
 import com.example.demo.repository.SiteUserRepository;
 import com.example.demo.service.UserService;
@@ -79,4 +80,16 @@ public class UserServiceImpl implements UserService {
 	public long countByUsername(String username) {
 		return repository.countByUsername(username);
 	}
+	
+	 /**
+     * ユーザー情報 更新
+     * @param user ユーザー情報
+     */
+    public void update(UserUpdateRequest userUpdateRequest) {
+        SiteUser user = findOne(userUpdateRequest.getId());
+        user.setUsername(userUpdateRequest.getUsername());
+        user.setDisplayname(userUpdateRequest.getDisplayname());
+        user.setProfile(userUpdateRequest.getProfile());
+        repository.save(user);
+    }
 }

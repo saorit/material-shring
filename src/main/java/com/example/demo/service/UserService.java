@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.form.sub.UserUpdateRequest;
 import com.example.demo.model.SiteUser;
 
 /**
@@ -48,5 +49,11 @@ public interface UserService {
 	 * */
 	 
 	public long countByUsername(String username);
+	
+	 /**
+     * ユーザー情報 更新
+     * @param user ユーザー情報
+     */
+    public void update(UserUpdateRequest userUpdateRequest);
 
 }

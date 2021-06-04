@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.domain.Page;
@@ -29,7 +30,8 @@ public class SiteUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
    
-    @Size(min = 2, max = 35, message="ユーザー名は2文字から10文字内で入力してください")
+    @NotEmpty(message = "usernameを入力してください")
+    @Size(max = 35)
     @UniqueLogin
     private String username;
 

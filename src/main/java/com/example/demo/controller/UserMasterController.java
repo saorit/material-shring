@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +30,7 @@ import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
 import com.example.demo.form.sub.UserCreateForm;
 import com.example.demo.form.sub.UserUpdateForm;
+import com.example.demo.form.sub.UserUpdateRequest;
 
 @Controller
 public class UserMasterController {
@@ -57,8 +59,16 @@ public class UserMasterController {
 	 * @param model    Modelクラス
 	 * @return ユーザー編集画面のテンプレートパス
 	 */
-	@GetMapping("/user_master/edit")
-	public String edit(@ModelAttribute UserCreateForm userCreateForm) {
+	@GetMapping("/user_master/edit/{userId}")
+	public String edit(@PathVariable Integer userId, Model model) {
+		
+		 SiteUser user = userService.findOne(userId);
+	        UserUpdateRequest userUpdateRequest = new UserUpdateRequest();
+	        userUpdateRequest.setId(user.getId());
+	        userUpdateRequest.setUsername(user.getUsername());
+	        userUpdateRequest.setDisplayname(user.getDisplayname());
+	        userUpdateRequest.setProfile(user.getProfile());
+	        model.addAttribute("userUpdateRequest", userUpdateRequest);
 		
 		return "user_master/edit";
 	}
@@ -71,21 +81,21 @@ public class UserMasterController {
 	 * @param bindingResult  入力チェック結果
 	 * @return 遷移先パス(エラーの場合、編集画面のテンプレートパス。成功の場合、一覧画面のテンプレートパス)
 	 */
-	@PostMapping("/user_master/update")
-	public String update(@Valid @ModelAttribute UserCreateForm userCreateForm, final BindingResult bindingResult)  {
-	       // 入力チェック
-			if (bindingResult.hasErrors()) {
-				// 入力チェックエラー時の処理
-				return "register";
-			}
-			userCreateForm.setPassword(passwordEncoder.encode(userCreateForm.getPassword()));
-	        
-
-			SiteUser user = userCreateForm.toEntity();
-
-			// ユーザー情報を保存
-			userService.save(user);
- 
+	@PostMapping("/user/update")
+	public String update(@Validated @ModelAttribute UserUpdateRequest userUpdateRequest, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            List<String> errorList = new ArrayList<String>();
+            for(ObjectError error : result.getAllErrors()) {
+                errorList.add(error.getDefaultMessage());
+            }
+              model.addAttribute("validationError", errorList);
+              return "user_master/edit";
+            }
+        
+        // ユーザー情報の更新
+        userService.update(userUpdateRequest);
+        
+        
 
 		return "redirect:/index?upldate";
 	}
