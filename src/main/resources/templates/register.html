@@ -41,7 +41,7 @@
 					<tr>
 						<th>自己紹介 <span class="badge badge-primary">任意</span></th>
 						<td>
-							<textarea class="profile_text" rows="10" cols="60" th:field="*{profile}"></textarea>
+							<textarea class="profile_text" rows="5" cols="60" th:field="*{profile}"></textarea>
 							<span th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}"></span>
 						</td>
 					</tr>

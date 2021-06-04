@@ -77,9 +77,11 @@
 	margin: 0;
 	padding: 0;
 }
+/* 自己紹介エリア */
 .profile_text {
     width: 100%;
     border-color: #d1d3e2;
+    color: #858796;;
 }
 
 /* 投稿者画面のユーザタイトル */
