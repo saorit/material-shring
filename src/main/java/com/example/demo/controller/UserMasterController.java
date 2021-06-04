@@ -63,6 +63,7 @@ public class UserMasterController {
 	public String edit(@PathVariable Integer userId, Model model) {
 		
 		 SiteUser user = userService.findOne(userId);
+		 
 	        UserUpdateRequest userUpdateRequest = new UserUpdateRequest();
 	        userUpdateRequest.setId(user.getId());
 	        userUpdateRequest.setUsername(user.getUsername());

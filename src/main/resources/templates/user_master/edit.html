@@ -26,6 +26,7 @@
   </table>
     <h1>プロフィールの編集</h1>
     <form th:action="@{/user/update}" th:object="${userUpdateRequest}" th:method="post">
+        <input type="hidden" th:field="*{id}" />
         <table class="table user-edit">
             <tr>
                 <th class="cell_title">ユーザー名</th>

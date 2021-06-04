@@ -2,6 +2,9 @@ package com.example.demo.form;
 
 import java.io.Serializable;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -28,7 +31,7 @@ public class UserRequest implements Serializable {
 
 	/** 正規表現(半角英数字)のエラーメッセージ. */
 	private static final String ALPHANUMERIC_MESSAGE = "半角英字、数字、ピリオドを使用できます";
-	
+
 	
   /**
    * 名前
