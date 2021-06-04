@@ -44,7 +44,7 @@ public class SiteUser {
 	private String displayname;
     
     /** 自己紹介. */
-    @Column(name = "profile", length = 200, nullable = true)
+    @Size(max = 255, message = "255文字以内で入力してください")
 	private String profile;
     
     /** プロフィール画像. */

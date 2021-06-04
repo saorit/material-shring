@@ -144,6 +144,24 @@
 	color: #FF9800;/*文字色*/
 	}
 	
+/* プロフィールの編集のテーブル */
+.user-edit th {
+	color: #8fbc8f;
+	background: honeydew;/*背景色*/
+	text-align: center;
+	vertical-align: middle;
+	width: 30%;
+}
+.user-edit td {
+	background: #ffffff;/*背景色*/
+	width: 70%;
+}
+.user-edit {
+	border: solid 2px honeydew;
+	table-layout: fixed;
+	width: 100%;
+	}
+	
 /* 画面幅の50%の幅で画像を表示 */
 .image-vw {
   width : 20vw ; 

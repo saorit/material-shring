@@ -18,41 +18,45 @@
                 <div class="p-5">
                 
                 <!-- Edit Profile -->
-	            <div class="container body-container">
-		        <h1>プロフィール編集</h1>
+	            
 		         <table>
     <tr th:if="${validationError}" th:each="error : ${validationError}">
         <td style="color:red;" th:text="${error}"></td>
     </tr>
   </table>
-    <h1>ユーザー編集</h1>
+    <h1>プロフィールの編集</h1>
     <form th:action="@{/user/update}" th:object="${userUpdateRequest}" th:method="post">
-        <a th:href="@{/user/{id}(id=*{id})}">キャンセル</a>
-        <input type="hidden" th:field="*{id}" />
-        <table>
+        <table class="table user-edit">
             <tr>
-                <th class="cell_title">user</th>
-                <th class="cell_required">※</th>
-                <td><input type="text" th:field="*{username}"></td>
+                <th class="cell_title">ユーザー名</th>
+                <td><input type="text" class="form-control" th:field="*{username}"></td>
             </tr>
             <tr>
-                <th class="cell_title">namae</th>
-                <th class="cell_required"></th>
-                <td><input type="text" th:field="*{displayname}"></td>
+                <th class="cell_title">名前</th>
+                <td><input type="text" class="form-control" th:field="*{displayname}"></td>
             </tr>
             <tr>
-                <th class="cell_title">profile</th>
-                <th class="cell_required">※</th>
-                <td><input type="text" th:field="*{profile}"></td>
+                <th class="cell_title">自己紹介</th>
+                <td><textarea class="profile_text" rows="10" cols="60" th:field="*{profile}"></textarea></td>
             </tr>
             <tr>
-                <th class="cell_title">password</th>
-                <th class="cell_required">※</th>
-                <td><input type="password" th:field="*{password}"></td>
+                <th class="cell_title">パスワード</th>
+                <td><input type="password" class="form-control" th:field="*{password}"></td>
             </tr>
+            <tfoot>
+					<tr>
+						<td colspan="2">
+							<span class="d-flex justify-content-between">
+							    <a class="btn btn-outline-info" th:href="@{/user_master/edit}">戻る</a>
+								<button type="submit" class="btn btn-outline-danger">保存</button>
+							</span>
+						</td>
+					</tr>
+				</tfoot>
         </table>
-         <div class="btn_area_center"><input type="submit" value="保存" class="btn"></div>
     </form>
+    
+    
 	              </div>
 	              <!-- End of Edit Profile -->
 	</div>
