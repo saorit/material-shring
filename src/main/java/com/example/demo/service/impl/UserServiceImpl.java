@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userUpdateRequest.getUsername());
         user.setDisplayname(userUpdateRequest.getDisplayname());
         user.setProfile(userUpdateRequest.getProfile());
+        user.setPassword(userUpdateRequest.getPassword());
         repository.save(user);
     }
 }

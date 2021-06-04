@@ -68,6 +68,7 @@ public class UserMasterController {
 	        userUpdateRequest.setUsername(user.getUsername());
 	        userUpdateRequest.setDisplayname(user.getDisplayname());
 	        userUpdateRequest.setProfile(user.getProfile());
+	        userUpdateRequest.setPassword(user.getPassword());
 	        model.addAttribute("userUpdateRequest", userUpdateRequest);
 		
 		return "user_master/edit";
@@ -91,6 +92,8 @@ public class UserMasterController {
               model.addAttribute("validationError", errorList);
               return "user_master/edit";
             }
+        
+        userUpdateRequest.setPassword(passwordEncoder.encode(userUpdateRequest.getPassword()));
         
         // ユーザー情報の更新
         userService.update(userUpdateRequest);

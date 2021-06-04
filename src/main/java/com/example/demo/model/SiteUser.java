@@ -31,7 +31,7 @@ public class SiteUser {
     private Integer id;
    
     @NotEmpty(message = "usernameを入力してください")
-    @Size(max = 35)
+    @Size(max = 35, message = "35文字以内で入力してください")
     @UniqueLogin
     private String username;
 
@@ -39,7 +39,8 @@ public class SiteUser {
     private String password;
     
     /** 表示名. */
-    @Size(min = 2, max = 35, message="名前は2文字から10文字内で入力してください")
+    @NotEmpty(message = "displaynameを入力してください")
+    @Size(max = 35, message = "35文字以内で入力してください")
 	private String displayname;
     
     /** 自己紹介. */

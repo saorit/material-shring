@@ -34,7 +34,7 @@ public class UserRequest implements Serializable {
    * 名前
    */
   @NotEmpty(message = "usernameを入力してください")
-  @Size(max = 35, message = "usernameは35桁以内で入力してください")
+  @Size(max = 35, message = "35文字以内で入力してください")
   @Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
   private String username;
   /**
@@ -48,4 +48,7 @@ public class UserRequest implements Serializable {
    */
   @Size(max = 255, message = "255文字以内で入力してください")
   private String profile;
+  
+  @Size(min = 4, max = 255, message="パスワードは4文字以上で入力してください")
+  private String password;
 }
