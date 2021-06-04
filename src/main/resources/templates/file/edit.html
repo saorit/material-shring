@@ -52,6 +52,7 @@
 		<form th:action="@{/file/update/{id}(id=${id})}" th:method="post" th:object="${fileUploadForm}"
 			enctype="multipart/form-data">
 			<div class="mb-3">
+			<input type="hidden" th:field="*{id}" />
 				<input type="file" name="multipartFile" th:field="*{multipartFile}" class="form-control" /><br />
 				<span th:if="${#fields.hasErrors('multipartFile')}"
 					th:errors="*{multipartFile}">

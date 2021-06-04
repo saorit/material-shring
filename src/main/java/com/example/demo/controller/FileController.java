@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.form.FileUploadForm;
+import com.example.demo.form.sub.UserUpdateRequest;
 import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
@@ -87,11 +88,17 @@ public class FileController {
 	 * @return ファイル編集画面のテンプレートパス
 	 */
 	@GetMapping("/file/edit/{id}")
-	public String editFile(@PathVariable int id, Model model,
-			@ModelAttribute FileUploadForm fileUploadForm) {
+	public String editFile(@PathVariable int id, Model model) {
 		// ファイル情報を取得
 		File file = fileService.findOne(id);
 		model.addAttribute("file", file);
+		
+		FileUploadForm fileUploadForm = new FileUploadForm();
+		fileUploadForm.setId(file.getId());
+		fileUploadForm.setItemname(file.getItemname());
+		fileUploadForm.setDescription(file.getDescription());
+        model.addAttribute("fileUploadForm", fileUploadForm);
+		
 		return EDIT_TEMPLATE_PATH;
 	}
 	

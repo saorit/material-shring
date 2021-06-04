@@ -2,6 +2,10 @@ package com.example.demo.form;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +24,11 @@ public class FileUploadForm implements Serializable {
 
 	/** シリアルバージョンUID. */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name = "id", length = 30, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@FileRequired
 	private MultipartFile multipartFile;
