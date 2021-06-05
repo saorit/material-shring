@@ -20,72 +20,72 @@
 
                   <!-- register -->
                   <div class="text-center">
-		<h1>ユーザー新規登録</h1>
-		<form th:action="@{/register}" th:method="post" th:object="${userCreateForm}">
-			<table class="table user-container">
-				<tbody>
-					<tr>
-						<th>ユーザー名 <span class="badge badge-danger">必須</span></th>
-						<td>
-							<input type="text" class="form-control" th:field="*{username}" th:errorclass="is-invalid"/>
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-						</td>
-					</tr>
-					<tr>
-						<th>名前（表示する名前）<span class="badge badge-danger">必須</span></th>
-						<td>
-							<input type="text" class="form-control" th:field="*{displayname}" th:errorclass="is-invalid"/>
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
-						</td>
-					</tr>
-					<tr>
-						<th>自己紹介 <span class="badge badge-primary">任意</span></th>
-						<td>
-							<textarea class="profile_text" rows="5" cols="60" th:field="*{profile}"th:errorclass="is-invalid"></textarea>
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}"></span>
-						</td>
-					</tr>
-					<tr>
-						<th>パスワード <span class="badge badge-danger">必須</span></th>
-						<td>
-							<input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid"/>
-							<span class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-						</td>
-					</tr>
-					<tr>
-						<th>ロール <span class="badge badge-danger">必須</span></th>
-						<td>
-							<select class="form-control" th:field="*{role}">
-								<option th:each="item : *{getRoleItems()}" th:value="${item.key}"
+		          <h1>ユーザー新規登録</h1>
+		          <form th:action="@{/register}" th:method="post" th:object="${userCreateForm}">
+			          <table class="table user-container">
+			          <tbody>
+					      <tr>
+						      <th>ユーザー名 <span class="badge badge-danger">必須</span></th>
+						      <td>
+							    <input type="text" class="form-control" th:field="*{username}" th:errorclass="is-invalid"/>
+							    <span class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+						      </td>
+					      </tr>
+					      <tr>
+						      <th>名前（表示する名前）<span class="badge badge-danger">必須</span></th>
+					          <td>
+							    <input type="text" class="form-control" th:field="*{displayname}" th:errorclass="is-invalid"/>
+							    <span class="invalid-feedback" th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
+						      </td>
+					      </tr>
+					      <tr>
+						      <th>自己紹介 <span class="badge badge-primary">任意</span></th>
+						      <td>
+							    <textarea class="profile_text" rows="5" cols="60" th:field="*{profile}"th:errorclass="is-invalid"></textarea>
+							    <span class="invalid-feedback" th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}"></span>
+						      </td>
+					     </tr>
+					     <tr>
+						     <th>パスワード <span class="badge badge-danger">必須</span></th>
+						     <td>
+							   <input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid"/>
+							   <span class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+						     </td>
+					     </tr>
+					     <tr>
+						     <th>ロール <span class="badge badge-danger">必須</span></th>
+						     <td>
+							   <select class="form-control" th:field="*{role}">
+							   <option th:each="item : *{getRoleItems()}" th:value="${item.key}"
 									th:text="${item.value}" th:selected="${item.key} == *{role}">
 									pulldown
-								</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<th>有効フラグ <span class="badge badge-danger">必須</span></th>
-						<td>
-							<div th:each="item : *{getEnabledItems()}" class="form-check-inline">
-								<input type="radio" class="form-check-input"
+							   </option>
+							   </select>
+						    </td>
+					    </tr>
+					    <tr>
+					        <th>有効フラグ <span class="badge badge-danger">必須</span></th>
+						    <td>
+						      <div th:each="item : *{getEnabledItems()}" class="form-check-inline">
+							  <input type="radio" class="form-check-input"
 									th:value="${item.key}" th:text="${item.value}"
 									th:field="*{enabled}">
-							</div>
-						</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="2">
-							<span class="d-flex justify-content-between">
-							    <a class="btn btn-outline-info" th:href="@{/login}">戻る</a>
-								<button type="submit" class="btn btn-outline-danger">登録</button>
-							</span>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-		</form>
+							  </div>
+						    </td>
+					   </tr>
+				   </tbody>
+				   <tfoot>
+				       <tr>
+					       <td colspan="2">
+						     <span class="d-flex justify-content-between">
+						 	<a class="btn btn-outline-info" th:href="@{/login}">戻る</a>
+						 	<button type="submit" class="btn btn-outline-danger">登録</button>
+						 	</span>
+						   </td>
+					  </tr>
+				  </tfoot>
+			      </table>
+		      </form>
 	    <!-- End of register -->
 
                 </div>
@@ -95,8 +95,8 @@
         </div>
         <!-- End of Card -->
         </div>
+      </div>
     </div>
-  </div>
   </div>
   <!-- End of Main -->
   <th:block th:insert="fragments/base :: scripts"></th:block>
