@@ -8,102 +8,102 @@
 <body class="bg-gradient">
   <!-- Page Wrapper -->
   
-          <div class="alert alert-success" th:if="${param.upload}">
-          <div class="d-flex align-items-center justify-content-center">教材を追加しました！</div>
-          </div>
+    <div class="alert alert-success" th:if="${param.upload}">
+    <div class="d-flex align-items-center justify-content-center">教材を追加しました！</div>
+    </div>
           
-          <div class="alert alert-danger" th:if="${param.delete}">
-          <div class="d-flex align-items-center justify-content-center">教材を削除しました</div>
-          </div>
+    <div class="alert alert-danger" th:if="${param.delete}">
+    <div class="d-flex align-items-center justify-content-center">教材を削除しました</div>
+    </div>
           
-          <div class="alert alert-danger" th:if="${param.fileupdate}">
-          <div class="d-flex align-items-center justify-content-center">教材内容を更新しました</div>
-          </div>
+    <div class="alert alert-danger" th:if="${param.fileupdate}">
+    <div class="d-flex align-items-center justify-content-center">教材内容を更新しました</div>
+    </div>
           
-  
-
     <!-- Main -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <div class="container">
 
-          <!-- teaching-material list -->
+        <!-- teaching-material list -->
           <div class="card my-4">
             <div class="card-header py-3">
               <h3 class="m-0 font-weight-bolder">
                 新着教材一覧
               </h3>
             </div>
-            <div class="card-body">
-              <div class="teaching-material">
-              
-    <div class="album py-5">
-    <div class="container">
+          <div class="card-body">
+            <div class="teaching-material">
+              <div class="album py-5">
+                <div class="container">
     
-      <div class="row">
-        <div class="col-md-4" th:each="file:${files}" th:object="${file}">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
-					 loading="lazy">
-            <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
-					 loading="lazy">
-            <div class="card-body">
+                <div class="row">
+                <div class="col-md-4" th:each="file:${files}" th:object="${file}">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
+					     loading="lazy">
+                    <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
+					     loading="lazy">
+                <div class="card-body">
               
-              <table class="table index-itemname">
-			  <tr>
-				<td th:text="*{itemname}"></td>
+                <table class="table index-itemname">
+			        <tr>
+                    <td th:text="*{itemname}"></td>
 			  </tr>
 			  </table>
               
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
-                  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
+                  <div class="btn-group">
+                    <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
+                    <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
 						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
-				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
+				    <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
 						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
-                  <a class="btn btn-sm btn-outline-success"
+                    <a class="btn btn-sm btn-outline-success"
                         th:href="@{/user_master/contributor/{userId}(userId=*{createUser.id})}" >投稿者</a>
-                </div>
+                  </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
+      </div>
+      
+      </div>
     </div>
-  </div>
-  </div>
-  </div>
-    </div>
-  </div>
-  </div>
-         <div class="container">
-              <div class="row">
-                <div class="col-md-6 offset-md-3 py-2">
-                <nav aria-label="ページ送り">
-                 <div class="text-center">
-                 <ul th:if="0 != ${page.totalPages}" class="pagination justify-content-center">
-				     <li class="page-item">
+    
+      <!-- pagination -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 offset-md-3 py-2">
+              <nav aria-label="ページ送り">
+                <div class="text-center">
+                  <ul th:if="0 != ${page.totalPages}" class="pagination justify-content-center">
+				    <li class="page-item">
 					    <a class="page-link" th:if="${!page.isFirstPage()}" th:href="@{${url}(page=0)}">最初のページ</a>
-				     </li>
-				     <li class="page-item" th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:class="(${i}==${page.number})? 'active file-page' : 'file-page'" >
-					     <span class="page-link" th:if='${i}==${page.number - 1}' th:text='${i + 1}'>1</span>
-					     <a class="page-link" th:if='${i}!=${page.number - 1}' th:href="@{${url}(page=${i})}">
-						   <span th:text='${i + 1}'>1</span>
-					     </a>
-				     </li>
-				     <li class="file-page">
-					     <a class="page-link" th:if="${!page.isLastPage()}" th:href="@{${url}(page=(${page.totalPages} - 1))}">最後のページ</a>
-				     </li>
+				    </li>
+				    <li class="page-item" th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:class="(${i}==${page.number})? 'active file-page' : 'file-page'" >
+					    <span class="page-link" th:if='${i}==${page.number - 1}' th:text='${i + 1}'>1</span>
+					    <a class="page-link" th:if='${i}!=${page.number - 1}' th:href="@{${url}(page=${i})}">
+						<span th:text='${i + 1}'>1</span>
+					    </a>
+				    </li>
+				    <li class="file-page">
+					    <a class="page-link" th:if="${!page.isLastPage()}" th:href="@{${url}(page=(${page.totalPages} - 1))}">最後のページ</a>
+				    </li>
 			      </ul>
-			      </div>
-			    </nav>
 			    </div>
-			  </div>
-			  </div>
-			
-          <!-- End of teaching-material list -->
-          <!-- Official account -->
+			  </nav>
+			</div>
+	      </div>
+        </div>
+        <!-- End of pagination -->
+        <!-- End of teaching-material list -->
+        <!-- Official account -->
           <div class="container">
           <div class="card-deck mb-3 text-center">
           
@@ -114,19 +114,19 @@
               </h3>
             </div>
             <div class="card-body px-4">
-              <div class="official account">
+            <div class="official account">
               
     　　　　　　
-                <div class="card-deck">
-         <div class="card" style="width: 18rem;">
-           <svg class="rounded-pill" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
-           <div class="card-body">
-             <h5 class="card-title">Card title</h5>
-             <a href="#" class="card-link">Card link</a>
-             <p class="card-text">紹介文</p>
-             <a href="#" class="btn btn-primary">詳細</a>
-           </div>
-         </div><br>
+            <div class="card-deck">
+            <div class="card" style="width: 18rem;">
+                <svg class="rounded-pill" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+            <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+                <a href="#" class="card-link">Card link</a>
+                <p class="card-text">紹介文</p>
+                <a href="#" class="btn btn-primary">詳細</a>
+            </div>
+            </div><br>
          
          <div class="card" style="width: 18rem;">
            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>display_name</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
@@ -153,17 +153,13 @@
          </div>
 
          </div>
-    　　　　　　</div>
-              </div>
-              </div>
+    　　</div>
+       </div>
+       </div>
               
-              </div>
-      
     <!-- End of Official account -->
     <!-- End of Main -->
     </div>
- 
-
 </body>
 <th:block th:insert="fragments/base :: scripts"></th:block>
 <th:block th:insert="fragments/footer :: footer"></th:block>
