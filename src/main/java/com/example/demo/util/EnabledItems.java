@@ -13,8 +13,8 @@ public class EnabledItems {
 
 	static {
 		Map<Boolean, String> enabledItems = new LinkedHashMap<Boolean, String>();
-		enabledItems.put(true, "有効");
 		enabledItems.put(false, "無効");
+		enabledItems.put(true, "有効(推奨)");
 		ENABLEDITEMS = Collections.unmodifiableMap(enabledItems);
 	}
 
