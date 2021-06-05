@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -34,14 +35,14 @@ public class UserCreateForm extends UserBaseForm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-	@NotBlank
-	@Size(max = 30)
+	@NotBlank(message = "ユーザー名を入力してください")
+	@Size(max = 20,  message = "20文字以内で入力してください")
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	@CustomCheck(uniqueUsername = "username", message = "既に登録されています")
 	private String username;
 
 	@NotBlank
-	@Size(max = 255)
+	@Size(min = 4, max = 255, message="パスワードは4文字以上で入力してください")
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	private String password;
 

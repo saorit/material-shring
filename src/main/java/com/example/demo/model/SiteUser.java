@@ -30,8 +30,8 @@ public class SiteUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
    
-    @NotEmpty(message = "usernameを入力してください")
-    @Size(max = 35, message = "35文字以内で入力してください")
+    @NotEmpty(message = "ユーザー名を入力してください")
+    @Size(max = 20, message = "20文字以内で入力してください")
     @UniqueLogin
     private String username;
 
@@ -39,8 +39,8 @@ public class SiteUser {
     private String password;
     
     /** 表示名. */
-    @NotEmpty(message = "displaynameを入力してください")
-    @Size(max = 35, message = "35文字以内で入力してください")
+    @NotEmpty(message = "名前を入力してください")
+    @Size(max = 20, message = "20文字以内で入力してください")
 	private String displayname;
     
     /** 自己紹介. */

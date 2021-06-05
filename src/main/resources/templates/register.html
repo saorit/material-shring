@@ -27,29 +27,29 @@
 					<tr>
 						<th>ユーザー名 <span class="badge badge-danger">必須</span></th>
 						<td>
-							<input type="text" class="form-control" th:field="*{username}" />
-							<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+							<input type="text" class="form-control" th:field="*{username}" th:errorclass="is-invalid"/>
+							<span class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 						</td>
 					</tr>
 					<tr>
 						<th>名前（表示する名前）<span class="badge badge-danger">必須</span></th>
 						<td>
-							<input type="text" class="form-control" th:field="*{displayname}" />
-							<span th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
+							<input type="text" class="form-control" th:field="*{displayname}" th:errorclass="is-invalid"/>
+							<span class="invalid-feedback" th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
 						</td>
 					</tr>
 					<tr>
 						<th>自己紹介 <span class="badge badge-primary">任意</span></th>
 						<td>
-							<textarea class="profile_text" rows="5" cols="60" th:field="*{profile}"></textarea>
-							<span th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}"></span>
+							<textarea class="profile_text" rows="5" cols="60" th:field="*{profile}"th:errorclass="is-invalid"></textarea>
+							<span class="invalid-feedback" th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}"></span>
 						</td>
 					</tr>
 					<tr>
 						<th>パスワード <span class="badge badge-danger">必須</span></th>
 						<td>
-							<input type="password" class="form-control" th:field="*{password}" />
-							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							<input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid"/>
+							<span class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 						</td>
 					</tr>
 					<tr>
