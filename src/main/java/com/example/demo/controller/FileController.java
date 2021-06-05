@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,19 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.form.FileUploadForm;
-import com.example.demo.form.sub.UserUpdateRequest;
 import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
 
-/**
- * ファイルを操作する画面のコントローラークラス. クラスで@RequestMappingを利用すると、
- * リクエストURLが「クラスの@RequestMappingで指定したパス + メソッドで指定したパス」になります。
- */
 @Controller
-
 public class FileController {
 
 	/**
@@ -49,11 +40,6 @@ public class FileController {
 	 */
 	@Autowired
 	private UserService userService;
-
-	/**
-	 * Redirect用HOME画面パス.
-	 */
-	private final String REDIRECT_HOME_URL = "redirect:/file/home/{id}";
 
 	/**
 	 * 新規登録画面のTemplateHTMLのパス.
@@ -70,8 +56,6 @@ public class FileController {
 	 */
 	private final String SHOW_TEMPLATE_PATH = "file/show";
 	
-
-
 	/**
 	 * ファイル新規登録画面表示.
 	 * 
@@ -163,7 +147,6 @@ public class FileController {
 		
 		return EDIT_TEMPLATE_PATH;
 	}
-	
 
 	/**
 	 * ファイル情報の更新処理.
@@ -223,6 +206,13 @@ public class FileController {
 		return "redirect:/index?fileupdate";
 	}
 	
+	/**
+	 * 公開範囲画面.
+	 * 
+	 * @param id    ファイルID
+	 * @param model Modelクラス
+	 * @return ファイル公開範囲のテンプレートパス
+	 */
 	@GetMapping("/file/release/{id}")
 	public String releaseFile(@PathVariable int id, Model model,
 			@ModelAttribute FileUploadForm fileUploadForm) {
@@ -271,7 +261,6 @@ public class FileController {
 		}
 	}
 
-
 	/**
 	 * ファイルの削除処理.
 	 * 
@@ -311,12 +300,12 @@ public class FileController {
 		res.setContentLength(fileData.length);
 
 		try (
-				// ResponseのOutputStreamを代入
-				OutputStream os = res.getOutputStream();) {
+			// ResponseのOutputStreamを代入
+            OutputStream os = res.getOutputStream();) {
 			// OutputStreamにファイルデータを書き出す
-			os.write(file.getData());
-			// OutputStreamを強制的に書き込み
-			os.flush();
+		    os.write(file.getData());
+		    // OutputStreamを強制的に書き込み
+		    os.flush();
 		} catch (IOException e) {
 			// TODO 例外処理を実装
 		}

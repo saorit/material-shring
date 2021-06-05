@@ -2,14 +2,9 @@ package com.example.demo.form;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 import lombok.Getter;
@@ -31,27 +26,31 @@ public class UserRequest implements Serializable {
 
 	/** 正規表現(半角英数字)のエラーメッセージ. */
 	private static final String ALPHANUMERIC_MESSAGE = "半角英字、数字、ピリオドを使用できます";
-
 	
   /**
-   * 名前
+   * ユーザー名
    */
-  @NotEmpty(message = "usernameを入力してください")
-  @Size(max = 35, message = "35文字以内で入力してください")
+  @NotEmpty(message = "ユーザー名を入力してください")
+  @Size(max = 20, message = "20文字以内で入力してください")
   @Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
   private String username;
+  
   /**
-   * 住所
+   * 名前（表示名）
    */
-  @NotEmpty(message = "displaynameを入力してください")
-  @Size(max = 35, message = "35文字以内で入力してください")
+  @NotEmpty(message = "名前（表示名）を入力してください")
+  @Size(max = 20, message = "20文字以内で入力してください")
   private String displayname;
+  
   /**
-   * 住所
+   * 自己紹介
    */
-  @Size(max = 255, message = "255文字以内で入力してください")
+  @Size(max = 255, message = "自己紹介文を255文字以内で入力してください")
   private String profile;
   
+  /**
+   * パスワード
+   */
   @Size(min = 4, max = 255, message="パスワードは4文字以上で入力してください")
   @Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
   private String password;

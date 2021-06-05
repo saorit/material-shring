@@ -13,13 +13,13 @@ import com.example.demo.repository.SiteUserRepository;
 import com.example.demo.service.UserService;
 
 /**
- * UserEntityクラスを操作するServiceクラス.
+ * SiteUserEntityクラスを操作するServiceクラス.
  */
 @Service
 public class UserServiceImpl implements UserService {
 
 	/**
-	 * User(Entity)クラスのリポジトリクラス.
+	 * SiteUser(Entity)クラスのリポジトリクラス.
 	 */
 	@Autowired
 	private SiteUserRepository repository;
@@ -31,8 +31,7 @@ public class UserServiceImpl implements UserService {
 	PasswordEncoder passwordEncoder;
 
 	/**
-	 * User(Entity)クラスのデータを全件取得する.
-	 *
+	 * SiteUser(Entity)クラスのデータを全件取得する.
 	 * @return usersテーブルの全件データ
 	 */
 	public List<SiteUser> findAll() {
@@ -40,9 +39,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * ユーザー名に紐付くUser(Entity)クラスのデータを1件取得する.
-	 *
-	 * @param username ユーザー名
+	 * ユーザーIdに紐付くSiteUser(Entity)クラスのデータを1件取得する.
 	 * @return 該当した1件のデータ
 	 */
 	public SiteUser findOne(Integer id) {
@@ -50,8 +47,7 @@ public class UserServiceImpl implements UserService {
 	    }
 	
 	/**
-	 * ユーザー名に紐付くUser(Entity)クラスのデータを1件取得する.
-	 *
+	 * ユーザー名に紐付くSiteUser(Entity)クラスのデータを1件取得する.
 	 * @param username ユーザー名
 	 * @return 該当した1件のデータ
 	 */
@@ -61,19 +57,16 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * User(Entityクラス)のデータを保存する.
-	 *
-	 * @param user User(Entityクラス)
-	 * @return 保存したUser(Entityクラス)
+	 * @return 保存したSiteUser(Entityクラス)
 	 */
 	@Transactional
 	public SiteUser save(SiteUser user) {
-		// データベースにUser(Entityクラス)を保存
+		// データベースにSiteUser(Entityクラス)を保存
 		return repository.save(user);
 	}
 
 	/**
 	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.
-	 *
 	 * @param username ユーザー名
 	 * @return 件数
 	 */

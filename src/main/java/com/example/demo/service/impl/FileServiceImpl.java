@@ -27,7 +27,6 @@ public class FileServiceImpl implements FileService {
 
 	/**
 	 * File(Entity)クラスの1ページ分のデータを取得する.
-	 *
 	 * @return filesテーブルの1ページ分のデータ
 	 */
 	public Page<File> findAll(Pageable pageable) {
@@ -36,18 +35,14 @@ public class FileServiceImpl implements FileService {
 	
 	/**
 	 * userIDに紐付くFile(Entity)クラスのデータを取得する.
-	 *
 	 * @return 該当したfileのデータ
 	 */
 	public List<File> findMyFile(SiteUser siteUser) {
 		return repository.getMyFile(siteUser);
 	}
-	
-
 
 	/**
 	 * IDに紐付くFile(Entity)クラスのデータを1件取得する.
-	 *
 	 * @param id ファイルID
 	 * @return 該当した1件のデータ
 	 */
@@ -57,7 +52,6 @@ public class FileServiceImpl implements FileService {
 
 	/**
 	 * File(Entity)クラスのデータを保存する.
-	 *
 	 * @param file File(Entity)クラス
 	 * @return 保存したFile(Entity)クラス
 	 */
@@ -68,7 +62,6 @@ public class FileServiceImpl implements FileService {
 
 	/**
 	 * IDに紐付くFile(Entity)クラスのデータを削除する.
-	 *
 	 * @param id ファイルID
 	 */
 	@Transactional

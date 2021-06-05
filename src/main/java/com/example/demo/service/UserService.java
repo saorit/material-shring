@@ -11,31 +11,27 @@ import com.example.demo.model.SiteUser;
 public interface UserService {
 
 	/**
-	 * User(Entity)クラスのデータを全件取得する.
-	 *
+	 * SiteUser(Entity)クラスのデータを全件取得する.
 	 * @return usersテーブルの全件データ
 	 */
 	public List<SiteUser> findAll();
 
 	/**
-	 * ユーザー名に紐付くUser(Entity)クラスのデータを1件取得する.
-	 *
+	 * ユーザー名に紐付くSiteUser(Entity)クラスのデータを1件取得する.
 	 * @param id ユーザー名
 	 * @return 該当した1件のデータ
 	 */
 	public SiteUser findOne(Integer id);
 	
 	/**
-	 * ユーザー名に紐付くUser(Entity)クラスのデータを1件取得する.
-	 *
+	 * ユーザー名に紐付くSiteUser(Entity)クラスのデータを1件取得する.
 	 * @param username ユーザー名
 	 * @return 該当した1件のデータ
 	 */
 	public SiteUser findOneUsername(String username);
 
 	/**
-	 * User(Entity)クラスのデータを保存する.
-	 *
+	 * SiteUser(Entity)クラスのデータを保存する.
 	 * @param user User(Entity)クラス
 	 * @return 保存したUser(Entity)クラス
 	 */
@@ -43,7 +39,6 @@ public interface UserService {
 	
 	/**
 	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得する.一旦非表示
-	 *
 	 * @param username ユーザー名
 	 * @return 件数
 	 * */

@@ -34,7 +34,6 @@ public class UserMasterController {
 	 */
 	@Autowired
 	private FileService fileService;
-
 	
 	/**
 	 * UserEntityクラスを操作するServiceクラス.
@@ -46,7 +45,6 @@ public class UserMasterController {
 	
 	/**
 	 * ユーザー編集画面表示.
-	 *
 	 * @return ユーザー編集画面のテンプレートパス
 	 */
 	@GetMapping("/user_master/edit/{userId}")
@@ -104,7 +102,6 @@ public class UserMasterController {
 	
 	/**
 	 * 投稿者の詳細画面表示.
-	 * 
 	 * @return 投稿者の詳細画面のテンプレートパス
 	 */
 	@GetMapping("/user_master/contributor/{userId}")

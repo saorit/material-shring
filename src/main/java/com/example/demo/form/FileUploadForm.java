@@ -35,12 +35,13 @@ public class FileUploadForm implements Serializable {
 	private MultipartFile multipartFile;
 	
 	/** 教材名. */
-	@NotEmpty(message = "itemnameを入力してください")
-	@Size(max = 35, message="教材名は20文字内で入力してください")
-	private String itemname;
+	@NotEmpty(message = "教材名を入力してください")
+	@Size(max = 65, message="20文字内で入力してください")
+    private String itemname;
 	
-    @Size(min = 0, max = 300)
-    private String description;
+	/** 教材内容. */
+	@Column(name = "description", length = 300, nullable = false)
+	private String description;
 
 }
 

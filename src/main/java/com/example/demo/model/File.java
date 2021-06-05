@@ -38,8 +38,8 @@ public class File {
 	private String name;
 	
 	/** 教材名. */
-	@NotEmpty(message = "itemnameを入力してください")
-	@Size(max = 35, message="教材名は20文字内で入力してください")
+	@NotEmpty(message = "教材名を入力してください")
+	@Size(max = 20, message="教材名は20文字内で入力してください")
 	private String itemname;
 	
 	/** 教材の内容 */

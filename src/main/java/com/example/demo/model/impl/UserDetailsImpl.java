@@ -71,7 +71,6 @@ public class UserDetailsImpl implements UserDetails {
 		return user.isEnabled();
 	}
 
-
 	/**
 	 * ユーザーの権限情報を取得する.
 	 *

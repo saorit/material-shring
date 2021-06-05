@@ -45,7 +45,6 @@ public class SecurityController {
 
     private final BCryptPasswordEncoder passwordEncoder;
     
- 
 	/**
 	 * HOME画面URL.
 	 */

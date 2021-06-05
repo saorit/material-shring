@@ -21,11 +21,13 @@ public class UserUpdateForm extends UserBaseForm {
 
 	/** 正規表現(半角英数字)のエラーメッセージ. */
 	private static final String ALPHANUMERIC_MESSAGE = "半角英字、数字、ピリオドを使用できます";
-
-	@Size(max = 35)
+    
+	/** ユーザー名. */
+	@Size(max = 20)
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	private String username;
-
+    
+	/** パスワード. */
 	@Size(max = 255)
 	@Pattern(regexp = ALPHANUMERIC_REGEXP, message = ALPHANUMERIC_MESSAGE)
 	private String password;

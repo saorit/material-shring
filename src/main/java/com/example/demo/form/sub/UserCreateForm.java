@@ -56,7 +56,6 @@ public class UserCreateForm extends UserBaseForm {
 
 	/**
 	 * Formの設定内容をUser Entityクラスに変換する.
-	 *
 	 * @return ユーザー情報(Entityクラス)
 	 */
 	public SiteUser toEntity() {

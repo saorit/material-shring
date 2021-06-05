@@ -55,17 +55,18 @@ public class FileUpdateForm implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "update_username", nullable = true)
 	private SiteUser updateUser;
-
+	
+	/** アップロードファイル. */
 	@FileRequired
 	private MultipartFile multipartFile;
 	
-	@NotEmpty(message = "itemnameを入力してください")
+	/** 教材名. */
+	@NotEmpty(message = "教材名を入力してください")
 	@Size(max = 65, message="20文字内で入力してください")
     private String itemname;
 	
+	/** 教材内容. */
 	@Column(name = "description", length = 300, nullable = false)
 	private String description;
 
 }
-
-
