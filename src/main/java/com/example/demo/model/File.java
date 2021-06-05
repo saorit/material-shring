@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -37,7 +38,8 @@ public class File {
 	private String name;
 	
 	/** 教材名. */
-	@Size(min = 1, max = 35, message="教材名は1文字以上20文字内で入力してください")
+	@NotEmpty(message = "itemnameを入力してください")
+	@Size(max = 35, message="教材名は20文字内で入力してください")
 	private String itemname;
 	
 	/** 教材の内容 */

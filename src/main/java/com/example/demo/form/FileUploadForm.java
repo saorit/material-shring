@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -33,8 +34,10 @@ public class FileUploadForm implements Serializable {
 	@FileRequired
 	private MultipartFile multipartFile;
 	
-	@Size(min = 1, max = 65, message="教材名は1文字以上20文字内で入力してください")
-    private String itemname;
+	/** 教材名. */
+	@NotEmpty(message = "itemnameを入力してください")
+	@Size(max = 35, message="教材名は20文字内で入力してください")
+	private String itemname;
 	
     @Size(min = 0, max = 300)
     private String description;

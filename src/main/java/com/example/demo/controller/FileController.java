@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -79,6 +82,65 @@ public class FileController {
 	public String newFile(@ModelAttribute FileUploadForm fileUploadForm) {
 		return NEW_TEMPLATE_PATH;
 	}
+	
+	/**
+	 * ファイルのアップロード処理.
+	 * 
+	 * @param fileForm      ファイルのアップロード情報
+	 * @param bindingResult 入力チェック結果
+	 * @param userDetails   ユーザーの詳細情報
+	 * @return 遷移先パス(エラーの場合、新規登録画面のテンプレートパス。成功の場合、HOME画面)
+	 */
+	@PostMapping("/file/upload")
+	public String create(@Validated @ModelAttribute FileUploadForm fileForm, final BindingResult bindingResult,
+			@AuthenticationPrincipal UserDetailsImpl userDetails){
+
+		// 入力チェック
+		if (bindingResult.hasErrors()) {
+			// 入力チェックエラー時の処理
+			return NEW_TEMPLATE_PATH;
+		}
+
+		File file = new File();
+		try {
+			file.setData(fileForm.getMultipartFile().getBytes());
+
+			// ファイル名を取得
+			String fileName = fileForm.getMultipartFile().getOriginalFilename();
+			file.setName(fileName);
+			
+			// 教材の名前を取得
+			String itemname = fileForm.getItemname();
+			file.setItemname(itemname);
+			
+			// 教材の内容を取得
+			String description = fileForm.getDescription();
+			file.setDescription(description);
+
+			// 画像ファイル拡張子フラグを取得
+			boolean isImageExtension = this.isImageExtension(fileName);
+
+			file.setImageExtension(isImageExtension);
+
+			// 現在日時を取得
+			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+			file.setCreateDate(currentTime); // 登録日時を設定
+			file.setUpdateDate(currentTime); // 更新日時を設定
+
+			// ユーザー名に紐づくユーザー情報を取得
+			SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
+			file.setCreateUser(loginUser); // 登録ユーザーを設定
+			file.setUpdateUser(loginUser); // 更新ユーザーを設定
+
+		} catch (IOException e) {
+			// TODO 例外処理を実装する
+		}
+
+		// ファイル情報を保存
+		fileService.save(file);
+
+		return "redirect:/index?upload";
+	}
 
 	/**
 	 * ファイル編集画面表示.
@@ -100,6 +162,65 @@ public class FileController {
         model.addAttribute("fileUploadForm", fileUploadForm);
 		
 		return EDIT_TEMPLATE_PATH;
+	}
+	
+
+	/**
+	 * ファイル情報の更新処理.
+	 * 
+	 * @param id             ファイルID
+	 * @param userUpdateForm 編集画面の入力情報
+	 * @param bindingResult  入力チェック結果
+	 * @param userDetails    ログインユーザーの詳細情報
+	 * @return 遷移先(エラーの場合、編集画面。成功の場合、HOME画面)
+	 */
+	@PostMapping("/file/update/{id}")
+	public String update(@PathVariable int id, @Validated FileUploadForm fileForm, final BindingResult result,
+			@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+
+		// 入力チェック
+		if (result.hasErrors()) {
+		// 入力チェックエラー時の処理
+		return "file/edit";
+		}
+
+		// ファイル情報を取得
+		File file = fileService.findOne(id);
+		try {
+			// ファイルデータを設定
+			file.setData(fileForm.getMultipartFile().getBytes());
+			
+			// ファイルnameを設定
+			file.setItemname(fileForm.getItemname());
+			
+			// descriptionを設定
+			file.setDescription(fileForm.getDescription());
+
+			// ファイル名を取得
+			String fileName = fileForm.getMultipartFile().getOriginalFilename();
+			file.setName(fileName);
+
+			// 画像ファイルフラグを取得
+			boolean isImage = this.isImageExtension(fileName);
+			file.setImageExtension(isImage);
+
+			// 現在日時を取得
+			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+			// 更新日時を設定
+			file.setUpdateDate(currentTime);
+
+			// ユーザー名に紐づくユーザー情報を取得
+			SiteUser loginUser = userService.findOne(userDetails.getId());
+			// 更新ユーザーを設定
+			file.setUpdateUser(loginUser);
+
+			// ファイル情報を保存
+			fileService.save(file);
+		} catch (IOException e) {
+			// TODO 例外処理を実装する
+
+		}
+		return "redirect:/index?fileupdate";
 	}
 	
 	@GetMapping("/file/release/{id}")
@@ -150,125 +271,6 @@ public class FileController {
 		}
 	}
 
-	/**
-	 * ファイルのアップロード処理.
-	 * 
-	 * @param fileForm      ファイルのアップロード情報
-	 * @param bindingResult 入力チェック結果
-	 * @param userDetails   ユーザーの詳細情報
-	 * @return 遷移先パス(エラーの場合、新規登録画面のテンプレートパス。成功の場合、HOME画面)
-	 */
-	@PostMapping("/file/upload")
-	public String create(@Validated @ModelAttribute FileUploadForm fileForm, final BindingResult bindingResult,
-			@AuthenticationPrincipal UserDetailsImpl userDetails){
-		
-		
-
-		// 入力チェック
-		if (bindingResult.hasErrors()) {
-			// 入力チェックエラー時の処理
-			return NEW_TEMPLATE_PATH;
-		}
-
-		File file = new File();
-		try {
-			file.setData(fileForm.getMultipartFile().getBytes());
-
-			// ファイル名を取得
-			String fileName = fileForm.getMultipartFile().getOriginalFilename();
-			file.setName(fileName);
-			
-			// 教材の名前を取得
-			String itemname = fileForm.getItemname();
-			file.setItemname(itemname);
-			
-			// 教材の内容を取得
-			String description = fileForm.getDescription();
-			file.setDescription(description);
-
-			// 画像ファイル拡張子フラグを取得
-			boolean isImageExtension = this.isImageExtension(fileName);
-
-			file.setImageExtension(isImageExtension);
-
-			// 現在日時を取得
-			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-			file.setCreateDate(currentTime); // 登録日時を設定
-			file.setUpdateDate(currentTime); // 更新日時を設定
-
-			// ユーザー名に紐づくユーザー情報を取得
-			SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
-			file.setCreateUser(loginUser); // 登録ユーザーを設定
-			file.setUpdateUser(loginUser); // 更新ユーザーを設定
-
-		} catch (IOException e) {
-			// TODO 例外処理を実装する
-		}
-
-		// ファイル情報を保存
-		fileService.save(file);
-
-		return "redirect:/index?upload";
-	}
-
-	/**
-	 * ファイル情報の更新処理.
-	 * 
-	 * @param id             ファイルID
-	 * @param userUpdateForm 編集画面の入力情報
-	 * @param bindingResult  入力チェック結果
-	 * @param userDetails    ログインユーザーの詳細情報
-	 * @return 遷移先(エラーの場合、編集画面。成功の場合、HOME画面)
-	 */
-	@PostMapping("/file/update/{id}")
-	public String update(@PathVariable int id, @Validated FileUploadForm fileForm, final BindingResult bindingResult,
-			@AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-		// 入力チェック
-		if (bindingResult.hasErrors()) {
-			// 入力チェックエラーの場合
-			// 編集画面へ遷移
-			return EDIT_TEMPLATE_PATH;
-		}
-
-		// ファイル情報を取得
-		File file = fileService.findOne(id);
-		try {
-			// ファイルデータを設定
-			file.setData(fileForm.getMultipartFile().getBytes());
-			
-			// ファイルnameを設定
-			file.setItemname(fileForm.getItemname());
-			
-			// descriptionを設定
-			file.setDescription(fileForm.getDescription());
-
-			// ファイル名を取得
-			String fileName = fileForm.getMultipartFile().getOriginalFilename();
-			file.setName(fileName);
-
-			// 画像ファイルフラグを取得
-			boolean isImage = this.isImageExtension(fileName);
-			file.setImageExtension(isImage);
-
-			// 現在日時を取得
-			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-			// 更新日時を設定
-			file.setUpdateDate(currentTime);
-
-			// ユーザー名に紐づくユーザー情報を取得
-			SiteUser loginUser = userService.findOne(userDetails.getId());
-			// 更新ユーザーを設定
-			file.setUpdateUser(loginUser);
-
-			// ファイル情報を保存
-			fileService.save(file);
-		} catch (IOException e) {
-			// TODO 例外処理を実装する
-
-		}
-		return "redirect:/index?fileupdate";
-	}
 
 	/**
 	 * ファイルの削除処理.
