@@ -12,116 +12,98 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <div class="container">
-        <br />
+          <br />
             
             <!-- profile -->
-             <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-4">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="p-5">
+              <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-4">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="p-5">
 
                   <!-- userConfirm -->
-                  
-                  <table class="table contributor-top" th:object="${user}">
-                  <tr><th th:text="*{displayname}+さんのプロフィール"></th></tr>
-                  </table>
-			
-                    
-                    
-		        <table class="table user-container" th:object="${user}">
-				<tr>
-					<th>ユーザー名</th>
-					<td th:text="*{username}"></td>
-				</tr>
-				<tr>
-					<th>名前</th>
-					<td th:text="*{displayname}"></td>
-				</tr>
-				<tr>
-					<th>自己紹介</th>
-					<td th:text="*{profile}"></td>
-				</tr>
-		        </table>
-                    
-                    
-            </div>
-          </div>
-        </div>
-        </div>
-         </div>
-  </div>
-            
-            
-
-          <!-- teaching-material list -->
-          <div class="card my-4">
-            <div class="card-header py-3">
-              <h3>
-                <a th:text="*{user.displayname}+さんが投稿した教材"></a>
-                </h3>
-            </div>
-            <div class="card-body">
-              <div class="teaching-material">
-              
-    <div class="album py-5">
-    <div class="container">
-    
-      <div class="card-body">
-              <div class="teaching-material">
-    <div class="album py-5">
-    <div class="container">
-    
-      <div class="row">
-        <div class="col-md-4" th:each="file:${files}" th:object="${file}">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
-					 loading="lazy">
-            <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
-					 loading="lazy">
-            <div class="card-body">
-              
-              <table class="table index-itemname" th:object="${file}">
-			  <tr>
-				<td th:text="*{itemname}"></td>
-			  </tr>
-			  </table>
-              
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
-                  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
-						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
-				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
-						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
-                  <a th:field="${user}" class="btn btn-sm btn-outline-success"
-                        th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
+                      <table class="table contributor-top" th:object="${user}">
+                        <tr>
+                            <th th:text="*{displayname}+さんのプロフィール"></th></tr>
+                      </table>
+                      <table class="table user-container" th:object="${user}">
+				        <tr>
+					        <th>ユーザー名</th>
+					        <td th:text="*{username}"></td>
+				        </tr>
+				        <tr>
+					        <th>名前</th>
+					        <td th:text="*{displayname}"></td>
+				        </tr>
+				        <tr>
+					        <th>自己紹介</th>
+					        <td th:text="*{profile}"></td>
+				        </tr>
+		              </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        </div>
-    </div>
-  </div>
-  </div>
-  </div>
-    </div>
-  </div>
- 
-  </div>
-  </div>
-    </div>
- 
-  
+          <!-- teaching-material list -->
+          <div class="card my-4">
+              <div class="card-header py-3">
+                  <h3>
+                      <a th:text="*{user.displayname}+さんが投稿した教材"></a>
+                  </h3>
+              </div>
+              <div class="card-body">
+                <div class="teaching-material">
+                  <div class="album py-5">
+                    <div class="container">
+                      <div class="card-body">
+                        <div class="teaching-material">
+                          <div class="album py-5">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-4" th:each="file:${files}" th:object="${file}">
+                                  <div class="card mb-4 shadow-sm">
+                                    <img class="card-img-top" th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
+					                     loading="lazy">
+                                    <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
+					                     loading="lazy">
+                                  <div class="card-body">
+                                  <table class="table index-itemname" th:object="${file}">
+			                        <tr>
+			                 	        <td th:text="*{itemname}"></td>
+			                        </tr>
+			                      </table>
               
-			
-			
+                                  <div class="d-flex justify-content-between align-items-center">
+                                  <div class="btn-group">
+                                      <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
+                                      <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
+						                 th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
+				                      <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
+					                     th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
+                                      <a th:field="${user}" class="btn btn-sm btn-outline-success"
+                                         th:href="@{/file/contributor/{id}(id=*{id})}" >投稿者</a>
+                                  </div>
+                                  </div>
+                                  
+                                  </div>
+                                  </div>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+          </div>
           <!-- End of teaching-material list -->
           <!-- End of Main -->
           </div>
-          </div>
+        </div>
  
 
 </body>
