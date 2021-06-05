@@ -3,13 +3,7 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,8 +22,6 @@ import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.repository.SiteUserRepository;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
-import com.example.demo.form.sub.UserCreateForm;
-import com.example.demo.form.sub.UserUpdateForm;
 import com.example.demo.form.sub.UserUpdateRequest;
 
 @Controller
@@ -55,8 +47,6 @@ public class UserMasterController {
 	/**
 	 * ユーザー編集画面表示.
 	 *
-	 * @param username ユーザー名
-	 * @param model    Modelクラス
 	 * @return ユーザー編集画面のテンプレートパス
 	 */
 	@GetMapping("/user_master/edit/{userId}")
@@ -75,13 +65,10 @@ public class UserMasterController {
 		return "user_master/edit";
 	}
 	
-
 	/**
 	 * ユーザーの更新処理.
 	 *
-	 * @param userUpdateForm 編集画面の入力情報
-	 * @param bindingResult  入力チェック結果
-	 * @return 遷移先パス(エラーの場合、編集画面のテンプレートパス。成功の場合、一覧画面のテンプレートパス)
+	 * @return 遷移先パス(エラーの場合、編集画面のテンプレートパス。成功の場合、マイページのテンプレートパス)
 	 */
 	@PostMapping("/user/update")
 	public String update(@Validated @ModelAttribute UserUpdateRequest userUpdateRequest, BindingResult result, Model model) {
@@ -97,11 +84,9 @@ public class UserMasterController {
         userUpdateRequest.setPassword(passwordEncoder.encode(userUpdateRequest.getPassword()));
         
         // ユーザー情報の更新
-        userService.update(userUpdateRequest);
-        
-        
+        userService.update(userUpdateRequest); 
 
-		return "redirect:/index?upldate";
+		return "redirect:/file/mypage?upldate";
 	}
 	
 	/**
@@ -119,9 +104,7 @@ public class UserMasterController {
 	
 	/**
 	 * 投稿者の詳細画面表示.
-	 *
-	 * @param id ユーザー
-	 * @param model    Modelクラス
+	 * 
 	 * @return 投稿者の詳細画面のテンプレートパス
 	 */
 	@GetMapping("/user_master/contributor/{userId}")

@@ -9,9 +9,6 @@ import com.example.demo.model.SiteUser;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * ユーザー編集画面のFormクラス.
- */
 @Getter
 @Setter
 public class UserUpdateForm extends UserBaseForm {
@@ -42,8 +39,6 @@ public class UserUpdateForm extends UserBaseForm {
 
 	/**
 	 * コンストラクタ.
-	 * 
-	 * @param user User(Entityクラス)
 	 */
 	public UserUpdateForm(SiteUser user) {
 		this.setUsername(user.getUsername());
@@ -53,7 +48,7 @@ public class UserUpdateForm extends UserBaseForm {
 	}
 
 	/**
-	 * Formクラスの設定内容を文字列で出力する.
+	 * SiteUserクラスの設定内容を文字列で出力する.
 	 */
 	public String toString() {
 		return "username: " + this.getUsername() + ", displayname: " + super.getDisplayname() + ", password: "
@@ -61,9 +56,9 @@ public class UserUpdateForm extends UserBaseForm {
 	}
 
 	/**
-	 * Formの設定内容をUser Entityクラスに変換する.
+	 * SiteUSerの設定内容をUser Entityクラスに変換する.
 	 *
-	 * @return ユーザー情報(Entityクラス)
+	 * @return ユーザー情報(Userクラス)
 	 */
 	public SiteUser toEntity() {
 
