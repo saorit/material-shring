@@ -26,7 +26,7 @@
             <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-4">
                 <h4>教材アップロード</h4>
-                    <a th:href="@{/file/new}" class="btn btn-info btn-user btn-block">
+                    <a th:href="@{/file/new}" class="btn btn-info btn-user btn-block btn-lg">
                       アップロード画面へ
                     </a>
             </div>
@@ -41,7 +41,7 @@
             <div class="p-5">
 
             <!-- userConfirm -->
-            <table class="table contributor-top" th:object="${user}">
+            <table class="table user-top" th:object="${user}">
               <tr>
                 <th th:text="*{displayname}+のプロフィール"></th></tr>
             </table>
@@ -76,19 +76,19 @@
           </div>
           <!-- teaching-material list -->
           <div class="card my-4">
-          <div class="card-header py-3">
+          <div class="card-header py-4">
               <h3 class="m-0 font-weight-bolder">
                 投稿した教材一覧
               </h3>
           </div>
           <div class="card-body">
-          <div class="teaching-material">
-          <div class="album py-5">
+          <div class="teaching-material-list">
           <div class="container">
+          <div class="album py-5">
     
           <div class="row">
-          <div class="col-md-4" th:each="file:${files}" th:object="${file}">
-          <div class="card mb-4 shadow-sm">
+          <div class="col-md-3" th:each="file:${files}" th:object="${file}">
+          <div class="card mb-3 shadow-sm">
             <img class="card-img-top" th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"
 					 loading="lazy">
             <img class="card-img-top" th:if="*{isImageExtension}" th:src="@{/file/show/image/{id}(id=*{id})}" th:alt="*{name}"
@@ -102,14 +102,16 @@
               
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
-                  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
+                      <a type="button" class="btn btn-sm btn-outline-primary" th:href="@{/file/show/{id}(id=*{id})}">詳細</a>
+                      <a class="btn btn-sm btn-outline-success"
+                        th:href="@{/user_master/contributor/{userId}(userId=*{createUser.id})}" >投稿者</a>
+                  </div>
+                  <div class="btn-group">
+                      <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-info"
 						th:href="@{/file/edit/{id}(id=*{id})}">編集</a>
-				  <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-danger"
+				      <a th:if="${loginUsername} == *{createUser.username}" class="btn btn-sm btn-outline-warning"
 						th:href="@{/file/delete/{id}(id=*{id})}" th:method="get">削除</a>
-                  <a class="btn btn-sm btn-outline-success"
-                        th:href="@{/file/contributor/{userId}(userId=*{createUser.id})}" >投稿者</a>
-                </div>
+                  </div>
               </div>
             </div>
             </div>

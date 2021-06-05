@@ -84,8 +84,8 @@
     color: #858796;;
 }
 
-/* 投稿者画面のユーザタイトル */
-.contributor-top {
+/* ユーザー画面のユーザタイトル */
+.user-top {
 	font-size: 20px;
 	padding: 20px;/*上下左右20pxずつ*/
 	color: #FF9800;/*文字色*/
@@ -113,6 +113,47 @@
 	width: 70%;
 	}
 	
+/* 投稿者画面のユーザタイトル */
+.contributor-top {
+	font-size: 20px;
+	padding: 20px;/*上下左右20pxずつ*/
+	color: orange;/*文字色*/
+    background: ivory;/*背景色*/
+    text-align: center;
+    border: solid 2px gold;/*表全体を線で囲う*/
+}
+
+/* ユーザーの教材背景 */
+.teaching-material-list {
+	background: mintcream;
+}
+
+/* 投稿者の教材背景 */
+.contributor-file-list {
+	background: #FFFAFA;
+}
+
+/* 投稿者のプロフィールテーブル */
+.contributor th {
+	color: palevioletred;
+	background: snow;/*背景色*/
+	text-align: center;
+	vertical-align: middle;
+	width: 30%;
+}
+.contributor {
+	border: solid 2px mistyrose;
+	table-layout: fixed;
+	width: 100%;
+	}
+
+.contributor td {
+	font-size: 18px;
+	background: #ffffff;
+	color: 
+	width: 70%;
+	}
+
 /* 教材テーブル上教材タイトル */
 .file-top {
 	font-size: 20px;
