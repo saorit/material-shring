@@ -23,7 +23,24 @@
     <!-- Main -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
-        <div class="container">
+        <div class="container"><br />
+          
+                    
+                    <ul class="topMenu">
+                        <li>
+                          <a class="nav-link"
+						     th:href="@{/file/mypage}">MyPage</a>
+                        </li>
+                        <li>
+                          <a class="nav-link" 
+                             th:href="@{/file/new}">教材アップロード</a>
+                        </li>
+                        <li>
+                          <a class="nav-link" 
+                             th:href="@{/logout}">ログアウト</a>
+                        </li>
+                    </ul>
+                    
 
         <!-- teaching-material list -->
           <div class="card my-4">
