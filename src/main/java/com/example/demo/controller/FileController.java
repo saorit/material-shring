@@ -236,6 +236,12 @@ public class FileController {
 		try {
 			// ファイルデータを設定
 			file.setData(fileForm.getMultipartFile().getBytes());
+			
+			// ファイルnameを設定
+			file.setItemname(fileForm.getItemname());
+			
+			// descriptionを設定
+			file.setDescription(fileForm.getDescription());
 
 			// ファイル名を取得
 			String fileName = fileForm.getMultipartFile().getOriginalFilename();
