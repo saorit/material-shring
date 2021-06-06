@@ -1,12 +1,15 @@
 package com.example.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.Publish;
 import com.example.demo.repository.PublishRepository;
+import com.example.demo.service.PublishService;
 
-public class PublishServiceImpl {
+@Service
+public class PublishServiceImpl implements PublishService {
 	
 	/**
 	 * Publish(Entity)クラスのリポジトリクラス.

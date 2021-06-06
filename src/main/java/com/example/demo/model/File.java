@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -38,17 +36,12 @@ public class File {
 	private String name;
 	
 	/** 教材名. */
-	@NotEmpty(message = "教材名を入力してください")
-	@Size(max = 20, message="教材名は20文字内で入力してください")
+	@Column(name = "itemname", length = 20, nullable = false)
 	private String itemname;
 	
 	/** 教材の内容. */
     @Column(name = "description", length = 300, nullable = false)
 	private String description;
-    
-    /** 公開範囲. */
-    @NotEmpty(message ="公開設定を選択してください")
-    private String publicPreference;
 
 	/** ファイルデータ. */
 	@Column(name = "data", nullable = false, columnDefinition = "mediumblob")
