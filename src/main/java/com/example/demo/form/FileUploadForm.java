@@ -1,6 +1,8 @@
 package com.example.demo.form;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.annotation.FileRequired;
+import com.example.demo.util.PublicPreferenceItems;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +45,21 @@ public class FileUploadForm implements Serializable {
 	/** 教材内容. */
 	@Column(name = "description", length = 300, nullable = false)
 	private String description;
+	
+	/** 公開設定. */
+	@NotEmpty(message ="公開設定を選択してください")
+    private String publicPreference;
+
+	private List<String> publicUser;
+	
+	/** 
+	 *  公開設定の選択肢の定数を取得するメソッド.
+	 *  
+	 *  @return 選択肢の定数
+	 * */
+	public Map<String, String> getPublicPreferenceItems() {
+		return PublicPreferenceItems.PUBLICITEMS;
+	}
 
 }
 

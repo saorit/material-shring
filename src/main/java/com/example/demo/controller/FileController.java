@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.form.FileUploadForm;
 import com.example.demo.model.File;
+import com.example.demo.model.Publish;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.service.FileService;
 import com.example.demo.service.UserService;
+import com.example.demo.service.PublishService;
 
 @Controller
 public class FileController {
@@ -34,6 +36,12 @@ public class FileController {
 	 */
 	@Autowired
 	private FileService fileService;
+	
+	/**
+	 * PublishEntityクラスを操作するServiceクラス.
+	 */
+	@Autowired
+	private PublishService publishService;
 
 	/**
 	 * UserEntityクラスを操作するServiceクラス.
@@ -84,8 +92,32 @@ public class FileController {
 			// 入力チェックエラー時の処理
 			return NEW_TEMPLATE_PATH;
 		}
-
-		File file = new File();
+		
+		// 公開範囲の情報処理
+		Publish publish = new Publish();
+			
+			// 教材の名前を取得
+			String publishItemname = fileForm.getItemname();
+			publish.setPublishItemname(publishItemname);
+			
+			// 公開範囲を取得
+            String publicPreference = fileForm.getPublicPreference();
+            publish.setPublicPreference(publicPreference);
+            
+            // ユーザー名に紐づくユーザー情報を取得
+            SiteUser makeUser = userService.findOneUsername(userDetails.getUsername());
+            publish.setMakeUser(makeUser); // 登録ユーザーを設定
+            
+            // 教材Idに紐づく教材情報を取得
+            File createFile = fileService.findOne(fileForm.getId());
+            publish.setFileId(createFile); // 登録教材を設定
+			
+		// 公開範囲の情報を保存
+		publishService.save(publish);
+		
+					
+		// 教材の情報処理
+		File file = new File();	
 		try {
 			file.setData(fileForm.getMultipartFile().getBytes());
 
@@ -100,7 +132,7 @@ public class FileController {
 			// 教材の内容を取得
 			String description = fileForm.getDescription();
 			file.setDescription(description);
-
+			
 			// 画像ファイル拡張子フラグを取得
 			boolean isImageExtension = this.isImageExtension(fileName);
 
