@@ -1,47 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
+	<meta charset="UTF-8">
 
-  <th:block th:fragment="header">
-  
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" th:href="@{/css/file/stylesheet.css}">
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>material-sharing</title>
+	<th:block th:fragment="header">
 
-    <!-- These are required CSS -->
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/webjars/startbootstrap-sb-admin-2/css/sb-admin-2.min.css}">
-    <link rel="stylesheet" th:href="@{/css/app.css}">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- datatablesのCSSを追加(2個) -->
-    <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap4.min.css}">
-    <link rel="stylesheet" th:href="@{/webjars/datatables-buttons/css/buttons.dataTables.min.css}">
-    
-  </th:block>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>material-sharing</title>
+
+		<!-- These are required CSS -->
+		<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}">
+		<link rel="stylesheet" th:href="@{/webjars/startbootstrap-sb-admin-2/css/sb-admin-2.min.css}">
+		<link rel="stylesheet" th:href="@{/css/app.css}">
+
+	</th:block>
 </head>
+
 <body>
 
-  <!-- These are required JS -->
-  <th:block th:fragment="scripts">
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/startbootstrap-sb-admin-2/js/sb-admin-2.min.js}"></script>
-    <script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
+	<!-- These are required JS -->
+	<th:block th:fragment="scripts">
+		<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+		<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+		<script th:src="@{/webjars/startbootstrap-sb-admin-2/js/sb-admin-2.min.js}"></script>
+		<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
 
-    <!-- datatablesのJSを追加(6個) -->
-    <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/webjars/datatables/js/dataTables.bootstrap4.min.js}"></script>
-    <script th:src="@{/webjars/datatables-buttons/js/dataTables.buttons.min.js}"></script>
-    <script th:src="@{/webjars/datatables-buttons/js/buttons.html5.min.js}"></script>
-    <script th:src="@{/webjars/datatables-buttons/js/buttons.print.min.js}"></script>
-    <script th:src="@{/webjars/jszip/jszip.min.js}"></script>
-    
-  </th:block>
+		<script th:src="@{/js/public-users-table.js}"></script>
+
+	</th:block>
 </body>
+
 </html>
