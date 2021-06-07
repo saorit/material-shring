@@ -47,7 +47,7 @@ public class HomeController {
 	@GetMapping("/file/mypage")
 	public String home(@ModelAttribute("user") SiteUser user,Model model,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
-
+		
 		// ログインユーザーの詳細情報を判定
 		if (userDetails == null) {
 			// ログインユーザーの詳細情報がNULLの場合
@@ -63,7 +63,12 @@ public class HomeController {
 			
 			model.addAttribute("files", filesPage);
 			model.addAttribute("loginUsername", userDetails.getUsername());
+			
 		}
+		
+		// ユーザー名に紐づく教材数を取得
+        long fileCount = fileService.count(user.getUsername());
+        model.addAttribute("fileCount", fileCount);
 
 		return "file/mypage";
 	}

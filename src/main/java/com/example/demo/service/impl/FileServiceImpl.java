@@ -68,5 +68,13 @@ public class FileServiceImpl implements FileService {
 	public void delete(int id) {
 		repository.deleteById(id);
 	}
+	
+	/**
+	 * create_userのデータをカウントする.
+	 * @param create_user 
+	 */
+	public long count(String username) {
+		return repository.countFile(username);
+	}
 }
 

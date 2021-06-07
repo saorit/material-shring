@@ -53,6 +53,10 @@ public class SiteUser {
 	/** 有効フラグ. */
 	@Column(name = "is_enabled", nullable = true)
 	private boolean isEnabled;
+	
+	/** 教材数. */
+	@Column(name = "fileCount", nullable = true)
+	private Integer fileCount;
 
     private boolean admin;
     private boolean active = true;

@@ -50,5 +50,15 @@ public interface FileRepository extends JpaRepository<File, String> {
 	@Transactional
 	@Modifying
 	void deleteById(@Param("id") int id);
+	
+	/**
+	 * create_userの件数を取得.
+	 *
+	 * @param create_user 教材登録者
+	 * @return 件数
+	 */
+	@Query("select count(f) from File f WHERE f.createUser = :createUser")
+	long countFile(@Param("createUser") String createUser);
+
 }
 

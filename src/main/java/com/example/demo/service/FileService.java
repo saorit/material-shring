@@ -45,4 +45,10 @@ public interface FileService {
 	 * @param id ファイルID
 	 */
 	public void delete(int id);
+	
+	/**
+	 * create_userのデータをカウントする.
+	 * @param create_user 
+	 */
+	public long count(String username);
 }
