@@ -27,19 +27,10 @@ public class Publish {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-	
-	/** 教材名. */
-	@JoinColumn(name = "publish_itemname", nullable = false)
-	private String publishItemname;
-	
-    /** 公開範囲. */
-	@Column(name = "publicPreference", nullable = false)
-    private String publicPreference;
 
-	/** 登録ユーザー. */
-	@ManyToOne
-	@JoinColumn(name = "make_user", nullable = false)
-	private SiteUser makeUser;
+	/** 公開ユーザー. */
+	@Column(name = "username", nullable = false)
+	private String username;
 	
 	/** ファイル情報ID. */
 	@ManyToOne

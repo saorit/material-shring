@@ -68,6 +68,10 @@ public class File {
 	@ManyToOne
 	@JoinColumn(name = "update_username", nullable = true)
 	private SiteUser updateUser;
+	
+	/** 公開範囲. */
+	@Column(name = "public_preference", length = 10, nullable = false)
+	private String publicPreference;
 
 }
 

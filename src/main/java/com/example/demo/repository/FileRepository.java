@@ -34,7 +34,6 @@ public interface FileRepository extends JpaRepository<File, String> {
 
 	/**
 	 * IDに紐付くFile(Entity)クラスを取得.
-	 *
 	 * @param id ファイルID
 	 * @return 取得したデータが格納されたFile(Entity)クラス
 	 */
@@ -43,7 +42,6 @@ public interface FileRepository extends JpaRepository<File, String> {
 
 	/**
 	 * ファイルIDに紐付くFile(Entity)クラスを削除.
-	 *
 	 * @param id ファイルID
 	 */
 	@Query("DELETE FROM File f WHERE f.id = :id")
@@ -52,13 +50,10 @@ public interface FileRepository extends JpaRepository<File, String> {
 	void deleteById(@Param("id") int id);
 	
 	/**
-	 * create_userの件数を取得.
-	 *
-	 * @param create_user 教材登録者
+	 * createUserの教材件数を取得.
 	 * @return 件数
 	 */
 	@Query("select count(f) from File f WHERE f.createUser = :createUser")
 	long countFile(@Param("createUser") String createUser);
-
 }
 

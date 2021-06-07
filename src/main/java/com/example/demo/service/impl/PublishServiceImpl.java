@@ -1,9 +1,12 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.model.File;
 import com.example.demo.model.Publish;
 import com.example.demo.repository.PublishRepository;
 import com.example.demo.service.PublishService;
@@ -25,5 +28,15 @@ public class PublishServiceImpl implements PublishService {
 	@Transactional
 	public Publish save(Publish publish) {
 		return repository.save(publish);
-		}
 	}
+
+	/**
+	 * ファイルに紐付くPublish(Entity)クラスを取得.
+	 *
+	 * @param file ファイル
+	 * @return 取得したデータが格納されたPublish(Entity)クラス
+	 */
+	public List<Publish> findByFile(File file){
+		return repository.findByFileId(file);
+	}
+}

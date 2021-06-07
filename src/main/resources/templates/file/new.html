@@ -2,56 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>New File</title>
-    <th:block th:insert="fragments/header :: header"></th:block>
-    <th:block th:insert="fragments/base :: header"></th:block>
+	<title>New File</title>
+	<th:block th:insert="fragments/header :: header"></th:block>
+	<th:block th:insert="fragments/base :: header"></th:block>
 </head>
 
 <body class="bg-gradient">
-<div id="content-wrapper" class="d-flex flex-column">
-  <div id="content">
-    <div class="container">
-      <div class="container body-container"><br/>
-        <h1>教材アップロード</h1><br>
-		<form th:action="@{/file/upload}" th:method="post" enctype="multipart/form-data"
-			th:object="${fileUploadForm}">
-        <div class="mb-3">
-          <label for="formFile" class="form-label"><span class="badge badge-danger">必須</span>ファイル</label>
-            <input type="file" th:field="*{multipartFile}" class="form-control"/>
-          <br />
-            <span th:if="${#fields.hasErrors('multipartFile')}"
-			      th:errors="*{multipartFile}">
-            </span>
-        </div>
-        <div class="form-group">
-          <label for="name">
-          <span class="badge badge-danger">必須</span>
-            教材名
-          </label>
-            <input type="text" class="form-control"
-                   th:errorclass="is-invalid" th:field="*{itemname}">
-              <div class="invalid-feedback"
-                   th:errors="*{itemname}">
-              </div>
-        </div>
-        <div class="form-group">
-          <label for="description">
-          <span class="badge badge-primary">任意</span>
-              教材の内容（使い方や関連書籍など）
-          </label>
-            <textarea class="profile_text" rows="10" cols="60" th:field="*{description}" placeholder="ここに記入してください"></textarea>
-        </div>
-        <br />
-          <span class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-outline-danger">アップロード</button>
-            <a class="btn btn-outline-primary" th:href="@{/}">HOME画面へ</a>
-		  </span>
-        </form>
-	  </div>
+	<div class="container body-container"><br />
+		<h1>教材アップロード</h1><br>
+		<form th:action="@{/file/upload}" th:method="post" enctype="multipart/form-data" th:object="${fileUploadForm}">
+			<div class="mb-3">
+				<label for="formFile" class="form-label"><span class="badge badge-danger">必須</span>ファイル</label>
+				<input type="file" th:field="*{multipartFile}" class="form-control" th:errorclass="is-invalid"/>
+				<br />
+				<span th:if="${#fields.hasErrors('multipartFile')}"
+					th:errors="*{multipartFile}" class="invalid-feedback">
+				</span>
+			</div>
+			<div class="form-group">
+				<label for="name">
+					<span class="badge badge-danger">必須</span>
+					教材名
+				</label>
+				<input type="text" class="form-control"
+					th:errorclass="is-invalid" th:field="*{itemname}">
+				<div class="invalid-feedback"
+					th:errors="*{itemname}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="public_preference">
+					<span class="badge badge-danger">必須</span>
+					公開設定
+				</label>
+				<select class="form-control" th:field="*{publicPreference}">
+					<option th:each="item : *{getPublicPreferenceItems()}" th:value="${item.key}"
+						th:text="${item.value}" th:selected="${item.key} == *{publicPreference}">
+						pulldown
+					</option>
+				</select>
+				<div class="invalid-feedback"
+					th:errors="*{publicPreference}">
+				</div>
+				<br>
+				<div id="public-users-area">
+					<table id="public-users-table" class="table table-bordered">
+						<tr>
+							<th>
+								ユーザー
+							</th>
+							<th>
+								削除
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control"
+									th:field="*{publicUser}" >
+							</td>
+							<td>
+								<i class="fas fa-trash-alt mr-1 public-user-remove"></i>
+							</td>
+						</tr>
+					</table>
+					<input type="button" id="public-user-add" class="btn btn-outline-secondary btn-sm" value="追加"></button>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description">
+					<span class="badge badge-primary">任意</span>
+					教材の内容（使い方や関連書籍など）
+				</label>
+				<textarea class="profile_text" rows="10" cols="60" th:field="*{description}" placeholder="ここに記入してください"></textarea>
+			</div>
+			<br />
+			<span class="d-flex justify-content-between">
+				<button type="submit" class="btn btn-outline-danger">アップロード</button>
+				<a class="btn btn-outline-primary" th:href="@{/}">HOME画面へ</a>
+			</span>
+		</form>
 	</div>
-  </div>
-</div>
 	<th:block th:insert="fragments/base :: scripts"></th:block>
-    <th:block th:insert="fragments/footer :: footer"></th:block>
+	<th:block th:insert="fragments/footer :: footer"></th:block>
 </body>
 </html>

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.util.List;
+
+import com.example.demo.model.File;
 import com.example.demo.model.Publish;
 
 /**
@@ -13,5 +16,10 @@ public interface PublishService {
 	 */
 	public Publish save(Publish publish);
 
+	/**
+	 * ファイルに紐付くPublish(Entity)クラスを取得.
+	 * @param file ファイル
+	 * @return 取得したデータが格納されたPublish(Entity)クラス
+	 */
+	public List<Publish> findByFile(File file);
 }
-

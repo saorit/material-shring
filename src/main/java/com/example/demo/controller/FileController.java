@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +38,7 @@ public class FileController {
 	 */
 	@Autowired
 	private FileService fileService;
-	
+
 	/**
 	 * PublishEntityクラスを操作するServiceクラス.
 	 */
@@ -63,7 +65,7 @@ public class FileController {
 	 * 詳細画面のTemplateHTMLのパス.
 	 */
 	private final String SHOW_TEMPLATE_PATH = "file/show";
-	
+
 	/**
 	 * ファイル新規登録画面表示.
 	 * 
@@ -74,7 +76,7 @@ public class FileController {
 	public String newFile(@ModelAttribute FileUploadForm fileUploadForm) {
 		return NEW_TEMPLATE_PATH;
 	}
-	
+
 	/**
 	 * ファイルのアップロード処理.
 	 * 
@@ -85,79 +87,78 @@ public class FileController {
 	 */
 	@PostMapping("/file/upload")
 	public String create(@Validated @ModelAttribute FileUploadForm fileForm, final BindingResult bindingResult,
-			@AuthenticationPrincipal UserDetailsImpl userDetails){
+			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        // 入力チェック
-        if (bindingResult.hasErrors()) {
-            // 入力チェックエラー時の処理
-            return NEW_TEMPLATE_PATH;
-        }
+		// 入力チェック
+		if (bindingResult.hasErrors()) {
+			// 入力チェックエラー時の処理
+			return NEW_TEMPLATE_PATH;
+		}
+
+		// 教材の情報処理
+		File file = new File();
+		try {
+			file.setData(fileForm.getMultipartFile().getBytes());
+
+			// ファイル名を取得
+			String fileName = fileForm.getMultipartFile().getOriginalFilename();
+			file.setName(fileName);
+
+			// 教材の名前を取得
+			String itemname = fileForm.getItemname();
+			file.setItemname(itemname);
+
+			// 教材の内容を取得
+			String description = fileForm.getDescription();
+			file.setDescription(description);
+
+			// 画像ファイル拡張子フラグを取得
+			boolean isImageExtension = this.isImageExtension(fileName);
+
+			file.setImageExtension(isImageExtension);
+
+			// 現在日時を取得
+			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+			file.setCreateDate(currentTime); // 登録日時を設定
+			file.setUpdateDate(currentTime); // 更新日時を設定
+
+			// ユーザー名に紐づくユーザー情報を取得
+			SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
+			file.setCreateUser(loginUser); // 登録ユーザーを設定
+			file.setUpdateUser(loginUser); // 更新ユーザーを設定
+
+			// 公開範囲を取得
+			String publicPreference = fileForm.getPublicPreference();
+			file.setPublicPreference(publicPreference);
+			
+			// ファイル情報を保存
+			File fileSaveData = fileService.save(file);
+
+			// 公開範囲を取得
+			List<String> publicUsers= fileForm.getPublicUser();
+
+			// 公開範囲を判定
+			if ("LIMITED".equals(publicPreference)) {
+				// 一部の人が閲覧可能の場合
+				for (String username : publicUsers) {
+					// 公開範囲の情報処理
+					Publish publish = new Publish();
+	
+					publish.setUsername(username); // 登録ユーザーを設定
+	
+					publish.setFileId(fileSaveData); // 登録教材を設定
 		
-        // 公開範囲の情報処理
-        Publish publish = new Publish();
-			
-            // 教材の名前を取得
-            String publishItemname = fileForm.getItemname();
-            publish.setPublishItemname(publishItemname);
-			
-            // 公開範囲を取得
-            String publicPreference = fileForm.getPublicPreference();
-            publish.setPublicPreference(publicPreference);
-            
-            // ユーザー名に紐づくユーザー情報を取得
-            SiteUser makeUser = userService.findOneUsername(userDetails.getUsername());
-            publish.setMakeUser(makeUser); // 登録ユーザーを設定
-            
-            // 教材Idに紐づく教材情報を取得
-            File fileId = fileService.findOne(fileForm.getId());
-            publish.setFileId(fileId); // 登録教材を設定
+					// 公開範囲の情報を保存
+					publishService.save(publish);
+				}
+			}
+		} catch (IOException e) {
+			// TODO 例外処理を実装する
+		}
 
-			
-		// 公開範囲の情報を保存
-		publishService.save(publish);
-		
-					
-        // 教材の情報処理
-        File file = new File();	
-        try {
-            file.setData(fileForm.getMultipartFile().getBytes());
 
-            // ファイル名を取得
-            String fileName = fileForm.getMultipartFile().getOriginalFilename();
-            file.setName(fileName);
-			
-            // 教材の名前を取得
-            String itemname = fileForm.getItemname();
-            file.setItemname(itemname);
-			
-            // 教材の内容を取得
-            String description = fileForm.getDescription();
-            file.setDescription(description);
-			
-            // 画像ファイル拡張子フラグを取得
-            boolean isImageExtension = this.isImageExtension(fileName);
-
-            file.setImageExtension(isImageExtension);
-
-            // 現在日時を取得
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            file.setCreateDate(currentTime); // 登録日時を設定
-            file.setUpdateDate(currentTime); // 更新日時を設定
-
-            // ユーザー名に紐づくユーザー情報を取得
-            SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
-            file.setCreateUser(loginUser); // 登録ユーザーを設定
-            file.setUpdateUser(loginUser); // 更新ユーザーを設定
-
-        } catch (IOException e) {
-            // TODO 例外処理を実装する
-        }
-
-        // ファイル情報を保存
-        fileService.save(file);
-
-        return "redirect:/index?upload";
-    }
+		return "redirect:/index?upload";
+	}
 
 	/**
 	 * ファイル編集画面表示.
@@ -171,13 +172,29 @@ public class FileController {
 		// ファイル情報を取得
 		File file = fileService.findOne(id);
 		model.addAttribute("file", file);
-		
+
 		FileUploadForm fileUploadForm = new FileUploadForm();
 		fileUploadForm.setId(file.getId());
 		fileUploadForm.setItemname(file.getItemname());
 		fileUploadForm.setDescription(file.getDescription());
-        model.addAttribute("fileUploadForm", fileUploadForm);
-		
+		fileUploadForm.setPublicPreference(file.getPublicPreference());
+
+		List<String> users = new ArrayList<String>();
+
+		// 公開範囲を取得
+		String publicPreference= file.getPublicPreference();
+
+		// 公開範囲を判定
+		if ("LIMITED".equals(publicPreference)) {
+			// 公開ユーザーを取得
+			List<Publish> publishUser= publishService.findByFile(file);
+			for (Publish publish: publishUser) {
+				users.add(publish.getUsername());
+			}
+		}
+		fileUploadForm.setPublicUser(users);
+		model.addAttribute("fileUploadForm", fileUploadForm);
+
 		return EDIT_TEMPLATE_PATH;
 	}
 
@@ -196,8 +213,8 @@ public class FileController {
 
 		// 入力チェック
 		if (result.hasErrors()) {
-		// 入力チェックエラー時の処理
-		return "file/edit";
+			// 入力チェックエラー時の処理
+			return "file/edit";
 		}
 
 		// ファイル情報を取得
@@ -205,10 +222,10 @@ public class FileController {
 		try {
 			// ファイルデータを設定
 			file.setData(fileForm.getMultipartFile().getBytes());
-			
+
 			// ファイルnameを設定
 			file.setItemname(fileForm.getItemname());
-			
+
 			// descriptionを設定
 			file.setDescription(fileForm.getDescription());
 
@@ -238,7 +255,7 @@ public class FileController {
 		}
 		return "redirect:/index?fileupdate";
 	}
-	
+
 	/**
 	 * 公開範囲画面.
 	 * 
@@ -247,11 +264,10 @@ public class FileController {
 	 * @return ファイル公開範囲のテンプレートパス
 	 */
 	@GetMapping("/file/release/{id}")
-	public String releaseFile(@PathVariable int id, Model model,
-			@ModelAttribute FileUploadForm fileUploadForm) {
+	public String releaseFile(@PathVariable int id, Model model, @ModelAttribute FileUploadForm fileUploadForm) {
 		// ファイル情報を取得
-				File file = fileService.findOne(id);
-				model.addAttribute("file", file);
+		File file = fileService.findOne(id);
+		model.addAttribute("file", file);
 
 		return "file/release";
 	}
@@ -333,12 +349,12 @@ public class FileController {
 		res.setContentLength(fileData.length);
 
 		try (
-			// ResponseのOutputStreamを代入
-            OutputStream os = res.getOutputStream();) {
+				// ResponseのOutputStreamを代入
+				OutputStream os = res.getOutputStream();) {
 			// OutputStreamにファイルデータを書き出す
-		    os.write(file.getData());
-		    // OutputStreamを強制的に書き込み
-		    os.flush();
+			os.write(file.getData());
+			// OutputStreamを強制的に書き込み
+			os.flush();
 		} catch (IOException e) {
 			// TODO 例外処理を実装
 		}
