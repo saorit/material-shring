@@ -107,6 +107,11 @@ public class FileController {
             // ユーザー名に紐づくユーザー情報を取得
             SiteUser makeUser = userService.findOneUsername(userDetails.getUsername());
             publish.setMakeUser(makeUser); // 登録ユーザーを設定
+            
+           // 教材Idに紐づく教材情報を取得
+            File fileId = fileService.findOne(fileForm.getId());
+            publish.setFileId(fileId); // 登録教材を設定
+
 			
 		// 公開範囲の情報を保存
 		publishService.save(publish);

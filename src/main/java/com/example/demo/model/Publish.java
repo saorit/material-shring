@@ -40,5 +40,10 @@ public class Publish {
 	@ManyToOne
 	@JoinColumn(name = "make_user", nullable = false)
 	private SiteUser makeUser;
+	
+	/** ファイル情報ID. */
+	@ManyToOne
+	@JoinColumn(name = "file_id", nullable = false)
+	private File fileId;
 
 }
