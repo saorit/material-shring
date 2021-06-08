@@ -73,7 +73,7 @@ public class FileServiceImpl implements FileService {
 	 * create_userのデータをカウントする.
 	 * @param create_user 
 	 */
-	public long count(String username) {
+	public long count(SiteUser username) {
 		return repository.countFile(username);
 	}
 }

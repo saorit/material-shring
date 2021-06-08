@@ -16,24 +16,30 @@ public interface SiteUserRepository extends JpaRepository<SiteUser, Integer> {
     boolean existsByUsername(String username);
     
     /**
-	 * IDに紐付くFile(Entity)クラスを取得.
+	 * usernameに紐付くFile(Entity)クラスを取得.
 	 *
 	 * @param username userID
-	 * @return 取得したデータが格納されたUser(Entity)クラス
+	 * @return 取得したデータが格納されたSiteUser(Entity)クラス
 	 */
 	@Query("SELECT f FROM SiteUser f WHERE f.username = :username")
 	SiteUser getOneUsername(@Param("username") String username);
+	
+	/**
+	 * IDに紐付くFile(Entity)クラスを取得.
+	 *
+	 * @param ID
+	 * @return 取得したデータが格納されたSiteUser(Entity)クラス
+	 */
+	@Query("select e from SiteUser e WHERE e.id = :id")
+	SiteUser getById(@Param("id") Long id);
  
-    
     /**
-	 * ユーザー名に紐付くUser(Entity)クラスの件数を取得.
+	 * ユーザー名に紐付くSiteUser(Entity)クラスの件数を取得.
 	 *
 	 * @param username ユーザー名
 	 * @return 件数
 	 */
 	@Query("select count(e) from SiteUser e WHERE e.username = :username")
 	long countByUsername(@Param("username") String username);
-
-	@Query("select e from SiteUser e WHERE e.id = :id")
-	SiteUser getById(@Param("id") Long id);
+	
 }

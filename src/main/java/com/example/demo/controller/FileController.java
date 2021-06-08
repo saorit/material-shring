@@ -274,7 +274,6 @@ public class FileController {
 		} catch (IOException e) {
 			// TODO 例外処理を実装する
 		}
-
 		
 		return "redirect:/index?fileupdate";
 	}

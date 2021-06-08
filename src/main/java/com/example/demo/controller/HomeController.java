@@ -64,11 +64,14 @@ public class HomeController {
 			model.addAttribute("files", filesPage);
 			model.addAttribute("loginUsername", userDetails.getUsername());
 			
+			// ユーザー名に紐づく教材数を取得
+			SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
+	        long fileCount = fileService.count(loginUser);
+	        model.addAttribute("fileCount", fileCount);
+			
 		}
 		
-		// ユーザー名に紐づく教材数を取得
-        long fileCount = fileService.count(user.getUsername());
-        model.addAttribute("fileCount", fileCount);
+		
 
 		return "file/mypage";
 	}
