@@ -253,3 +253,6 @@
 .topMenu li:last-of-type {
  border-bottom: none; /*最後のliの線だけ消す*/
 }
+#public-users-area{
+	width: 300px;
+}

@@ -39,4 +39,15 @@ public class PublishServiceImpl implements PublishService {
 	public List<Publish> findByFile(File file){
 		return repository.findByFileId(file);
 	}
+	
+	/**
+	 * ファイルに紐付くPublish(Entity)クラスの削除.
+	 *
+	 * @param file ファイル
+	 * @return 
+	 * @return 取得したデータが格納されたPublish(Entity)クラスの削除
+	 */
+	public File deleteByFileId(File file) {
+		return repository.deleteByFileId(file);
+	}
 }

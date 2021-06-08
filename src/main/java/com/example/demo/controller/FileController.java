@@ -216,7 +216,7 @@ public class FileController {
 			// 入力チェックエラー時の処理
 			return "file/edit";
 		}
-
+		
 		// ファイル情報を取得
 		File file = fileService.findOne(id);
 		try {
@@ -246,13 +246,36 @@ public class FileController {
 			SiteUser loginUser = userService.findOne(userDetails.getId());
 			// 更新ユーザーを設定
 			file.setUpdateUser(loginUser);
-
+			
+			// 公開範囲を取得
+			String publicPreference = fileForm.getPublicPreference();
+			file.setPublicPreference(publicPreference);
+						
 			// ファイル情報を保存
-			fileService.save(file);
+			File fileSaveData = fileService.save(file);
+			
+			// TODO fileForm.getId()に紐つく公開範囲の削除
+			publishService.deleteByFileId(fileSaveData);
+			
+			// 公開範囲を取得
+			List<String> publicUsers= fileForm.getPublicUser();
+			// 公開範囲を判定
+			if ("LIMITED".equals(publicPreference)) {
+				// 一部の人が閲覧可能の場合
+				for (String username : publicUsers) {
+					// 公開範囲の情報処理
+					Publish publish = new Publish();
+					publish.setUsername(username); // 登録ユーザーを設定
+					publish.setFileId(fileSaveData); // 登録教材を設定
+					// 公開範囲の情報を保存
+					publishService.save(publish);
+				}
+			}
 		} catch (IOException e) {
 			// TODO 例外処理を実装する
-
 		}
+
+		
 		return "redirect:/index?fileupdate";
 	}
 

@@ -22,4 +22,13 @@ public interface PublishService {
 	 * @return 取得したデータが格納されたPublish(Entity)クラス
 	 */
 	public List<Publish> findByFile(File file);
+	
+	/**
+	 * ファイルに紐付くPublish(Entity)クラスの削除.
+	 *
+	 * @param file ファイル
+	 * @return 取得したデータが格納されたPublish(Entity)クラスの削除
+	 */
+	public File deleteByFileId(File file);
+	
 }
