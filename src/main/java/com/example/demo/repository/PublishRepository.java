@@ -36,6 +36,6 @@ public interface PublishRepository extends JpaRepository<Publish, String> {
 	@Transactional
 	@Modifying
 	@Query("DELETE FROM Publish p WHERE p.fileId = :file")
-	public File deleteByFileId(@Param("file") File file);
+	public Integer deleteByFileId(@Param("file") File file);
 }
 

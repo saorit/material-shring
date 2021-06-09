@@ -29,6 +29,6 @@ public interface PublishService {
 	 * @param file ファイル
 	 * @return 取得したデータが格納されたPublish(Entity)クラスの削除
 	 */
-	public File deleteByFileId(File file);
+	public Integer deleteByFileId(File file);
 	
 }
