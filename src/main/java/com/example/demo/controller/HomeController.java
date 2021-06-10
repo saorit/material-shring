@@ -46,23 +46,24 @@ public class HomeController {
 	 * @param userDetails ログインユーザーの詳細情報
 	 * @return 遷移先
 	 */
+	/**
+	 * マイページ画面表示.
+	 * 
+	 * @param model       Modelクラス
+	 * @param userDetails ログインユーザーの詳細情報
+	 * @return 遷移先
+	 */
 	@GetMapping("/file/mypage")
-	public String home(@ModelAttribute("user") SiteUser user, Model model,
+	public String home(@ModelAttribute("user") SiteUser user,Model model,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
-
+		// 1ページに表示するファイル情報を取得
 		SiteUser siteUser = userService.findOne(userDetails.getId());
 		model.addAttribute("user", siteUser);
-
 		List<File> filesPage = fileService.findMyFile(siteUser);
-
 		model.addAttribute("files", filesPage);
 		model.addAttribute("loginUsername", userDetails.getUsername());
-
-		// ユーザー名に紐づく教材数を取得
-		SiteUser loginUser = userService.findOneUsername(siteUser.getUsername());
-		Long fileCount = fileService.count(loginUser);
-		model.addAttribute("fileCount", fileCount);
-
+		int count = filesPage.size();
+		model.addAttribute("count", count);
 		return "file/mypage";
 	}
 

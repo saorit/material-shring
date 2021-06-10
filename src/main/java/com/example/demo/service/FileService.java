@@ -46,9 +46,4 @@ public interface FileService {
 	 */
 	public void delete(int id);
 	
-	/**
-	 * create_userのデータをカウントする.
-	 * @param create_user 
-	 */
-	public Long count(SiteUser username);
 }
