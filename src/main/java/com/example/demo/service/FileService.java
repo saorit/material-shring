@@ -50,5 +50,5 @@ public interface FileService {
 	 * create_userのデータをカウントする.
 	 * @param create_user 
 	 */
-	public long count(SiteUser username);
+	public Long count(SiteUser username);
 }

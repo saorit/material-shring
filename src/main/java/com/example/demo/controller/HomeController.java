@@ -59,8 +59,8 @@ public class HomeController {
 		model.addAttribute("loginUsername", userDetails.getUsername());
 
 		// ユーザー名に紐づく教材数を取得
-		SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
-		long fileCount = fileService.count(loginUser);
+		SiteUser loginUser = userService.findOneUsername(siteUser.getUsername());
+		Long fileCount = fileService.count(loginUser);
 		model.addAttribute("fileCount", fileCount);
 
 		return "file/mypage";

@@ -54,6 +54,6 @@ public interface FileRepository extends JpaRepository<File, String> {
 	 * @return 件数
 	 */
 	@Query("select count(f) from File f WHERE f.createUser = :username")
-	long countFile(@Param("username") SiteUser username);
+	Long countFile(@Param("username") SiteUser username);
 }
 
