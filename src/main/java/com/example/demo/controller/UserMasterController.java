@@ -20,7 +20,7 @@ import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.repository.SiteUserRepository;
-import com.example.demo.service.FileService;
+import com.example.demo.service.PublishService;
 import com.example.demo.service.UserService;
 import com.example.demo.form.sub.UserUpdateRequest;
 
@@ -29,12 +29,13 @@ public class UserMasterController {
 	
 	SiteUserRepository repository;
 	
+
 	/**
-	 * File(Entityクラス)を操作するServiceクラス.
+	 * Publish(Entityクラス)を操作するServiceクラス.
 	 */
 	@Autowired
-	private FileService fileService;
-	
+	PublishService publishService;
+
 	/**
 	 * UserEntityクラスを操作するServiceクラス.
 	 */
@@ -111,23 +112,16 @@ public class UserMasterController {
 		
 		model.addAttribute("user",  userService.findOne(userId));
 
-		// ログインユーザーの詳細情報を判定
-		if (userDetails == null) {
-			// ログインユーザーの詳細情報がNULLの場合
-			model.addAttribute("loginUsername", "");
-			model.addAttribute("files", new ArrayList<File>());
-		} else {
-			// ログインユーザーの詳細情報がNULL以外の場合
-			// 1ページに表示するファイル情報を取得
-			SiteUser siteUser = userService.findOne(userId);
-			model.addAttribute("user", siteUser);
-			
-			List<File> filesPage = fileService.findMyFile(siteUser);
-			
-			model.addAttribute("files", filesPage);
-			model.addAttribute("loginUsername", userDetails.getUsername());
-		}
+		// ログインユーザーの詳細情報がNULL以外の場合
+		// 1ページに表示するファイル情報を取得
+		SiteUser siteUser = userService.findOne(userId);
+		model.addAttribute("user", siteUser);
+
+		List<File> filesPage = publishService.findViewableFilesByUser(userDetails.getUsername(), siteUser);
 		
+		model.addAttribute("files", filesPage);
+		model.addAttribute("loginUsername", userDetails.getUsername());
+
 		return "user_master/contributor";
 	}
 

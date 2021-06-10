@@ -16,9 +16,9 @@ import com.example.demo.model.File;
 import com.example.demo.model.SiteUser;
 import com.example.demo.model.impl.UserDetailsImpl;
 import com.example.demo.service.FileService;
+import com.example.demo.service.PublishService;
 import com.example.demo.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +26,7 @@ import java.util.List;
  */
 @Controller
 public class HomeController {
-	
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -37,6 +36,9 @@ public class HomeController {
 	@Autowired
 	private FileService fileService;
 
+	@Autowired
+	private PublishService publishService;
+
 	/**
 	 * マイページ画面表示.
 	 * 
@@ -45,37 +47,25 @@ public class HomeController {
 	 * @return 遷移先
 	 */
 	@GetMapping("/file/mypage")
-	public String home(@ModelAttribute("user") SiteUser user,Model model,
+	public String home(@ModelAttribute("user") SiteUser user, Model model,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
-		
-		// ログインユーザーの詳細情報を判定
-		if (userDetails == null) {
-			// ログインユーザーの詳細情報がNULLの場合
-			model.addAttribute("loginUsername", "");
-			model.addAttribute("files", new ArrayList<File>());
-		} else {
-			// ログインユーザーの詳細情報がNULL以外の場合
-			// 1ページに表示するファイル情報を取得
-			SiteUser siteUser = userService.findOne(userDetails.getId());
-			model.addAttribute("user", siteUser);
-			
-			List<File> filesPage = fileService.findMyFile(siteUser);
-			
-			model.addAttribute("files", filesPage);
-			model.addAttribute("loginUsername", userDetails.getUsername());
-			
-			// ユーザー名に紐づく教材数を取得
-			SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
-	        long fileCount = fileService.count(loginUser);
-	        model.addAttribute("fileCount", fileCount);
-			
-		}
-		
-		
+
+		SiteUser siteUser = userService.findOne(userDetails.getId());
+		model.addAttribute("user", siteUser);
+
+		List<File> filesPage = fileService.findMyFile(siteUser);
+
+		model.addAttribute("files", filesPage);
+		model.addAttribute("loginUsername", userDetails.getUsername());
+
+		// ユーザー名に紐づく教材数を取得
+		SiteUser loginUser = userService.findOneUsername(userDetails.getUsername());
+		long fileCount = fileService.count(loginUser);
+		model.addAttribute("fileCount", fileCount);
 
 		return "file/mypage";
 	}
-	
+
 	/**
 	 * HOME画面表示.
 	 * 
@@ -88,29 +78,19 @@ public class HomeController {
 	public String index(@ModelAttribute("user") SiteUser user,Model model,
 			@PageableDefault(page = 0, size = 6, sort = {
 			"updateDate" }, direction = Sort.Direction.DESC) Pageable pageable,
-	        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-            // 1ページに表示するファイル情報を取得
-            Page<File> filesPage = fileService.findAll(pageable);
+			model.addAttribute("url", "index");
 
-            // ファイル一覧のページ情報を設定
-            PageWrapper<File> page = new PageWrapper<File>(filesPage, "index");
+			model.addAttribute("loginUsername", userDetails.getUsername());
+			Page<File> filesPage = publishService.findViewableFiles(userDetails.getUsername() , pageable);
 
-            model.addAttribute("files", filesPage);
-            model.addAttribute("page", page);
-            model.addAttribute("url", "index");
+			// ファイル一覧のページ情報を設定
+			PageWrapper<File> page = new PageWrapper<File>(filesPage, "index");
 
-            // ログインユーザーの詳細情報を判定
-            if (userDetails == null) {
-	        // ログインユーザーの詳細情報がNULLの場合
-         	model.addAttribute("loginUsername", "");
-            } else {
-	        // ログインユーザーの詳細情報がNULL以外の場合
-	       model.addAttribute("loginUsername", userDetails.getUsername());
-           }
-
-           return "index";
+			model.addAttribute("page", page);
+			model.addAttribute("files", filesPage);
+			return "index";
 	}
 
 }
-

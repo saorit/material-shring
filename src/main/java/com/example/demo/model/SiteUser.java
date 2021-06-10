@@ -56,7 +56,7 @@ public class SiteUser {
 	
 	/** 教材数. */
 	@Column(name = "fileCount", nullable = true)
-	private long fileCount;
+	private Long fileCount;
 
     private boolean admin;
     private boolean active = true;
