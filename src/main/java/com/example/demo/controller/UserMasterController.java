@@ -121,6 +121,9 @@ public class UserMasterController {
 		
 		model.addAttribute("files", filesPage);
 		model.addAttribute("loginUsername", userDetails.getUsername());
+		
+		int count = filesPage.size();
+		model.addAttribute("count", count);
 
 		return "user_master/contributor";
 	}
