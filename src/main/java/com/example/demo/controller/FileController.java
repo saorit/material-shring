@@ -153,7 +153,7 @@ public class FileController {
 				}
 			}
 		} catch (IOException e) {
-			// TODO 例外処理を実装する
+			// 例外処理を実装する
 		}
 
 
@@ -328,7 +328,7 @@ public class FileController {
 			// OutputStreamにファイルデータを書き出す
 			os.write(file.getData());
 		} catch (IOException e) {
-			// TODO 例外処理を実装
+			// 例外処理を実装
 		}
 	}
 
@@ -358,17 +358,17 @@ public class FileController {
 		File file = fileService.findOne(id);
 		// ファイルデータを取得
 		byte[] fileData = file.getData();
-		// TODO ダウンロード件数に+1して、保存
+		// ダウンロード件数に+1して、保存
 		Integer download = file.getDownloadCount();
 		Integer downloadCount = 0;
 		if (download == null) {
 		    downloadCount = 1;
 		    file.setDownloadCount(downloadCount);
 		} else {
-			downloadCount = download++;
+			downloadCount = download+1;
 			file.setDownloadCount(downloadCount);
 		}
-		
+		fileService.save(file); // ファイルデータを保存
 		// ファイル名を取得
 		String fileName = new String(file.getName().getBytes("Windows-31J"), "ISO8859_1");
 		// レスポンスオブジェクトのヘッダー情報を設定
