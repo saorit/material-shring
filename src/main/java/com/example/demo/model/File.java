@@ -42,6 +42,10 @@ public class File {
 	/** 教材の内容. */
     @Column(name = "description", length = 300, nullable = false)
 	private String description;
+    
+    /** ダウンロード数. */
+	@Column(name = "download_count", nullable = true)
+	private Integer downloadCount;
 
 	/** ファイルデータ. */
 	@Column(name = "data", nullable = false, columnDefinition = "mediumblob")

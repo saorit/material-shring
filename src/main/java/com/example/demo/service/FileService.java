@@ -24,7 +24,6 @@ public interface FileService {
 	 * @return 該当したfileのデータ
 	 */
 	public List<File> findMyFile(SiteUser siteUser);
-	
 
 	/**
 	 * ファイルIDに紐付くFile(Entity)クラスのデータを1件取得する.

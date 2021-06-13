@@ -40,6 +40,10 @@
 				          <td th:text="*{description}"></td>
 			            </tr>
 			            <tr>
+				          <th>ダウンロード数</th>
+				          <td th:text="*{downloadCount}"></td>
+			            </tr>
+			            <tr>
 				          <th>ファイル</th>
 				          <td>
 					        <img th:if="!*{isImageExtension}" src="/images/file/no-image.jpg" alt="no_image"

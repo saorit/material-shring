@@ -254,7 +254,7 @@ public class FileController {
 			// ファイル情報を保存
 			File fileSaveData = fileService.save(file);
 			
-			// TODO fileForm.getId()に紐つく公開範囲の削除
+			// fileForm.getId()に紐つく公開範囲の削除
 			publishService.deleteByFileId(fileSaveData);
 			
 			// 公開範囲を取得
@@ -272,7 +272,7 @@ public class FileController {
 				}
 			}
 		} catch (IOException e) {
-			// TODO 例外処理を実装する
+			// 例外処理を実装する
 		}
 		
 		return "redirect:/index?fileupdate";
@@ -343,7 +343,7 @@ public class FileController {
 		fileService.delete(id);
 		return "redirect:/index?delete";
 	}
-
+	
 	/**
 	 * ファイルのダウンロード処理.
 	 * 
@@ -353,23 +353,30 @@ public class FileController {
 	 */
 	@GetMapping("/file/download/{id}")
 	@ResponseBody
-	public String download(@PathVariable int id, HttpServletResponse res) throws UnsupportedEncodingException {
+	public String download(@PathVariable int id, HttpServletResponse res, Model model) throws UnsupportedEncodingException {
 		// ファイル情報を取得
 		File file = fileService.findOne(id);
 		// ファイルデータを取得
 		byte[] fileData = file.getData();
-
+		// TODO ダウンロード件数に+1して、保存
+		Integer download = file.getDownloadCount();
+		Integer downloadCount = 0;
+		if (download == null) {
+		    downloadCount = 1;
+		    file.setDownloadCount(downloadCount);
+		} else {
+			downloadCount = download++;
+			file.setDownloadCount(downloadCount);
+		}
+		
 		// ファイル名を取得
 		String fileName = new String(file.getName().getBytes("Windows-31J"), "ISO8859_1");
-
 		// レスポンスオブジェクトのヘッダー情報を設定
 		res.setContentType("application/octet-stream");
 		// ヘッダーにファイル名を設定
 		res.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-
 		// ファイルサイズをResponseのメッセージボディのサイズに設定
 		res.setContentLength(fileData.length);
-
 		try (
 				// ResponseのOutputStreamを代入
 				OutputStream os = res.getOutputStream();) {
