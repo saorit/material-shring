@@ -279,22 +279,6 @@ public class FileController {
 	}
 
 	/**
-	 * 公開範囲画面.
-	 * 
-	 * @param id    ファイルID
-	 * @param model Modelクラス
-	 * @return ファイル公開範囲のテンプレートパス
-	 */
-	@GetMapping("/file/release/{id}")
-	public String releaseFile(@PathVariable int id, Model model, @ModelAttribute FileUploadForm fileUploadForm) {
-		// ファイル情報を取得
-		File file = fileService.findOne(id);
-		model.addAttribute("file", file);
-
-		return "file/release";
-	}
-
-	/**
 	 * ファイル詳細画面表示.
 	 * 
 	 * @param id    ファイルID
