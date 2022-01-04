@@ -1,8 +1,9 @@
 # material-shring
 ![image](https://user-images.githubusercontent.com/80804421/147995805-ab1a9418-ed27-45d2-9ac6-96ab8181d90a.png)
 
-日本語教師を始めとする教師のための教材共有Webアプリケーションを制作しました。
+教師向けの教材共有Webアプリケーションを制作しました。
 
+使用言語：Java
 使用フレームワーク：Spring boot
 環境開発：SpringToolSuit4
 【実装】
